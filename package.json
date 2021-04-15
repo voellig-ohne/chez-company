@@ -1,0 +1,25 @@
+{
+  "name": "chez-company-website",
+  "private": true,
+  "description": "CHEZ COMPANY WEBSITE",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "dependencies": {
+    "gatsby": "^3.2.1",
+    "gatsby-transformer-typescript-css-modules": "^1.0.14",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "gatsby-plugin-dts-css-modules": "^2.0.0",
+    "prettier": "2.2.1"
+  }
+}
