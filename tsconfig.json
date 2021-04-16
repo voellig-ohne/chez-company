@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5",
+      "plugins": [
+        {
+          "name": "ts-graphql-plugin",
+          "schema": "src/__generated__/gatsby-plugin-documents.graphql",
+          "tag": "gql"
+        }
+      ]
+    }
+  }
