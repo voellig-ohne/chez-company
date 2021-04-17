@@ -1,14 +1,18 @@
 import React from "react";
 import { useProjects } from "../../hooks/useProjects";
+import { Project } from "../Project";
 
 export function Timeline() {
   const projects = useProjects();
-  console.log(projects);
 
   return (
     <div>
       {projects.map(({ node: project }) => (
-        <article key={project.id}>{project.title}</article>
+        <Project
+          key={project.id}
+          title={project.title}
+          description={project.description?.raw}
+        />
       ))}
     </div>
   );
