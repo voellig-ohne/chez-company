@@ -1,22 +1,26 @@
 import { ForceGraph2D } from "react-force-graph";
 import React, { useCallback } from "react";
 import { useProjects } from "../../hooks/useProjects";
+import { sortBy } from "lodash";
 
 const graphStyles = {
   project: {
     color: "#ffff3b",
     background: "#fec4fc",
     fontSize: 20,
+    order: 1,
   },
   fragment: {
     color: "#f81955",
     background: "#2c99e4",
     fontSize: 15,
+    order: 3,
   },
   tag: {
     color: "#ffff3b",
     background: "#fec4fc",
     fontSize: 15,
+    order: 2,
   },
 };
 
@@ -70,6 +74,11 @@ export function ProjectGraph() {
       }
     });
   });
+
+  graphData.nodes = sortBy(
+    graphData.nodes,
+    (node) => -graphStyles[node.type].order
+  );
 
   return (
     <ForceGraph2D
