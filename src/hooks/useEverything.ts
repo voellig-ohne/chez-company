@@ -1,11 +1,9 @@
 import { useStaticQuery, graphql } from "gatsby";
 
-export const useProjects = () => {
-  const {
-    allContentfulProjekt: { edges },
-  } = useStaticQuery<GatsbyTypes.ProjectsQuery>(
+export const useEverything = () => {
+  const everything = useStaticQuery<GatsbyTypes.EverythingQuery>(
     graphql`
-      query Projects {
+      query Everything {
         allContentfulProjekt {
           edges {
             node {
@@ -34,5 +32,5 @@ export const useProjects = () => {
     `
   );
 
-  return edges;
+  return everything;
 };

@@ -13,5 +13,15 @@
 
 body {
   --mainFont: "PT Mono", monospace;
+
+  --yellow: #ffff3b;
+  --red: #f81955;
+  --orange: #f8927d;
+  --pink: #fec4fc;
+  --blue: #2c99e4;
+  --turquoise: #6deaba;
+
+  background: var(--turquoise);
   font-family: var(--mainFont);
+  margin: 0;
 }

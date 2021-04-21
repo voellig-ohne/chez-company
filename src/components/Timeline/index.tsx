@@ -1,5 +1,4 @@
 import React from "react";
-import { ForceGraph2D } from "react-force-graph";
 import { useProjects } from "../../hooks/useProjects";
 import { Project } from "../Project";
 

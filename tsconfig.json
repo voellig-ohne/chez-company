@@ -12,6 +12,7 @@
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "removeComments": false,
+      "allowJs": true,
       "plugins": [
         {
           "name": "ts-graphql-plugin",
