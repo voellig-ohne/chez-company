@@ -5,6 +5,9 @@ require("dotenv").config({
 module.exports = {
   plugins: [
     "gatsby-plugin-dts-css-modules",
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-typegen`,
       options: {

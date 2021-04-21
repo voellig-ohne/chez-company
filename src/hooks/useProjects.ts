@@ -15,6 +15,14 @@ export const useProjects = () => {
               description {
                 raw
               }
+              tags {
+                id
+                title
+                image {
+                  id
+                  gatsbyImageData
+                }
+              }
             }
           }
         }
