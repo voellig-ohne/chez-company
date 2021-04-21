@@ -24,8 +24,16 @@ export const useProjects = () => {
                 }
               }
               fragments {
-                id
-                title
+                ... on Node {
+                  ... on ContentfulFragmentTextBild {
+                    id
+                    title
+                  }
+                  ... on ContentfulFragmentVideo {
+                    id
+                    title
+                  }
+                }
               }
             }
           }

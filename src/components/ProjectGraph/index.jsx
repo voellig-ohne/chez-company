@@ -69,7 +69,7 @@ export function ProjectGraph() {
       }
 
       graphData.links.push({ source: projectNode.id, target: tagNode.id });
-      if (!graphData.nodes.find((foo) => foo.id === tag.id)) {
+      if (!graphData.nodes.find((node) => node.id === tag.id)) {
         graphData.nodes.push(tagNode);
       }
     });
