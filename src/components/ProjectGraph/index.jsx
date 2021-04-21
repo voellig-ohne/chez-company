@@ -1,13 +1,15 @@
 import { ForceGraph2D } from "react-force-graph";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useProjects } from "../../hooks/useProjects";
 import { sortBy } from "lodash";
+import { navigate } from "gatsby-link";
+import { stringToSslug } from "../util";
 
 const graphStyles = {
   project: {
     color: "#ffff3b",
     background: "#fec4fc",
-    fontSize: 20,
+    fontSize: 30,
     order: 1,
   },
   fragment: {
@@ -27,13 +29,13 @@ const graphStyles = {
 export function ProjectGraph() {
   const projects = useProjects();
 
-  const graphRef = useCallback((node) => {
-    if (node) {
-      setTimeout(() => {
-        node.zoomToFit(1000, 50);
-      }, 1500);
-    }
-  }, []);
+  const graphRef = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      graphRef.current.zoomToFit(1000, 50);
+    }, 1500);
+  }, [graphRef])
 
   if (typeof window === "undefined") {
     return null;
@@ -105,7 +107,7 @@ export function ProjectGraph() {
           const textWidth = ctx.measureText(label).width;
           const bckgDimensions = [textWidth, fontSize].map(
             (n) => n + fontSize * 0.4
-          ); // some padding
+          );
 
           ctx.fillStyle = styles.background;
           ctx.fillRect(
@@ -138,6 +140,12 @@ export function ProjectGraph() {
       }}
       ref={graphRef}
       linkWidth={2}
+      onNodeClick={(node) => {
+        if(node.type === 'project') {
+          navigate(`/projekt/${stringToSslug(node.slug)}/`)
+        }
+        console.log("node", node);
+      }}
     />
   );
 }

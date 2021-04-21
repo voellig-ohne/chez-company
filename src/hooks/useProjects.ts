@@ -12,6 +12,7 @@ export const useProjects = () => {
               id
               year
               title
+              slug
               description {
                 raw
               }
