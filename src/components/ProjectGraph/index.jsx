@@ -1,5 +1,5 @@
 import { ForceGraph2D } from "react-force-graph";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useProjects } from "../../hooks/useProjects";
 import { sortBy } from "lodash";
 import { navigate } from "gatsby-link";
@@ -28,14 +28,9 @@ const graphStyles = {
 
 export function ProjectGraph() {
   const projects = useProjects();
+  const [hasCenteredOnce, setHasCenteredOnce] = useState(false);
 
   const graphRef = useRef();
-
-  useEffect(() => {
-    setTimeout(() => {
-      graphRef.current.zoomToFit(1000, 50);
-    }, 1500);
-  }, [graphRef])
 
   if (typeof window === "undefined") {
     return null;
@@ -81,6 +76,7 @@ export function ProjectGraph() {
     graphData.nodes,
     (node) => -graphStyles[node.type].order
   );
+  console.log("hu");
 
   return (
     <ForceGraph2D
@@ -141,10 +137,16 @@ export function ProjectGraph() {
       ref={graphRef}
       linkWidth={2}
       onNodeClick={(node) => {
-        if(node.type === 'project') {
-          navigate(`/projekt/${stringToSslug(node.slug)}/`)
+        if (node.type === "project") {
+          navigate(`/projekt/${stringToSslug(node.slug)}/`);
         }
-        console.log("node", node);
+      }}
+      cooldownTime={3000}
+      onEngineStop={() => {
+        if (!hasCenteredOnce) {
+          setHasCenteredOnce(true);
+          graphRef.current.zoomToFit(2000, 50);
+        }
       }}
     />
   );
