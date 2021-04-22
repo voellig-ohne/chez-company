@@ -3,8 +3,15 @@ import React from "react";
 import { Fragment } from "../Fragment";
 import { Page } from "../Page";
 
-export default function FragmentPage({ data: { contentfulFragmentTextBild: fragment } }) {
-  return <Page><Fragment {...fragment} /></Page>;
+export default function FragmentPage({
+  data: { contentfulFragmentTextBild, contentfulFragmentVideo },
+}) {
+  const fragment = contentfulFragmentTextBild || contentfulFragmentVideo;
+  return (
+    <Page>
+      <Fragment {...fragment} />
+    </Page>
+  );
 }
 
 export const pageQuery = graphql`
@@ -13,11 +20,16 @@ export const pageQuery = graphql`
       title
       id
       description {
-          raw
+        raw
       }
       image {
         gatsbyImageData(width: 800)
       }
+    }
+    contentfulFragmentVideo(id: { eq: $id }) {
+      title
+      id
+      youtubeId
     }
   }
 `;

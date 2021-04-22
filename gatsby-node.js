@@ -42,6 +42,14 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
               }
             }
           }
+          allContentfulFragmentVideo {
+            edges {
+              node {
+                slug
+                id
+              }
+            }
+          }
         }
       `).then((result) => {
         if (result.errors) {
@@ -59,7 +67,11 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
           });
         });
 
-        result.data?.allContentfulFragmentTextBild.edges.forEach((fragment) => {
+        const fragments = [
+          ...result.data?.allContentfulFragmentTextBild.edges,
+          ...result.data?.allContentfulFragmentVideo.edges,
+        ];
+        fragments.forEach((fragment) => {
           const slug = `/fragment/${stringToSslug(fragment.node.slug)}`;
 
           createPage({
