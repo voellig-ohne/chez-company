@@ -1,5 +1,5 @@
 import { ForceGraph2D } from "react-force-graph";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useProjects } from "../../hooks/useProjects";
 import { sortBy } from "lodash";
 import { navigate } from "gatsby-link";
@@ -34,6 +34,22 @@ export function ProjectGraph() {
   const [graphData] = useState(() => formatGraphData(projects));
   const graphRef = useRef();
 
+  const getDisplaySize = () => ({height: window.innerHeight, width: window.innerWidth})
+  const [displaySize, setDisplaySize] = useState(getDisplaySize());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDisplaySize(getDisplaySize());
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
   if (typeof window === "undefined") {
     return null;
   }
@@ -45,6 +61,7 @@ export function ProjectGraph() {
       }}
     >
       <ForceGraph2D
+        {...displaySize}
         graphData={graphData}
         nodeCanvasObject={(node, ctx, globalScale) => {
           if (node.imageEl) {
