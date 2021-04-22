@@ -66,7 +66,7 @@ export function ProjectGraph() {
         nodeCanvasObject={(node, ctx, globalScale) => {
           if (node.imageEl) {
             const width = 30;
-            const height = width * node.ratio;
+            const height = width / node.ratio;
             node.__bckgDimensions = [width, height];
             ctx.drawImage(
               node.imageEl,
@@ -176,13 +176,11 @@ function formatGraphData(projects) {
     node.tags?.forEach((tag) => {
       const tagNode = tag;
       tagNode.type = "tag";
-      const image = tagNode?.image?.gatsbyImageData?.images?.fallback?.src;
+      const image = tagNode?.image?.resize?.src;
 
       if (image) {
         tagNode.imageEl = new Image();
-        tagNode.ratio =
-          tagNode?.image?.gatsbyImageData.height /
-          tagNode?.image?.gatsbyImageData.width;
+        tagNode.ratio = tagNode?.image?.resize?.aspectRatio;
 
         tagNode.imageEl.src = image;
       }

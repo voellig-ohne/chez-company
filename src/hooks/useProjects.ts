@@ -21,7 +21,10 @@ export const useProjects = () => {
                 title
                 image {
                   id
-                  gatsbyImageData
+                  resize(width: 200) {
+                    aspectRatio
+                    src
+                  }
                 }
               }
               fragments {
