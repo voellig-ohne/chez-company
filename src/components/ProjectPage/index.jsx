@@ -6,8 +6,6 @@ import { Project } from "../Project";
 // type ProjectPageProps = { data: any };
 
 export default function ProjectPage({ data: { contentfulProjekt: project } }) {
-  console.log(project);
-  // return <>{project.title}</>
   return <Page><Project {...project} /></Page>;
 }
 
