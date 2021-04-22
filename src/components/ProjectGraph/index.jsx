@@ -4,6 +4,7 @@ import { useProjects } from "../../hooks/useProjects";
 import { sortBy } from "lodash";
 import { navigate } from "gatsby-link";
 import { stringToSslug } from "../util";
+import { prefetchPathname } from "gatsby";
 
 const graphStyles = {
   project: {
@@ -144,6 +145,12 @@ export function ProjectGraph() {
             if (prevNode.type === "tag") {
               setIsHoveringTag(false);
             }
+          }
+          if (node?.type === "project") {
+            prefetchPathname(`/projekt/${stringToSslug(node.slug)}/`);
+          }
+          if (node?.type === "fragment") {
+            prefetchPathname(`/fragment/${stringToSslug(node.slug)}/`);
           }
         }}
         autoPauseRedraw={false}
