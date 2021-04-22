@@ -34,7 +34,10 @@ export function ProjectGraph() {
   const [graphData] = useState(() => formatGraphData(projects));
   const graphRef = useRef();
 
-  const getDisplaySize = () => ({height: window.innerHeight, width: window.innerWidth})
+  const getDisplaySize = () => ({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
   const [displaySize, setDisplaySize] = useState(getDisplaySize());
 
   useEffect(() => {
@@ -48,7 +51,6 @@ export function ProjectGraph() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
 
   if (typeof window === "undefined") {
     return null;
