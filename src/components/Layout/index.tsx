@@ -13,7 +13,7 @@ export default function Layout({
   return (
     <>
       <div className={s.graph}>
-        <ProjectGraph />
+        {typeof window !== "undefined" && <ProjectGraph />}
       </div>
       {path !== "/" && (
         <main className={s.main}>

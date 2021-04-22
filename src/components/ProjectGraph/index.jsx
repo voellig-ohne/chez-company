@@ -52,10 +52,6 @@ export function ProjectGraph() {
     };
   }, []);
 
-  if (typeof window === "undefined") {
-    return null;
-  }
-
   return (
     <div
       style={{
