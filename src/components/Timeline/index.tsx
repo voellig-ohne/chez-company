@@ -11,7 +11,7 @@ export function Timeline() {
         <Project
           key={project.id}
           title={project.title}
-          description={project.description?.raw}
+          description={project.description}
           tags={project.tags}
         />
       ))}

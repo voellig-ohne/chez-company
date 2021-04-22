@@ -5,7 +5,7 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 
 type ProjectProps = {
   title?: string;
-  description?: { raw: string };
+  description?: { raw: GatsbyTypes.Maybe<string> };
   tags?: readonly GatsbyTypes.Maybe<{
     id?: string;
     title?: string;

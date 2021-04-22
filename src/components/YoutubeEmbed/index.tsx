@@ -7,6 +7,7 @@ export function YoutubeEmbed({ youtubeUrl }: { youtubeUrl?: string }) {
   return (
     <div className={s.container}>
       <iframe
+        className={s.iFrame}
         width="560"
         height="315"
         src={youtubeUrlNoCookie}
