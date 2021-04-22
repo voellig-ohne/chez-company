@@ -20,10 +20,21 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
 exports.createPages = ({ graphql, actions: { createPage } }) => {
   return new Promise((resolve, reject) => {
     const ProjectPage = path.resolve("./src/components/ProjectPage/index.jsx");
+    const FragmentPage = path.resolve(
+      "./src/components/FragmentPage/index.jsx"
+    );
     resolve(
       graphql(`
         {
           allContentfulProjekt {
+            edges {
+              node {
+                slug
+                id
+              }
+            }
+          }
+          allContentfulFragmentTextBild {
             edges {
               node {
                 slug
@@ -38,13 +49,23 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
           reject(result.errors);
         }
 
-        result.data.allContentfulProjekt.edges.forEach((project) => {
+        result.data?.allContentfulProjekt.edges.forEach((project) => {
           const slug = `/projekt/${stringToSslug(project.node.slug)}`;
 
           createPage({
             path: slug,
             component: ProjectPage,
             context: { slug, id: project.node.id },
+          });
+        });
+
+        result.data?.allContentfulFragmentTextBild.edges.forEach((fragment) => {
+          const slug = `/fragment/${stringToSslug(fragment.node.slug)}`;
+
+          createPage({
+            path: slug,
+            component: FragmentPage,
+            context: { slug, id: fragment.node.id },
           });
         });
       })

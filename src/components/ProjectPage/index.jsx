@@ -3,14 +3,12 @@ import React from "react";
 import { Page } from "../Page";
 import { Project } from "../Project";
 
-// type ProjectPageProps = { data: any };
-
 export default function ProjectPage({ data: { contentfulProjekt: project } }) {
   return <Page><Project {...project} /></Page>;
 }
 
 export const pageQuery = graphql`
-  query StaticPageBySlug($id: String!) {
+  query ProjectById($id: String!) {
     contentfulProjekt(id: { eq: $id }) {
       title
       id

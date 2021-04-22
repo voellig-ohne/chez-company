@@ -1,5 +1,5 @@
 import { ForceGraph2D } from "react-force-graph";
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useProjects } from "../../hooks/useProjects";
 import { sortBy } from "lodash";
 import { navigate } from "gatsby-link";
@@ -103,6 +103,9 @@ export function ProjectGraph() {
         onNodeClick={(node) => {
           if (node.type === "project") {
             navigate(`/projekt/${stringToSslug(node.slug)}/`);
+          }
+          if (node.type === "fragment") {
+            navigate(`/fragment/${stringToSslug(node.slug)}/`);
           }
         }}
         cooldownTime={3000}

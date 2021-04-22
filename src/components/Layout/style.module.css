@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: auto minmax(0, 800px) auto;
   padding: 1rem;
-  min-height: 100vw;
+  min-height: 100vh;
 }
 
 .mainInner {

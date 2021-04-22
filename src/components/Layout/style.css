@@ -26,3 +26,7 @@ body {
   font-family: var(--mainFont);
   margin: 0;
 }
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}

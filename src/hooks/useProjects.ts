@@ -29,10 +29,12 @@ export const useProjects = () => {
                   ... on ContentfulFragmentTextBild {
                     id
                     title
+                    slug
                   }
                   ... on ContentfulFragmentVideo {
                     id
                     title
+                    slug
                   }
                 }
               }
