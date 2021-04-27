@@ -1,8 +1,10 @@
 .main {
+    --borderWidth: 4px;
+
     position: relative;
     padding: 1rem;
     background: var(--white);
-    border: solid 4px var(--mainColor);
+    border: solid var(--borderWidth) var(--mainColor);
 }
 
 .heading {
@@ -23,8 +25,8 @@
     height: 3rem;
     width: 3rem;
     border-radius: 100%;
-    background: var(--mainColor);
-    border: 4px solid var(--fontColor);
+    background: var(--fontColor);
+    border: var(--borderWidth) solid var(--mainColor);
 }
 
 .backButton:before,
@@ -33,9 +35,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    background: var(--fontColor);
+    background: var(--mainColor);
     width: 70%;
-    height: 4px;
+    height: var(--borderWidth);
 }
 
 .backButton:before {
