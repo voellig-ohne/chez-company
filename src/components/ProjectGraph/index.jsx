@@ -10,19 +10,19 @@ const graphStyles = {
   project: {
     color: "#ffff3b",
     background: "#fec4fc",
-    fontSize: 30,
+    fontSize: 8,
     order: 1,
   },
   fragment: {
     color: "#f81955",
     background: "#2c99e4",
-    fontSize: 15,
+    fontSize: 5,
     order: 3,
   },
   tag: {
     color: "#ffff3b",
     background: "#fec4fc",
-    fontSize: 15,
+    fontSize: 6,
     order: 2,
   },
 };
@@ -78,7 +78,7 @@ export function ProjectGraph() {
             const styles = graphStyles[node.type];
 
             const label = node.title;
-            const fontSize = styles.fontSize / globalScale;
+            const fontSize = styles.fontSize;
             ctx.font = `${fontSize}px PT Mono`;
 
             const textWidth = ctx.measureText(label).width;
@@ -124,7 +124,7 @@ export function ProjectGraph() {
             navigate(`/fragment/${stringToSslug(node.slug)}/`);
           }
         }}
-        cooldownTime={3000}
+        cooldownTime={5000}
         onEngineStop={() => {
           if (!hasCenteredOnce) {
             setHasCenteredOnce(true);
@@ -194,6 +194,7 @@ function formatGraphData(projects) {
       }
 
       graphData.links.push({ source: projectNode.id, target: tagNode.id });
+
       if (!graphData.nodes.find((node) => node.id === tag.id)) {
         graphData.nodes.push(tagNode);
       }
