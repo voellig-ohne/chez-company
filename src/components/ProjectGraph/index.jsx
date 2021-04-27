@@ -171,11 +171,14 @@ function formatGraphData(projects) {
       const fragmentNode = fragment;
       fragmentNode.type = "fragment";
 
-      graphData.nodes.push(fragmentNode);
       graphData.links.push({
         source: projectNode.id,
         target: fragmentNode.id,
       });
+
+      if (!graphData.nodes.find((node) => node.id === fragmentNode.id)) {
+        graphData.nodes.push(fragmentNode);
+      }
     });
 
     node.tags?.forEach((tag) => {
