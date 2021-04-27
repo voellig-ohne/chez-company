@@ -25,25 +25,23 @@ export function Page({
       event.target instanceof Node && ref.current?.contains(event.target);
     if (!clickInside) {
       // TODO: FIX THIS, DIRTY HACK NEEDS TO BE DONE PROPERLY!!
-      setTimeout(() => {
-        navigate("/");
-      }, 300);
+      navigate("/");
     }
   }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("mousedown", handleWindowClick);
+    window.addEventListener("click", handleWindowClick);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("mousedown", handleWindowClick);
+      window.removeEventListener("click", handleWindowClick);
     };
   }, [handleKeyDown, handleWindowClick]);
 
   return (
-    <>
-      <article className={clsx(s.main, s[color])} ref={ref}>
+    <main className={s.main}>
+      <article className={clsx(s.article, s[color])} ref={ref}>
         <Link
           className={s.backButton}
           to="/"
@@ -57,6 +55,6 @@ export function Page({
         )}
         {children}
       </article>
-    </>
+    </main>
   );
 }

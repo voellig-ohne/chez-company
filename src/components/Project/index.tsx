@@ -15,7 +15,7 @@ type ProjectProps = {
   }>[];
 };
 
-export function Project({ title, description, tags }: ProjectProps) {
+export function Project({ description, tags }: ProjectProps) {
   return (
     <>
       <div className={s.tags}>

@@ -1,51 +1,62 @@
 .main {
-    --borderWidth: 4px;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 700px) auto;
+  padding: 1rem;
+  min-height: 100vh;
+  align-items: center;
+}
 
-    position: relative;
-    padding: 1rem;
-    background: var(--white);
-    border: solid var(--borderWidth) var(--mainColor);
+.article {
+  --borderWidth: 4px;
+
+  grid-column: 2;
+  position: relative;
+  padding: 1rem;
+  background: var(--white);
+  border: solid var(--borderWidth) var(--mainColor);
 }
 
 .heading {
-    margin-top: 0;
-    font-size: 2rem;
-    margin-bottom: 2rem;
+  margin-top: 0;
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 .headingInner {
-    color: var(--fontColor);
-    background: var(--mainColor);
+  color: var(--fontColor);
+  background: var(--mainColor);
 }
 
 .backButton {
-    position: absolute;
-    top: -1rem;
-    right: -1rem;
-    height: 3rem;
-    width: 3rem;
-    border-radius: 100%;
-    background: var(--fontColor);
-    border: var(--borderWidth) solid var(--mainColor);
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 100%;
+  background: var(--fontColor);
+  border: var(--borderWidth) solid var(--mainColor);
 }
 
 .backButton:before,
 .backButton:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background: var(--mainColor);
-    width: 70%;
-    height: var(--borderWidth);
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--mainColor);
+  width: 70%;
+  height: var(--borderWidth);
 }
 
 .backButton:before {
-    transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .backButton:after {
-    transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .pink {

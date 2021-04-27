@@ -15,11 +15,7 @@ export default function Layout({
       <div className={s.graph}>
         {typeof window !== "undefined" && <ProjectGraph />}
       </div>
-      {path !== "/" && (
-        <main className={s.main}>
-          <div className={s.mainInner}>{children}</div>
-        </main>
-      )}
+      {path !== "/" && children}
     </>
   );
 }

@@ -116,7 +116,7 @@ export function ProjectGraph() {
         }}
         ref={graphRef}
         linkWidth={2}
-        onNodeClick={(node) => {
+        onNodeClick={(node, event) => {
           if (node.type === "project") {
             navigate(`/projekt/${stringToSslug(node.slug)}/`);
           }
