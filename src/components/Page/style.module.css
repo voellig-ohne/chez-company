@@ -1,12 +1,19 @@
 .main {
     position: relative;
     padding: 1rem;
-    background: var(--backgroundColor);
-    color: var(--fontColor);
+    background: var(--white);
+    border: solid 4px var(--mainColor);
 }
 
 .heading {
     margin-top: 0;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.headingInner {
+    color: var(--fontColor);
+    background: var(--mainColor);
 }
 
 .backButton {
@@ -16,8 +23,8 @@
     height: 3rem;
     width: 3rem;
     border-radius: 100%;
-    background: var(--backgroundColor);
-    border: 2px solid var(--fontColor);
+    background: var(--mainColor);
+    border: 4px solid var(--fontColor);
 }
 
 .backButton:before,
@@ -40,16 +47,16 @@
 }
 
 .pink {
-    --backgroundColor: var(--pink);
+    --mainColor: var(--pink);
     --fontColor: var(--yellow);
 }
 
 .blue {
-    --backgroundColor: var(--blue);
+    --mainColor: var(--blue);
     --fontColor: var(--red);
 }
 
 .white {
-    --backgroundColor: var(--white);
+    --mainColor: var(--white);
     --fontColor: var(--black);
 }

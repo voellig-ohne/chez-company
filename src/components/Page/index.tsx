@@ -21,7 +21,11 @@ export function Page({
           aria-label="zurück"
           title="zurück"
         ></Link>
-        {title && <h1 className={s.heading}>{title}</h1>}
+        {title && (
+          <h1 className={s.heading}>
+            <span className={s.headingInner}>{title}</span>
+          </h1>
+        )}
         {children}
       </article>
     </>
