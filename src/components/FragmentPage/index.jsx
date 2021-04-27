@@ -8,7 +8,7 @@ export default function FragmentPage({
 }) {
   const fragment = contentfulFragmentTextBild || contentfulFragmentVideo;
   return (
-    <Page>
+    <Page color="blue" title={fragment.title}>
       <Fragment {...fragment} />
     </Page>
   );

@@ -4,7 +4,11 @@ import { Page } from "../Page";
 import { Project } from "../Project";
 
 export default function ProjectPage({ data: { contentfulProjekt: project } }) {
-  return <Page><Project {...project} /></Page>;
+  return (
+    <Page title={project.title} color="pink">
+      <Project {...project} />
+    </Page>
+  );
 }
 
 export const pageQuery = graphql`

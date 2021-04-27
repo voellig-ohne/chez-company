@@ -1,0 +1,55 @@
+.main {
+    position: relative;
+    padding: 1rem;
+    background: var(--backgroundColor);
+    color: var(--fontColor);
+}
+
+.heading {
+    margin-top: 0;
+}
+
+.backButton {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 100%;
+    background: var(--backgroundColor);
+    border: 2px solid var(--fontColor);
+}
+
+.backButton:before,
+.backButton:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--fontColor);
+    width: 70%;
+    height: 4px;
+}
+
+.backButton:before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.backButton:after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.pink {
+    --backgroundColor: var(--pink);
+    --fontColor: var(--yellow);
+}
+
+.blue {
+    --backgroundColor: var(--blue);
+    --fontColor: var(--red);
+}
+
+.white {
+    --backgroundColor: var(--white);
+    --fontColor: var(--black);
+}

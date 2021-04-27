@@ -17,8 +17,7 @@ type ProjectProps = {
 
 export function Project({ title, description, tags }: ProjectProps) {
   return (
-    <article className={s.project}>
-      <h1>{title}</h1>
+    <>
       <div className={s.tags}>
         {tags?.map((tag) => {
           if (!tag?.image?.gatsbyImageData) return null;
@@ -32,6 +31,6 @@ export function Project({ title, description, tags }: ProjectProps) {
         })}
       </div>
       <div>{contentfulRichtTextToThml(description?.raw)}</div>
-    </article>
+    </>
   );
 }
