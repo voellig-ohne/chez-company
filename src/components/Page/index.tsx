@@ -6,10 +6,12 @@ import * as s from './style.module.css';
 export function Page({
     children,
     color = 'white',
+    size = 'medium',
     title,
 }: {
     children: React.ReactNode;
     color?: 'pink' | 'blue' | 'white';
+    size?: 'medium' | 'large';
     title?: React.ReactNode;
 }) {
     const ref = useRef<HTMLDivElement>(null);
@@ -40,7 +42,7 @@ export function Page({
     }, [handleKeyDown, handleWindowClick]);
 
     return (
-        <main className={s.main}>
+        <main className={clsx(s.main, s[size])}>
             <article className={clsx(s.article, s[color])} ref={ref}>
                 <Link
                     className={s.backButton}

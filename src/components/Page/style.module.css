@@ -8,6 +8,10 @@
     align-items: center;
 }
 
+.main.large {
+    grid-template-columns: auto minmax(0, 1000px) auto;
+}
+
 .article {
     --borderWidth: 4px;
 
