@@ -22,6 +22,8 @@ body {
     --blue: #2c99e4;
     --turquoise: #6deaba;
 
+    --paragraphLineHeight: 1.4;
+
     background: var(--turquoise);
     font-family: var(--mainFont);
     margin: 0;
@@ -31,4 +33,8 @@ body {
 *:after,
 *:before {
     box-sizing: border-box;
+}
+
+p {
+    line-height: var(--paragraphLineHeight);
 }
