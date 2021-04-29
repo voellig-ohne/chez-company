@@ -42,16 +42,18 @@ function Fragments({ fragments }) {
 function FragmentItem(fragment) {
     if (!fragment) return null;
 
+    const image = fragment.images[0];
+
     return (
         <Link
             to={`/fragment/${stringToSslug(fragment.slug)}`}
             className={s.fragmentLink}
         >
             <h1 className={s.fragmentHeading}>{fragment.title}</h1>
-            {fragment.image && (
+            {image && (
                 <GatsbyImage
-                    alt={fragment.image.title || ''}
-                    image={fragment.image.gatsbyImageData}
+                    alt={image.title || ''}
+                    image={image.gatsbyImageData}
                     className={s.fragmentImage}
                 />
             )}

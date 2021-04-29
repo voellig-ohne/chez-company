@@ -26,7 +26,8 @@ export const pageQuery = graphql`
             description {
                 raw
             }
-            image {
+            images {
+                id
                 gatsbyImageData(width: 800)
             }
         }

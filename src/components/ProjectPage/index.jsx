@@ -34,7 +34,7 @@ export const pageQuery = graphql`
                         id
                         title
                         slug
-                        image {
+                        images {
                             id
                             gatsbyImageData(layout: CONSTRAINED, width: 200)
                         }
