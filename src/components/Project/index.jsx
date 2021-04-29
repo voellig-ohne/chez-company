@@ -1,6 +1,6 @@
 import contentfulRichtTextToThml from '../contentfulRichTextToHtml';
 import * as s from './style.module.css';
-import React from 'react';
+import React, { useRef } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { YoutubePreview } from '../YoutubeEmbed';
@@ -40,14 +40,21 @@ function Fragments({ fragments }) {
 }
 
 function FragmentItem(fragment) {
+    const audioref = useRef();
     if (!fragment) return null;
 
-    const image = fragment.images[0];
+    const image = fragment.images && fragment?.images[0];
 
     return (
         <Link
             to={`/fragment/${stringToSslug(fragment.slug)}`}
             className={s.fragmentLink}
+            onMouseEnter={() => {
+                audioref?.current?.play();
+            }}
+            onMouseLeave={() => {
+                audioref?.current?.pause();
+            }}
         >
             <h1 className={s.fragmentHeading}>{fragment.title}</h1>
             {image && (
@@ -59,6 +66,12 @@ function FragmentItem(fragment) {
             )}
             {fragment.youtubeId && (
                 <YoutubePreview youtubeUrl={fragment.youtubeId} />
+            )}
+            {fragment.audio?.file?.url && (
+                <div className={s.audio}>
+                    <audio ref={audioref} src={fragment.audio?.file?.url} />
+                    <div className={s.audioInner}>💿</div>
+                </div>
             )}
         </Link>
     );

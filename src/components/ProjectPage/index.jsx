@@ -45,6 +45,16 @@ export const pageQuery = graphql`
                         title
                         youtubeId
                     }
+                    ... on ContentfulFragmentAudio {
+                        id
+                        slug
+                        title
+                        audio {
+                            file {
+                                url
+                            }
+                        }
+                    }
                 }
             }
         }

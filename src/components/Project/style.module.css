@@ -37,3 +37,34 @@
 .fragmentImage {
     display: block;
 }
+
+.audio {
+    padding-bottom: 50%;
+    position: relative;
+    font-size: 5rem;
+}
+
+.audioInner {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fragmentLink:hover .audioInner {
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

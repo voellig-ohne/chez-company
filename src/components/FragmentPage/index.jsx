@@ -4,9 +4,16 @@ import { Fragment } from '../Fragment';
 import { Page } from '../Page';
 
 export default function FragmentPage({
-    data: { contentfulFragmentTextBild, contentfulFragmentVideo },
+    data: {
+        contentfulFragmentTextBild,
+        contentfulFragmentVideo,
+        contentfulFragmentAudio,
+    },
 }) {
-    const fragment = contentfulFragmentTextBild || contentfulFragmentVideo;
+    const fragment =
+        contentfulFragmentTextBild ||
+        contentfulFragmentVideo ||
+        contentfulFragmentAudio;
     return (
         <Page
             color="blue"
@@ -35,6 +42,15 @@ export const pageQuery = graphql`
             title
             id
             youtubeId
+        }
+        contentfulFragmentAudio(id: { eq: $id }) {
+            title
+            audio {
+                file {
+                    url
+                }
+            }
+            id
         }
     }
 `;

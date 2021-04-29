@@ -39,6 +39,11 @@ export const useProjects = () => {
                                         title
                                         slug
                                     }
+                                    ... on ContentfulFragmentAudio {
+                                        id
+                                        title
+                                        slug
+                                    }
                                 }
                             }
                         }

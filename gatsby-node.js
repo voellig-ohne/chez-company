@@ -52,6 +52,14 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                             }
                         }
                     }
+                    allContentfulFragmentAudio {
+                        edges {
+                            node {
+                                slug
+                                id
+                            }
+                        }
+                    }
                 }
             `).then(result => {
                 if (result.errors) {
@@ -72,6 +80,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                 const fragments = [
                     ...result.data?.allContentfulFragmentTextBild.edges,
                     ...result.data?.allContentfulFragmentVideo.edges,
+                    ...result.data?.allContentfulFragmentAudio.edges,
                 ];
                 fragments.forEach(fragment => {
                     const slug = `/fragment/${stringToSslug(
