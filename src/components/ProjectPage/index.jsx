@@ -33,10 +33,17 @@ export const pageQuery = graphql`
                     ... on ContentfulFragmentTextBild {
                         id
                         title
+                        slug
+                        image {
+                            id
+                            gatsbyImageData(layout: CONSTRAINED, width: 200)
+                        }
                     }
                     ... on ContentfulFragmentVideo {
                         id
+                        slug
                         title
+                        youtubeId
                     }
                 }
             }

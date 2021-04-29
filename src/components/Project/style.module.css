@@ -11,3 +11,32 @@
 .tags > * {
     margin: 1rem;
 }
+
+.fragments {
+    margin-top: 2rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.fragmentLink {
+    color: var(--fontColor);
+    background: var(--mainColor);
+    text-decoration: none;
+    padding: 1rem;
+    display: block;
+}
+
+.fragmentLink:hover {
+    color: var(--mainColor);
+    background: var(--fontColor);
+}
+
+.fragmentHeading {
+    margin: 0 0 0.5rem;
+    font-size: inherit;
+}
+
+.fragmentImage {
+    display: block;
+}
