@@ -45,13 +45,11 @@ function FragmentItem(fragment) {
     return (
         <Link
             to={`/fragment/${stringToSslug(fragment.slug)}`}
-            key={fragment.id}
             className={s.fragmentLink}
         >
             <h1 className={s.fragmentHeading}>{fragment.title}</h1>
             {fragment.image && (
                 <GatsbyImage
-                    key={fragment.image.id}
                     alt={fragment.image.title || ''}
                     image={fragment.image.gatsbyImageData}
                     className={s.fragmentImage}

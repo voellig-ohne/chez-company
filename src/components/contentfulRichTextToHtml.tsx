@@ -7,7 +7,9 @@ export default function contentfulRichtTextToThml(source?: string) {
 
     const options = {
         renderText: (text: string) =>
-            text.split('\n').flatMap((text, i) => [i > 0 && <br />, text]),
+            text
+                .split('\n')
+                .flatMap((text, i) => [i > 0 && <br key={i} />, text]),
     };
 
     return documentToReactComponents(parsed, options);
