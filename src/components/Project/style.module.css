@@ -1,9 +1,6 @@
-.project {
-    /* background: green; */
-}
-
 .tags {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     margin: -1rem;
 }
