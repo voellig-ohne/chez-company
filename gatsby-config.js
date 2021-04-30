@@ -23,6 +23,7 @@ module.exports = {
             options: {
                 spaceId: 'u0ztoekrenxw',
                 accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+                useNameForId: false,
             },
         },
         {

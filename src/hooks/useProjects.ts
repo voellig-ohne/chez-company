@@ -2,11 +2,11 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 export const useProjects = () => {
     const {
-        allContentfulProjekt: { edges },
+        allContentfulProject: { edges },
     } = useStaticQuery<GatsbyTypes.ProjectsQuery>(
         graphql`
             query Projects {
-                allContentfulProjekt {
+                allContentfulProject {
                     edges {
                         node {
                             id
@@ -29,7 +29,7 @@ export const useProjects = () => {
                             }
                             fragments {
                                 ... on Node {
-                                    ... on ContentfulFragmentTextBild {
+                                    ... on ContentfulFragmentText {
                                         id
                                         title
                                         slug

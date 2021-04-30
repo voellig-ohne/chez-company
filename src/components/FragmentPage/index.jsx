@@ -5,13 +5,13 @@ import { Page } from '../Page';
 
 export default function FragmentPage({
     data: {
-        contentfulFragmentTextBild,
+        contentfulFragmentText,
         contentfulFragmentVideo,
         contentfulFragmentAudio,
     },
 }) {
     const fragment =
-        contentfulFragmentTextBild ||
+        contentfulFragmentText ||
         contentfulFragmentVideo ||
         contentfulFragmentAudio;
     return (
@@ -27,7 +27,7 @@ export default function FragmentPage({
 
 export const pageQuery = graphql`
     query FragmentById($id: String!) {
-        contentfulFragmentTextBild(id: { eq: $id }) {
+        contentfulFragmentText(id: { eq: $id }) {
             title
             id
             description {

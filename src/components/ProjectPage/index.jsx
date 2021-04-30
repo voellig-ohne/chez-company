@@ -3,7 +3,7 @@ import React from 'react';
 import { Page } from '../Page';
 import { Project } from '../Project';
 
-export default function ProjectPage({ data: { contentfulProjekt: project } }) {
+export default function ProjectPage({ data: { contentfulProject: project } }) {
     const superTitle =
         project.year && project.yearUntil
             ? `${project.year} – ${project.yearUntil}`
@@ -18,7 +18,7 @@ export default function ProjectPage({ data: { contentfulProjekt: project } }) {
 
 export const pageQuery = graphql`
     query ProjectById($id: String!) {
-        contentfulProjekt(id: { eq: $id }) {
+        contentfulProject(id: { eq: $id }) {
             title
             id
             year
@@ -45,7 +45,7 @@ export const pageQuery = graphql`
             }
             fragments {
                 ... on Node {
-                    ... on ContentfulFragmentTextBild {
+                    ... on ContentfulFragmentText {
                         id
                         title
                         slug

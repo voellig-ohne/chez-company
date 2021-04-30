@@ -34,7 +34,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
         resolve(
             graphql(`
                 {
-                    allContentfulProjekt {
+                    allContentfulProject {
                         edges {
                             node {
                                 slug
@@ -42,7 +42,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                             }
                         }
                     }
-                    allContentfulFragmentTextBild {
+                    allContentfulFragmentText {
                         edges {
                             node {
                                 slug
@@ -89,7 +89,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     reject(result.errors);
                 }
 
-                result.data?.allContentfulProjekt.edges.forEach(project => {
+                result.data?.allContentfulProject.edges.forEach(project => {
                     const slug = `/projekt/${stringToSslug(project.node.slug)}`;
 
                     createPage({
@@ -120,7 +120,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                 });
 
                 const fragments = [
-                    ...result.data?.allContentfulFragmentTextBild.edges,
+                    ...result.data?.allContentfulFragmentText.edges,
                     ...result.data?.allContentfulFragmentVideo.edges,
                     ...result.data?.allContentfulFragmentAudio.edges,
                 ];
