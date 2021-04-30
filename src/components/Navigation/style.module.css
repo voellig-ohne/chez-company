@@ -12,6 +12,7 @@
     text-decoration: none;
     text-shadow: 1px 1px 0 var(--yellow), 2px 2px 0 var(--yellow);
     color: var(--red);
+    display: block;
 }
 
 .link:hover {
