@@ -28,6 +28,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
         const PersonPage = path.resolve(
             './src/components/PersonPage/index.jsx'
         );
+        const StaticPage = path.resolve(
+            './src/components/StaticPage/index.jsx'
+        );
         resolve(
             graphql(`
                 {
@@ -71,6 +74,14 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                             }
                         }
                     }
+                    allContentfulPage {
+                        edges {
+                            node {
+                                slug
+                                id
+                            }
+                        }
+                    }
                 }
             `).then(result => {
                 if (result.errors) {
@@ -95,6 +106,16 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                         path: slug,
                         component: PersonPage,
                         context: { slug, id: person.node.id },
+                    });
+                });
+
+                result.data?.allContentfulPage.edges.forEach(page => {
+                    const slug = `/${stringToSslug(page.node.slug)}`;
+
+                    createPage({
+                        path: slug,
+                        component: StaticPage,
+                        context: { slug, id: page.node.id },
                     });
                 });
 
