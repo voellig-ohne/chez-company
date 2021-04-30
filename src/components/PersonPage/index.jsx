@@ -6,11 +6,11 @@ import { Page } from '../Page';
 
 export default function PersonPage({
     data: {
-        contentfulPerson: { name, description, image },
+        contentfulPerson: { name, description, image, profession },
     },
 }) {
     return (
-        <Page title={name} color="pink">
+        <Page superTitle={profession} title={name} color="pink">
             <GatsbyImage
                 alt={`Bild von ${name}`}
                 image={image?.gatsbyImageData}
@@ -25,6 +25,7 @@ export const pageQuery = graphql`
         contentfulPerson(id: { eq: $id }) {
             name
             id
+            profession
             description {
                 raw
             }
