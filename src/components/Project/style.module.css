@@ -1,11 +1,13 @@
-.tags {
+.tags,
+.persons {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     margin: -1rem;
 }
 
-.tags > * {
+.tags > *,
+.persons > * {
     margin: 1rem;
 }
 

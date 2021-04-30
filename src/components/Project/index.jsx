@@ -6,7 +6,7 @@ import { Link } from 'gatsby';
 import { YoutubePreview } from '../YoutubeEmbed';
 import { stringToSslug } from '../util';
 
-export function Project({ description, tags, fragments }) {
+export function Project({ description, tags, fragments, persons }) {
     return (
         <>
             <div className={s.tags}>
@@ -18,6 +18,23 @@ export function Project({ description, tags, fragments }) {
                             alt={tag.title || ''}
                             image={tag?.image?.gatsbyImageData}
                         />
+                    );
+                })}
+            </div>
+            <div className={s.persons}>
+                {persons?.map(person => {
+                    if (!person?.image?.gatsbyImageData) return null;
+                    return (
+                        <Link
+                            to={`/person/${stringToSslug(person.slug)}`}
+                            key={person.id}
+                        >
+                            <GatsbyImage
+                                alt={person.name}
+                                title={person.name}
+                                image={person?.image?.gatsbyImageData}
+                            />
+                        </Link>
                     );
                 })}
             </div>

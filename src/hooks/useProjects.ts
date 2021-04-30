@@ -46,6 +46,16 @@ export const useProjects = () => {
                                     }
                                 }
                             }
+                            persons {
+                                name
+                                id
+                                image {
+                                    resize(width: 200) {
+                                        aspectRatio
+                                        src
+                                    }
+                                }
+                            }
                         }
                     }
                 }

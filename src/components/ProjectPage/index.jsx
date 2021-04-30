@@ -28,6 +28,15 @@ export const pageQuery = graphql`
                     gatsbyImageData(layout: FIXED, width: 100)
                 }
             }
+            persons {
+                name
+                slug
+                id
+                image {
+                    id
+                    gatsbyImageData(layout: FIXED, width: 100)
+                }
+            }
             fragments {
                 ... on Node {
                     ... on ContentfulFragmentTextBild {
