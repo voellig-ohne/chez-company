@@ -28,9 +28,14 @@
     margin-bottom: 2rem;
 }
 
-.headingInner {
+.headingInner,
+.superTitleInner {
     color: var(--fontColor);
     background: var(--mainColor);
+}
+
+.superTitle {
+    margin-bottom: 0.5rem;
 }
 
 .backButton {

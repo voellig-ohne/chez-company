@@ -8,11 +8,13 @@ export function Page({
     color = 'white',
     size = 'medium',
     title,
+    superTitle,
 }: {
     children: React.ReactNode;
     color?: 'pink' | 'blue' | 'white';
     size?: 'medium' | 'large';
     title?: React.ReactNode;
+    superTitle?: React.ReactNode;
 }) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -50,6 +52,11 @@ export function Page({
                     aria-label="zurück"
                     title="zurück"
                 ></Link>
+                {superTitle && (
+                    <div className={s.superTitle}>
+                        <span className={s.superTitleInner}>{superTitle}</span>
+                    </div>
+                )}
                 {title && (
                     <h1 className={s.heading}>
                         <span className={s.headingInner}>{title}</span>

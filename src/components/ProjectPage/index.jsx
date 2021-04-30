@@ -4,8 +4,13 @@ import { Page } from '../Page';
 import { Project } from '../Project';
 
 export default function ProjectPage({ data: { contentfulProjekt: project } }) {
+    const superTitle =
+        project.year && project.yearUntil
+            ? `${project.year} – ${project.yearUntil}`
+            : project.year;
+
     return (
-        <Page title={project.title} color="pink">
+        <Page title={project.title} superTitle={superTitle} color="pink">
             <Project {...project} />
         </Page>
     );
@@ -17,6 +22,7 @@ export const pageQuery = graphql`
             title
             id
             year
+            yearUntil
             description {
                 raw
             }
