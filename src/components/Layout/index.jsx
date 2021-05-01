@@ -14,6 +14,10 @@ export default function Layout({ children, path }) {
                 titleTemplate="Chez Company - %s"
             >
                 <link rel="icon" type="image/png" href={Favicon} />
+                <link
+                    rel="canonical"
+                    href={`https://chez-company.org${path}`}
+                />
             </Helmet>
             <div className={s.graph}>
                 {typeof window !== 'undefined' && <ProjectGraph />}
