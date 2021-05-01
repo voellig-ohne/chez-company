@@ -22,7 +22,7 @@ export function Fragment({ description, images, youtubeId, audio }) {
                     ))}
                 </div>
             )}
-            <div>{contentfulRichtTextToThml(description?.raw)}</div>
+            <div>{contentfulRichtTextToThml(description)}</div>
         </>
     );
 }

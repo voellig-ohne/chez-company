@@ -10,7 +10,7 @@ export default function PersonPage({
 }) {
     return (
         <Page title={title} color="pink">
-            {contentfulRichtTextToThml(text?.raw)}
+            {contentfulRichtTextToThml(text)}
         </Page>
     );
 }
@@ -21,7 +21,7 @@ export const pageQuery = graphql`
             title
             id
             text {
-                raw
+                ...textStuff
             }
         }
     }

@@ -38,7 +38,7 @@ export function Project({ description, tags, fragments, persons }) {
                     );
                 })}
             </div>
-            <div>{contentfulRichtTextToThml(description?.raw)}</div>
+            <div>{contentfulRichtTextToThml(description)}</div>
             <Fragments fragments={fragments} />
         </>
     );

@@ -15,7 +15,7 @@ export default function PersonPage({
                 alt={`Bild von ${name}`}
                 image={image?.gatsbyImageData}
             />
-            {contentfulRichtTextToThml(description?.raw)}
+            {contentfulRichtTextToThml(description)}
         </Page>
     );
 }
