@@ -8,10 +8,13 @@ const NAV_ITEMS = [
         to: '/impressum',
         children: 'impressum',
     },
+    {
+        to: '/projekte',
+        children: 'projekte',
+    },
 ];
 
 export default function Navigation() {
-    console.log('hu', Logo);
     return (
         <div className={s.nav}>
             <Link to="/">
