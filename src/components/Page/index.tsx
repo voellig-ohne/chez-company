@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { Link, navigate } from 'gatsby';
 import React, { useCallback, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import * as s from './style.module.css';
 
 export function Page({
@@ -13,7 +14,7 @@ export function Page({
     children: React.ReactNode;
     color?: 'pink' | 'blue' | 'white';
     size?: 'medium' | 'large';
-    title?: React.ReactNode;
+    title?: string;
     superTitle?: React.ReactNode;
 }) {
     const ref = useRef<HTMLDivElement>(null);
@@ -47,6 +48,7 @@ export function Page({
 
     return (
         <main className={clsx(s.main, s[size])}>
+            <Helmet title={title}></Helmet>
             <article className={clsx(s.article, s[color])} ref={ref}>
                 <Link
                     className={s.backButton}
