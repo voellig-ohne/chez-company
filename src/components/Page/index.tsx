@@ -27,8 +27,10 @@ export function Page({
     const handleWindowClick = useCallback((event: MouseEvent) => {
         const clickInside =
             event.target instanceof Node && ref.current?.contains(event.target);
-        if (!clickInside) {
-            // TODO: FIX THIS, DIRTY HACK NEEDS TO BE DONE PROPERLY!!
+
+        const navClick = !!(event.target as HTMLElement).closest('nav');
+
+        if (!clickInside && !navClick) {
             navigate('/');
         }
     }, []);
