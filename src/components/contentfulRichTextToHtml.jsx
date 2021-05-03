@@ -3,6 +3,7 @@ import { BLOCKS } from '@contentful/rich-text-types';
 import React from 'react';
 import { graphql } from 'gatsby';
 import { ProjectInline } from './ProjectInline';
+import { PersonInline } from './PersonInline';
 
 export default function contentfulRichtTextToThml(source) {
     if (!source) return null;
@@ -18,6 +19,9 @@ export default function contentfulRichtTextToThml(source) {
                 if (node.data?.target?.internal?.type === 'ContentfulProject') {
                     return <ProjectInline {...node.data.target} />;
                 }
+                if (node.data?.target?.internal?.type === 'ContentfulPerson') {
+                    return <PersonInline {...node.data.target} />;
+                }
                 return null;
             },
         },
@@ -27,7 +31,39 @@ export default function contentfulRichtTextToThml(source) {
 }
 
 export const markdownFrontmatterFragment = graphql`
-    fragment textStuff on ContentfulPageText {
+    fragment textContentfulPage on ContentfulPageText {
+        raw
+        references {
+            ... on ContentfulProject {
+                contentful_id
+                internal {
+                    type
+                }
+                title
+                slug
+                year
+                yearUntil
+                persons {
+                    id
+                    name
+                }
+            }
+            ... on ContentfulPerson {
+                contentful_id
+                internal {
+                    type
+                }
+                name
+                profession
+                slug
+                image {
+                    id
+                    gatsbyImageData(width: 200)
+                }
+            }
+        }
+    }
+    fragment textStuff2 on ContentfulFragmentTextDescription {
         raw
         references {
             ... on ContentfulProject {

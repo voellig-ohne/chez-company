@@ -31,7 +31,7 @@ export const pageQuery = graphql`
             title
             id
             description {
-                raw
+                ...textStuff2
             }
             images {
                 id

@@ -21,7 +21,7 @@ export const pageQuery = graphql`
             title
             id
             text {
-                ...textStuff
+                ...textContentfulPage
             }
         }
     }

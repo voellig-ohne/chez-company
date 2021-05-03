@@ -1,0 +1,23 @@
+.person {
+    display: flex;
+    gap: 1rem;
+    text-decoration: none;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.title {
+    margin: 0;
+}
+
+.superTitle > span,
+.title > span {
+    color: var(--fontColor);
+    background: var(--mainColor);
+}
+
+.person:hover .superTitle > span,
+.person:hover .title > span {
+    background: var(--fontColor);
+    color: var(--mainColor);
+}
