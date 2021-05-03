@@ -18,7 +18,9 @@ export function ProjectInline({ slug, title, year, yearUntil, persons }) {
             {persons?.length && (
                 <ul className={s.persons}>
                     {persons.map(person => (
-                        <li className={s.person}>{person.name}</li>
+                        <li className={s.person} key={person.id}>
+                            {person.name}
+                        </li>
                     ))}
                 </ul>
             )}

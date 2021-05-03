@@ -40,6 +40,7 @@ export const markdownFrontmatterFragment = graphql`
                     type
                 }
                 persons {
+                    id
                     name
                 }
             }
