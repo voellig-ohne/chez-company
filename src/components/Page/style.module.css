@@ -82,3 +82,13 @@
     --mainColor: var(--white);
     --fontColor: var(--black);
 }
+
+@media (max-width: 800px) {
+    .main {
+        padding: 8rem 0.5rem 0.5rem;
+    }
+
+    .article {
+        padding: 0.5rem;
+    }
+}

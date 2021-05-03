@@ -135,7 +135,7 @@ export function ProjectGraph() {
                     }}
                     cooldownTime={5000}
                     onEngineStop={() => {
-                        if (!hasCenteredOnce) {
+                        if (!hasCenteredOnce && window.innerWidth > 800) {
                             setHasCenteredOnce(true);
                             graphRef.current.zoomToFit(2000, 50);
                         }
