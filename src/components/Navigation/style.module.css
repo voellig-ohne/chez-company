@@ -8,12 +8,14 @@
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
+    pointer-events: none;
 }
 
 .nav {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    width: max-content;
 }
 
 .link {
@@ -22,6 +24,7 @@
         var(--sz) var(--sz) 0 var(--yellow);
     color: var(--red);
     display: block;
+    pointer-events: all;
 }
 
 .link:hover,
@@ -33,6 +36,7 @@
 }
 
 .logo {
+    pointer-events: all;
     font-size: 4rem;
     height: 1em;
     filter: drop-shadow(var(--sz) var(--sz) 0px var(--yellow));
