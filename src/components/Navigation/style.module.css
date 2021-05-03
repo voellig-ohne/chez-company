@@ -1,4 +1,4 @@
-.nav {
+.container {
     position: absolute;
     top: 0;
     left: 0;
@@ -9,9 +9,15 @@
 }
 
 @media (min-width: 1100px) {
-    .nav {
+    .container {
         z-index: 2;
     }
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .link {

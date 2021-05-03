@@ -16,11 +16,11 @@ const NAV_ITEMS = [
 
 export default function Navigation() {
     return (
-        <div className={s.nav}>
+        <div className={s.container}>
             <Link to="/">
                 <Logo className={s.logo} />
             </Link>
-            <nav>
+            <nav className={s.nav}>
                 {NAV_ITEMS.map(item => (
                     <Link
                         key={item.to}
