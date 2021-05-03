@@ -5,12 +5,16 @@ import { Link } from 'gatsby';
 
 const NAV_ITEMS = [
     {
-        to: '/impressum',
-        children: 'impressum',
+        to: '/chez-company',
+        children: 'über',
     },
     {
         to: '/projekte',
         children: 'projekte',
+    },
+    {
+        to: '/impressum',
+        children: 'impressum',
     },
 ];
 
