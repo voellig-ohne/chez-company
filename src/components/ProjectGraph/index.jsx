@@ -10,13 +10,13 @@ const graphStyles = {
     project: {
         color: '#ffff3b',
         background: '#fec4fc',
-        fontSize: 8,
+        fontSize: 7,
         order: 1,
     },
     fragment: {
         color: '#f81955',
         background: '#2c99e4',
-        fontSize: 5,
+        fontSize: 4,
         order: 3,
     },
     tag: {
@@ -60,7 +60,7 @@ export function ProjectGraph() {
                     ? isHoveringTag
                         ? 'grab'
                         : 'pointer'
-                    : 'default',
+                    : 'move',
             }}
         >
             {typeof window === 'undefined' ? (
@@ -82,6 +82,9 @@ export function ProjectGraph() {
                                 height
                             );
                         } else {
+                            const borderWidth = 0.5;
+                            const shadowDistance = !!node.__hovered ? 2 : 1;
+
                             const styles = graphStyles[node.type];
 
                             const label = node.title;
@@ -93,9 +96,31 @@ export function ProjectGraph() {
                                 n => n + fontSize * 0.4
                             );
 
+                            ctx.fillStyle = styles.color;
+
+                            // border
+                            ctx.fillRect(
+                                node.x -
+                                    borderWidth / 2 -
+                                    bckgDimensions[0] / 2,
+                                node.y -
+                                    borderWidth / 2 -
+                                    bckgDimensions[1] / 2,
+                                ...bckgDimensions.map(d => d + borderWidth)
+                            );
+
+                            // shadow
+                            ctx.fillRect(
+                                node.x + shadowDistance - bckgDimensions[0] / 2,
+                                node.y + shadowDistance - bckgDimensions[1] / 2,
+                                ...bckgDimensions
+                            );
+
+                            // background
                             ctx.fillStyle = !!node.__hovered
                                 ? '#f8927d'
                                 : styles.background;
+
                             ctx.fillRect(
                                 node.x - bckgDimensions[0] / 2,
                                 node.y - bckgDimensions[1] / 2,
@@ -137,7 +162,7 @@ export function ProjectGraph() {
                     onEngineStop={() => {
                         if (!hasCenteredOnce && window.innerWidth > 800) {
                             setHasCenteredOnce(true);
-                            graphRef.current.zoomToFit(2000, 50);
+                            graphRef.current.zoomToFit(2000, -300);
                         }
                     }}
                     onNodeHover={(node, prevNode, ctx) => {
