@@ -6,6 +6,7 @@
     padding: 1rem;
     min-height: 100vh;
     align-items: center;
+    pointer-events: none;
 }
 
 .main.large {
@@ -20,6 +21,7 @@
     padding: 1rem;
     background: var(--white);
     border: solid var(--borderWidth) var(--mainColor);
+    pointer-events: all;
 }
 
 .heading {
@@ -83,7 +85,7 @@
     --fontColor: var(--black);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .main {
         padding: 8rem 0.5rem 0.5rem;
     }
