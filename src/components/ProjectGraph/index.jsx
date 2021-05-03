@@ -71,9 +71,11 @@ export function ProjectGraph() {
                     graphData={graphData}
                     nodeCanvasObject={(node, ctx, globalScale) => {
                         if (node.imageEl) {
-                            const width = 30;
-                            const height = width / node.ratio;
+                            const area = 1200;
+                            const width = Math.sqrt(area * node.ratio);
+                            const height = Math.sqrt(area * (1 / node.ratio));
                             node.__bckgDimensions = [width, height];
+
                             ctx.drawImage(
                                 node.imageEl,
                                 node.x - width / 2,
