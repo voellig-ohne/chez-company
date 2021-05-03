@@ -229,19 +229,19 @@ function formatGraphData(projects) {
             tagNode.type = 'tag';
             const image = tagNode?.image?.resize?.src;
 
-            if (image) {
-                tagNode.imageEl = new Image();
-                tagNode.ratio = tagNode?.image?.resize?.aspectRatio;
-
-                tagNode.imageEl.src = image;
-            }
-
             graphData.links.push({
                 source: projectNode.id,
                 target: tagNode.id,
             });
 
             if (!graphData.nodes.find(node => node.id === tag.id)) {
+                if (image) {
+                    tagNode.imageEl = new Image();
+                    tagNode.ratio = tagNode?.image?.resize?.aspectRatio;
+
+                    tagNode.imageEl.src = image;
+                }
+
                 graphData.nodes.push(tagNode);
             }
         });
