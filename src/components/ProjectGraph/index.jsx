@@ -36,8 +36,8 @@ export function ProjectGraph() {
     const graphRef = useRef();
 
     const getDisplaySize = () => ({
-        height: window.innerHeight,
-        width: window.innerWidth,
+        height: typeof window !== 'undefined' && window.innerHeight,
+        width: typeof window !== 'undefined' && window.innerWidth,
     });
     const [displaySize, setDisplaySize] = useState(getDisplaySize());
 
@@ -63,114 +63,120 @@ export function ProjectGraph() {
                     : 'default',
             }}
         >
-            <ForceGraph2D
-                {...displaySize}
-                graphData={graphData}
-                nodeCanvasObject={(node, ctx, globalScale) => {
-                    if (node.imageEl) {
-                        const width = 30;
-                        const height = width / node.ratio;
-                        node.__bckgDimensions = [width, height];
-                        ctx.drawImage(
-                            node.imageEl,
-                            node.x - width / 2,
-                            node.y - height / 2,
-                            width,
-                            height
-                        );
-                    } else {
-                        const styles = graphStyles[node.type];
+            {typeof window === 'undefined' ? (
+                <div></div>
+            ) : (
+                <ForceGraph2D
+                    {...displaySize}
+                    graphData={graphData}
+                    nodeCanvasObject={(node, ctx, globalScale) => {
+                        if (node.imageEl) {
+                            const width = 30;
+                            const height = width / node.ratio;
+                            node.__bckgDimensions = [width, height];
+                            ctx.drawImage(
+                                node.imageEl,
+                                node.x - width / 2,
+                                node.y - height / 2,
+                                width,
+                                height
+                            );
+                        } else {
+                            const styles = graphStyles[node.type];
 
-                        const label = node.title;
-                        const fontSize = styles.fontSize;
-                        ctx.font = `${fontSize}px PT Mono`;
+                            const label = node.title;
+                            const fontSize = styles.fontSize;
+                            ctx.font = `${fontSize}px PT Mono`;
 
-                        const textWidth = ctx.measureText(label).width;
-                        const bckgDimensions = [textWidth, fontSize].map(
-                            n => n + fontSize * 0.4
-                        );
+                            const textWidth = ctx.measureText(label).width;
+                            const bckgDimensions = [textWidth, fontSize].map(
+                                n => n + fontSize * 0.4
+                            );
 
-                        ctx.fillStyle = !!node.__hovered
-                            ? '#f8927d'
-                            : styles.background;
-                        ctx.fillRect(
-                            node.x - bckgDimensions[0] / 2,
-                            node.y - bckgDimensions[1] / 2,
-                            ...bckgDimensions
-                        );
+                            ctx.fillStyle = !!node.__hovered
+                                ? '#f8927d'
+                                : styles.background;
+                            ctx.fillRect(
+                                node.x - bckgDimensions[0] / 2,
+                                node.y - bckgDimensions[1] / 2,
+                                ...bckgDimensions
+                            );
 
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = styles.color;
-                        ctx.fillText(label, node.x, node.y);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillStyle = styles.color;
+                            ctx.fillText(label, node.x, node.y);
 
-                        node.__bckgDimensions = bckgDimensions;
-                    }
-                }}
-                nodePointerAreaPaint={(node, color, ctx) => {
-                    ctx.fillStyle = color;
-                    const bckgDimensions = node.__bckgDimensions;
-                    bckgDimensions &&
-                        ctx.fillRect(
-                            node.x - bckgDimensions[0] / 2,
-                            node.y - bckgDimensions[1] / 2,
-                            ...bckgDimensions
-                        );
-                }}
-                linkColor={() => {
-                    return '#ffff3b';
-                }}
-                ref={graphRef}
-                linkWidth={2}
-                onNodeClick={(node, event) => {
-                    if (node.type === 'project') {
-                        navigate(`/projekt/${stringToSslug(node.slug)}/`);
-                    }
-                    if (node.type === 'fragment') {
-                        navigate(`/fragment/${stringToSslug(node.slug)}/`);
-                    }
-                }}
-                cooldownTime={5000}
-                onEngineStop={() => {
-                    if (!hasCenteredOnce) {
-                        setHasCenteredOnce(true);
-                        graphRef.current.zoomToFit(2000, 50);
-                    }
-                }}
-                onNodeHover={(node, prevNode, ctx) => {
-                    if (node) {
-                        node.__hovered = true;
-                        setIsHovering(hovering => hovering + +1);
-                        if (node.type === 'tag') {
-                            setIsHoveringTag(true);
+                            node.__bckgDimensions = bckgDimensions;
                         }
-                    }
-                    if (prevNode) {
-                        prevNode.__hovered = false;
-                        setIsHovering(hovering => hovering + -1);
-                        if (prevNode.type === 'tag') {
-                            setIsHoveringTag(false);
+                    }}
+                    nodePointerAreaPaint={(node, color, ctx) => {
+                        ctx.fillStyle = color;
+                        const bckgDimensions = node.__bckgDimensions;
+                        bckgDimensions &&
+                            ctx.fillRect(
+                                node.x - bckgDimensions[0] / 2,
+                                node.y - bckgDimensions[1] / 2,
+                                ...bckgDimensions
+                            );
+                    }}
+                    linkColor={() => {
+                        return '#ffff3b';
+                    }}
+                    ref={graphRef}
+                    linkWidth={2}
+                    onNodeClick={(node, event) => {
+                        if (node.type === 'project') {
+                            navigate(`/projekt/${stringToSslug(node.slug)}/`);
                         }
-                    }
-                    if (node?.type === 'project') {
-                        prefetchPathname(
-                            `/projekt/${stringToSslug(node.slug)}/`
-                        );
-                    }
-                    if (node?.type === 'fragment') {
-                        prefetchPathname(
-                            `/fragment/${stringToSslug(node.slug)}/`
-                        );
-                    }
-                }}
-                autoPauseRedraw={false}
-            />
+                        if (node.type === 'fragment') {
+                            navigate(`/fragment/${stringToSslug(node.slug)}/`);
+                        }
+                    }}
+                    cooldownTime={5000}
+                    onEngineStop={() => {
+                        if (!hasCenteredOnce) {
+                            setHasCenteredOnce(true);
+                            graphRef.current.zoomToFit(2000, 50);
+                        }
+                    }}
+                    onNodeHover={(node, prevNode, ctx) => {
+                        if (node) {
+                            node.__hovered = true;
+                            setIsHovering(hovering => hovering + +1);
+                            if (node.type === 'tag') {
+                                setIsHoveringTag(true);
+                            }
+                        }
+                        if (prevNode) {
+                            prevNode.__hovered = false;
+                            setIsHovering(hovering => hovering + -1);
+                            if (prevNode.type === 'tag') {
+                                setIsHoveringTag(false);
+                            }
+                        }
+                        if (node?.type === 'project') {
+                            prefetchPathname(
+                                `/projekt/${stringToSslug(node.slug)}/`
+                            );
+                        }
+                        if (node?.type === 'fragment') {
+                            prefetchPathname(
+                                `/fragment/${stringToSslug(node.slug)}/`
+                            );
+                        }
+                    }}
+                    autoPauseRedraw={false}
+                />
+            )}
         </div>
     );
 }
 
 function formatGraphData(projects) {
     const graphData = { links: [], nodes: [] };
+
+    if (typeof window === 'undefined') return graphData;
 
     projects.forEach(({ node }) => {
         const projectNode = node;

@@ -20,7 +20,7 @@ export default function Layout({ children, path }) {
                 />
             </Helmet>
             <div className={s.graph}>
-                {typeof window !== 'undefined' && <ProjectGraph />}
+                <ProjectGraph />
             </div>
             <Navigation />
             {path !== '/' && children}
