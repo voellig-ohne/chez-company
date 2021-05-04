@@ -10,12 +10,14 @@ export function Page({
     size = 'medium',
     title,
     superTitle,
+    metaDescription,
 }: {
     children: React.ReactNode;
     color?: 'pink' | 'blue' | 'white';
     size?: 'medium' | 'large';
     title?: string;
     superTitle?: React.ReactNode;
+    metaDescription?: string;
 }) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -50,6 +52,9 @@ export function Page({
         <main className={clsx(s.main, s[size])}>
             <Helmet title={title}>
                 <meta property="og:title" content={title} />
+                {metaDescription && (
+                    <meta name="description" content={metaDescription} />
+                )}
             </Helmet>
             <article className={clsx(s.article, s[color])} ref={ref}>
                 <Link

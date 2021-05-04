@@ -10,7 +10,12 @@ export default function ProjectPage({ data: { contentfulProject: project } }) {
             : project.year;
 
     return (
-        <Page title={project.title} superTitle={superTitle} color="pink">
+        <Page
+            title={project.title}
+            superTitle={superTitle}
+            metaDescription="{project.metaDescription?.metaDescription}"
+            color="pink"
+        >
             <Project {...project} />
         </Page>
     );
@@ -23,6 +28,9 @@ export const pageQuery = graphql`
             id
             year
             yearUntil
+            metaDescription {
+                metaDescription
+            }
             description {
                 raw
             }

@@ -5,11 +5,15 @@ import { Page } from '../Page';
 
 export default function PersonPage({
     data: {
-        contentfulPage: { title, text },
+        contentfulPage: { title, text, metaDescription },
     },
 }) {
     return (
-        <Page title={title} color="pink">
+        <Page
+            title={title}
+            color="pink"
+            metaDescription={metaDescription?.metaDescription}
+        >
             {contentfulRichtTextToThml(text)}
         </Page>
     );
@@ -22,6 +26,9 @@ export const pageQuery = graphql`
             id
             text {
                 ...textContentfulPage
+            }
+            metaDescription {
+                metaDescription
             }
         }
     }

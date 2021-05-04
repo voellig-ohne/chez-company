@@ -19,6 +19,7 @@ export default function FragmentPage({
             color="blue"
             size={!!contentfulFragmentVideo ? 'large' : 'medium'}
             title={fragment.title}
+            metaDescription={fragment.metaDescription?.metaDescription}
         >
             <Fragment {...fragment} />
         </Page>
@@ -37,20 +38,30 @@ export const pageQuery = graphql`
                 id
                 gatsbyImageData(width: 800)
             }
+            metaDescription {
+                metaDescription
+            }
         }
         contentfulFragmentVideo(id: { eq: $id }) {
             title
             id
             youtubeId
+            metaDescription {
+                metaDescription
+            }
         }
         contentfulFragmentAudio(id: { eq: $id }) {
             title
+
             audio {
                 file {
                     url
                 }
             }
             id
+            metaDescription {
+                metaDescription
+            }
         }
     }
 `;
