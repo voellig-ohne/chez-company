@@ -56,13 +56,13 @@ function getYoutubeUrlNoCookie(str?: string) {
     return `https://www.youtube-nocookie.com/embed/${ID}`;
 }
 
-function youtubeParser(url: string) {
+export function youtubeParser(url: string) {
     var regExp = /^https?:\/\/(?:www\.youtube(?:-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*&)?vi?=|&vi?=|\?(?:.*&)?vi?=)([^#&?\n/<>"']*)/i;
     var match = url.match(regExp);
     return match && match[1].length === 11 ? match[1] : false;
 }
 
-function getPreviewImagesForAnimation(id: string) {
+export function getPreviewImagesForAnimation(id: string) {
     return [0, 1, 2, 3].map(
         index => `https://img.youtube.com/vi/${id}/${index}.jpg`
     );
