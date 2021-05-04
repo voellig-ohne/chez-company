@@ -9,6 +9,9 @@ export const useProjects = () => {
                 allContentfulProject {
                     edges {
                         node {
+                            internal {
+                                type
+                            }
                             id
                             year
                             title
@@ -30,6 +33,9 @@ export const useProjects = () => {
                             fragments {
                                 ... on Node {
                                     ... on ContentfulFragmentText {
+                                        internal {
+                                            type
+                                        }
                                         id
                                         title
                                         slug
@@ -42,11 +48,17 @@ export const useProjects = () => {
                                         }
                                     }
                                     ... on ContentfulFragmentVideo {
+                                        internal {
+                                            type
+                                        }
                                         id
                                         title
                                         slug
                                     }
                                     ... on ContentfulFragmentAudio {
+                                        internal {
+                                            type
+                                        }
                                         id
                                         title
                                         slug
@@ -54,6 +66,9 @@ export const useProjects = () => {
                                 }
                             }
                             persons {
+                                internal {
+                                    type
+                                }
                                 name
                                 id
                                 image {

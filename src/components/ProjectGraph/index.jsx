@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useProjects } from '../../hooks/useProjects';
 import { sortBy } from 'lodash';
 import { navigate } from 'gatsby-link';
-import { stringToSslug } from '../util';
+import { getRoute } from '../util';
 import { prefetchPathname } from 'gatsby';
 
 const graphStyles = {
@@ -218,11 +218,11 @@ export function ProjectGraph() {
                     ref={graphRef}
                     linkWidth={2}
                     onNodeClick={(node, event) => {
-                        if (node.type === 'project') {
-                            navigate(`/projekt/${stringToSslug(node.slug)}/`);
-                        }
-                        if (node.type === 'fragment') {
-                            navigate(`/fragment/${stringToSslug(node.slug)}/`);
+                        if (
+                            node.type === 'project' ||
+                            node.type === 'fragment'
+                        ) {
+                            navigate(getRoute(node));
                         }
                     }}
                     cooldownTime={5000}
@@ -247,15 +247,11 @@ export function ProjectGraph() {
                                 setIsHoveringTag(false);
                             }
                         }
-                        if (node?.type === 'project') {
-                            prefetchPathname(
-                                `/projekt/${stringToSslug(node.slug)}/`
-                            );
-                        }
-                        if (node?.type === 'fragment') {
-                            prefetchPathname(
-                                `/fragment/${stringToSslug(node.slug)}/`
-                            );
+                        if (
+                            node?.type === 'project' ||
+                            node?.type === 'fragment'
+                        ) {
+                            prefetchPathname(getRoute(node));
                         }
                     }}
                     autoPauseRedraw={false}
@@ -327,6 +323,7 @@ function formatGraphData(projects) {
         });
     });
 
+    // ORDER TO HAVE PROJECTS ON TOP
     graphData.nodes = sortBy(
         graphData.nodes,
         node => -graphStyles[node.type].order

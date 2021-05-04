@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { YoutubePreview } from '../YoutubeEmbed';
-import { stringToSslug } from '../util';
+import { getRoute } from '../util';
 
 export function Project({ description, tags, fragments, persons }) {
     return (
@@ -25,10 +25,7 @@ export function Project({ description, tags, fragments, persons }) {
                 {persons?.map(person => {
                     if (!person?.image?.gatsbyImageData) return null;
                     return (
-                        <Link
-                            to={`/person/${stringToSslug(person.slug)}`}
-                            key={person.id}
-                        >
+                        <Link to={getRoute(person)} key={person.id}>
                             <GatsbyImage
                                 alt={person.name}
                                 title={person.name}
@@ -64,7 +61,7 @@ function FragmentItem(fragment) {
 
     return (
         <Link
-            to={`/fragment/${stringToSslug(fragment.slug)}`}
+            to={getRoute(fragment)}
             className={s.fragmentLink}
             onMouseEnter={() => {
                 audioref?.current?.play();

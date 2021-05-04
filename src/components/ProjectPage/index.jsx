@@ -35,6 +35,9 @@ export const pageQuery = graphql`
                 }
             }
             persons {
+                internal {
+                    type
+                }
                 name
                 slug
                 id
@@ -46,6 +49,9 @@ export const pageQuery = graphql`
             fragments {
                 ... on Node {
                     ... on ContentfulFragmentText {
+                        internal {
+                            type
+                        }
                         id
                         title
                         slug
@@ -55,12 +61,18 @@ export const pageQuery = graphql`
                         }
                     }
                     ... on ContentfulFragmentVideo {
+                        internal {
+                            type
+                        }
                         id
                         slug
                         title
                         youtubeId
                     }
                     ... on ContentfulFragmentAudio {
+                        internal {
+                            type
+                        }
                         id
                         slug
                         title

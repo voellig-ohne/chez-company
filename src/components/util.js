@@ -1,4 +1,4 @@
-exports.stringToSslug = function (str) {
+const stringToSslug = function (str) {
     str = str.replace(/^\s+|\s+$/g, ''); // trim
     str = str.toLowerCase();
 
@@ -15,4 +15,21 @@ exports.stringToSslug = function (str) {
         .replace(/-+/g, '-'); // collapse dashes
 
     return str;
+};
+
+exports.getRoute = function ({ slug, internal }) {
+    const escapedSlug = stringToSslug(slug);
+
+    switch (internal.type) {
+        case 'ContentfulFragmentText':
+        case 'ContentfulFragmentVideo':
+        case 'ContentfulFragmentAudio':
+            return `/fragment/${escapedSlug}`;
+        case 'ContentfulProject':
+            return `/projekt/${escapedSlug}`;
+        case 'ContentfulPerson':
+            return `/person/${escapedSlug}`;
+        default:
+            return `/${escapedSlug}`;
+    }
 };

@@ -1,6 +1,6 @@
 const Promise = require('bluebird');
 const path = require('path');
-const { stringToSslug } = require('./src/components/util');
+const { getRoute } = require('./src/components/util');
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     if (stage === 'build-html' || stage === 'develop-html') {
@@ -37,6 +37,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     allContentfulProject {
                         edges {
                             node {
+                                internal {
+                                    type
+                                }
                                 slug
                                 id
                             }
@@ -45,6 +48,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     allContentfulFragmentText {
                         edges {
                             node {
+                                internal {
+                                    type
+                                }
                                 slug
                                 id
                             }
@@ -53,6 +59,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     allContentfulFragmentVideo {
                         edges {
                             node {
+                                internal {
+                                    type
+                                }
                                 slug
                                 id
                             }
@@ -61,6 +70,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     allContentfulFragmentAudio {
                         edges {
                             node {
+                                internal {
+                                    type
+                                }
                                 slug
                                 id
                             }
@@ -69,6 +81,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     allContentfulPerson {
                         edges {
                             node {
+                                internal {
+                                    type
+                                }
                                 slug
                                 id
                             }
@@ -77,6 +92,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     allContentfulPage {
                         edges {
                             node {
+                                internal {
+                                    type
+                                }
                                 slug
                                 id
                             }
@@ -89,33 +107,33 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     reject(result.errors);
                 }
 
-                result.data?.allContentfulProject.edges.forEach(project => {
-                    const slug = `/projekt/${stringToSslug(project.node.slug)}`;
+                result.data?.allContentfulProject.edges.forEach(({ node }) => {
+                    const slug = getRoute(node);
 
                     createPage({
                         path: slug,
                         component: ProjectPage,
-                        context: { slug, id: project.node.id },
+                        context: { slug, id: node.id },
                     });
                 });
 
-                result.data?.allContentfulPerson.edges.forEach(person => {
-                    const slug = `/person/${stringToSslug(person.node.slug)}`;
+                result.data?.allContentfulPerson.edges.forEach(({ node }) => {
+                    const slug = getRoute(node);
 
                     createPage({
                         path: slug,
                         component: PersonPage,
-                        context: { slug, id: person.node.id },
+                        context: { slug, id: node.id },
                     });
                 });
 
-                result.data?.allContentfulPage.edges.forEach(page => {
-                    const slug = `/${stringToSslug(page.node.slug)}`;
+                result.data?.allContentfulPage.edges.forEach(({ node }) => {
+                    const slug = getRoute(node);
 
                     createPage({
                         path: slug,
                         component: StaticPage,
-                        context: { slug, id: page.node.id },
+                        context: { slug, id: node.id },
                     });
                 });
 
@@ -124,15 +142,13 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     ...result.data?.allContentfulFragmentVideo.edges,
                     ...result.data?.allContentfulFragmentAudio.edges,
                 ];
-                fragments.forEach(fragment => {
-                    const slug = `/fragment/${stringToSslug(
-                        fragment.node.slug
-                    )}`;
+                fragments.forEach(({ node }) => {
+                    const slug = getRoute(node);
 
                     createPage({
                         path: slug,
                         component: FragmentPage,
-                        context: { slug, id: fragment.node.id },
+                        context: { slug, id: node.id },
                     });
                 });
             })
