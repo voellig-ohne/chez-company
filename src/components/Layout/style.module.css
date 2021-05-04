@@ -4,3 +4,37 @@
     left: 0;
     z-index: 0;
 }
+
+.storerContainer {
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.storer {
+    position: fixed;
+    text-decoration: none;
+    display: block;
+    bottom: 0;
+    width: max-content;
+    background: var(--yellow);
+    color: var(--red);
+    font-weight: bold;
+    padding: 0.2rem 0;
+    pointer-events: all;
+    bottom: 2rem;
+    transform: rotate(-5deg);
+    transform-origin: top left;
+    animation-name: storer;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes storer {
+    from {
+        transform: rotate(-5deg) translateX(-90%);
+    }
+    from {
+        transform: rotate(-5deg) translateX(-10%);
+    }
+}

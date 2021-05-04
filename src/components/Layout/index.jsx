@@ -5,11 +5,17 @@ import { ProjectGraph } from '../ProjectGraph';
 import Navigation from '../Navigation';
 import { Helmet } from 'react-helmet';
 import Favicon from './favicon.png';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 
 export default function Layout({ children, path }) {
     const {
-        contentfulGlobal: { title, description, ogimage },
+        contentfulGlobal: {
+            title,
+            description,
+            ogimage,
+            storerText,
+            storerLink,
+        },
     } = useStaticQuery(graphql`
         query GlobalStuffQuery {
             contentfulGlobal(
@@ -24,6 +30,8 @@ export default function Layout({ children, path }) {
                         src
                     }
                 }
+                storerText
+                storerLink
             }
         }
     `);
@@ -45,7 +53,24 @@ export default function Layout({ children, path }) {
                 <ProjectGraph />
             </div>
             <Navigation />
+            {storerText && storerLink && (
+                <div className={s.storerContainer}>
+                    <Link
+                        to={storerLink}
+                        className={s.storer}
+                        aria-label={storerText}
+                    >
+                        {generateStorerText(storerText)}
+                    </Link>
+                </div>
+            )}
             {path !== '/' && children}
         </>
     );
+}
+
+function generateStorerText(storerText) {
+    return new Array(100).fill().map(() => {
+        return ` +++ ${storerText}`;
+    });
 }
