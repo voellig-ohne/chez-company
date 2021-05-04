@@ -27,6 +27,9 @@ const graphStyles = {
     },
 };
 
+const borderWidth = 0.5;
+const shadowDistance = 1;
+
 export function ProjectGraph() {
     const projects = useProjects();
     const [hasCenteredOnce, setHasCenteredOnce] = useState(false);
@@ -71,6 +74,7 @@ export function ProjectGraph() {
                     graphData={graphData}
                     nodeCanvasObject={(node, ctx, globalScale) => {
                         if (node.imageEl) {
+                            // this is a TAG
                             const area = 1200;
                             const width = Math.sqrt(area * node.ratio);
                             const height = Math.sqrt(area * (1 / node.ratio));
@@ -83,9 +87,66 @@ export function ProjectGraph() {
                                 width,
                                 height
                             );
+                        } else if (node.imageEls) {
+                            // THESE ARE MULTIPLE IMAGES, FRAGMENTS
+                            const styles = graphStyles[node.type];
+                            node.imageEls.forEach((image, index) => {
+                                const area = 400;
+                                const width = Math.sqrt(area * image.ratio);
+                                const height = Math.sqrt(
+                                    area * (1 / image.ratio)
+                                );
+                                let x = node.x - width / 2;
+                                let y = node.y - height / 2;
+
+                                if (
+                                    !!node.__hovered &&
+                                    index !== node.imageEls.length - 1
+                                ) {
+                                    x += image.hoverX;
+                                    y += image.hoverY;
+                                }
+
+                                node.__bckgDimensions = [
+                                    width + 10,
+                                    height + 10,
+                                ];
+
+                                ctx.translate(
+                                    x + width * 0.5,
+                                    y + height * 0.5
+                                );
+                                ctx.rotate(image.rotation);
+
+                                // BORDER
+                                ctx.fillStyle = styles.color;
+                                ctx.fillRect(
+                                    width * -0.5 - borderWidth / 2,
+                                    height * -0.5 - borderWidth / 2,
+                                    width + borderWidth,
+                                    height + borderWidth
+                                );
+
+                                // IMAGE
+                                ctx.drawImage(
+                                    image.el,
+                                    width * -0.5,
+                                    height * -0.5,
+                                    width,
+                                    height
+                                );
+
+                                // UNDO TRANSLATIONS
+                                ctx.rotate(-image.rotation);
+                                ctx.translate(
+                                    -(x + width * 0.5),
+                                    -(y + height * 0.5)
+                                );
+                            });
                         } else {
-                            const borderWidth = 0.5;
-                            const shadowDistance = !!node.__hovered ? 2 : 1;
+                            const shadowDistanceHovered = !!node.__hovered
+                                ? shadowDistance * 2
+                                : shadowDistance;
 
                             const styles = graphStyles[node.type];
 
@@ -113,8 +174,12 @@ export function ProjectGraph() {
 
                             // shadow
                             ctx.fillRect(
-                                node.x + shadowDistance - bckgDimensions[0] / 2,
-                                node.y + shadowDistance - bckgDimensions[1] / 2,
+                                node.x +
+                                    shadowDistanceHovered -
+                                    bckgDimensions[0] / 2,
+                                node.y +
+                                    shadowDistanceHovered -
+                                    bckgDimensions[1] / 2,
                                 ...bckgDimensions
                             );
 
@@ -220,6 +285,21 @@ function formatGraphData(projects) {
             });
 
             if (!graphData.nodes.find(node => node.id === fragmentNode.id)) {
+                if (fragmentNode.images) {
+                    fragmentNode.imageEls = fragmentNode.images.map(image => {
+                        const el = new Image();
+                        el.src = image.resize.src;
+
+                        return {
+                            el,
+                            ratio: image.resize.aspectRatio,
+                            rotation: Math.random() * 0.4 - 0.2,
+                            hoverX: Math.random() * 40 - 20,
+                            hoverY: Math.random() * 40 - 20,
+                        };
+                    });
+                    fragmentNode.imageEls.reverse();
+                }
                 graphData.nodes.push(fragmentNode);
             }
         });

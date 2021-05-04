@@ -33,6 +33,13 @@ export const useProjects = () => {
                                         id
                                         title
                                         slug
+                                        images {
+                                            id
+                                            resize(width: 200) {
+                                                aspectRatio
+                                                src
+                                            }
+                                        }
                                     }
                                     ... on ContentfulFragmentVideo {
                                         id
