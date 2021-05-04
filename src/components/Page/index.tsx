@@ -48,7 +48,9 @@ export function Page({
 
     return (
         <main className={clsx(s.main, s[size])}>
-            <Helmet title={title}></Helmet>
+            <Helmet title={title}>
+                <meta property="og:title" content={title} />
+            </Helmet>
             <article className={clsx(s.article, s[color])} ref={ref}>
                 <Link
                     className={s.backButton}

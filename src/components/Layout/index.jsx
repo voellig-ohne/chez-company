@@ -37,6 +37,7 @@ export default function Layout({ children, path }) {
                     href={`https://chez-company.org${path}`}
                 />
                 <meta name="description" content={description?.description} />
+                <meta property="og:site_name" content={title} />
                 <meta property="og:title" content={title} />
                 <meta property="og:image" content={ogimage?.resize?.src} />
             </Helmet>

@@ -1,6 +1,7 @@
 import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import contentfulRichtTextToThml from '../contentfulRichTextToHtml';
 import { Page } from '../Page';
 
@@ -11,6 +12,14 @@ export default function PersonPage({
 }) {
     return (
         <Page superTitle={profession} title={name} color="pink">
+            <Helmet>
+                {image && (
+                    <meta
+                        property="og:image"
+                        content={image.gatsbyImageData?.images?.fallback?.src}
+                    />
+                )}
+            </Helmet>
             <GatsbyImage
                 alt={`Bild von ${name}`}
                 image={image?.gatsbyImageData}
