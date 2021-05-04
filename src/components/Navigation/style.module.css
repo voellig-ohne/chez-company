@@ -50,5 +50,6 @@
     .nav {
         flex-direction: row;
         flex-wrap: wrap;
+        width: auto;
     }
 }
