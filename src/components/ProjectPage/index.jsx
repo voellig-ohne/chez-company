@@ -13,7 +13,7 @@ export default function ProjectPage({ data: { contentfulProject: project } }) {
         <Page
             title={project.title}
             superTitle={superTitle}
-            metaDescription="{project.metaDescription?.metaDescription}"
+            metaDescription={project.metaDescription?.metaDescription}
             color="pink"
         >
             <Project {...project} />
