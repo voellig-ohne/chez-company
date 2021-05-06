@@ -254,7 +254,6 @@ export function ProjectGraph() {
                             prefetchPathname(getRoute(node));
                         }
                     }}
-                    autoPauseRedraw={false}
                 />
             )}
         </div>
