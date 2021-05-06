@@ -63,16 +63,23 @@ export function Page({
                     aria-label="zurück"
                     title="zurück"
                 ></Link>
-                {superTitle && (
-                    <div className={s.superTitle}>
-                        <span className={s.superTitleInner}>{superTitle}</span>
-                    </div>
-                )}
-                {title && (
-                    <h1 className={s.heading}>
-                        <span className={s.headingInner}>{title}</span>
-                    </h1>
-                )}
+                <header className={s.header}>
+                    {superTitle && (
+                        <div className={s.superTitle}>
+                            <span className={s.superTitleInner}>
+                                {superTitle}
+                            </span>
+                        </div>
+                    )}
+                    {title && (
+                        <h1 className={s.heading}>
+                            <span className={s.headingInner}>{title}</span>
+                        </h1>
+                    )}
+                    {metaDescription && (
+                        <h2 className={s.subTitle}>{metaDescription}</h2>
+                    )}
+                </header>
                 {children}
             </article>
         </main>
