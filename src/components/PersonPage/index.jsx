@@ -16,7 +16,7 @@ export default function PersonPage({
                 {image && (
                     <meta
                         property="og:image"
-                        content={image.gatsbyImageData?.images?.fallback?.src}
+                        content={image?.gatsbyImageData?.images?.fallback?.src}
                     />
                 )}
             </Helmet>
