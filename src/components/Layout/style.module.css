@@ -37,9 +37,9 @@
 
 @keyframes storer {
     from {
-        transform: rotate(-5deg) translateX(-90%);
-    }
-    from {
         transform: rotate(-5deg) translateX(-10%);
+    }
+    to {
+        transform: rotate(-5deg) translateX(-90%);
     }
 }
