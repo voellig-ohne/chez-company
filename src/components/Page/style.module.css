@@ -23,7 +23,6 @@
     border: solid var(--borderWidth) var(--mainColor);
     pointer-events: all;
 }
-
 .heading {
     margin: 0;
     font-size: 2rem;
@@ -101,5 +100,10 @@
 
     .article {
         padding: 0.5rem;
+    }
+
+    .main.blankPage {
+        padding: 0;
+        align-items: stretch;
     }
 }

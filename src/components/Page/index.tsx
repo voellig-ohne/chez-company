@@ -11,6 +11,7 @@ export function Page({
     title,
     superTitle,
     metaDescription,
+    blankPage,
 }: {
     children: React.ReactNode;
     color?: 'pink' | 'blue' | 'white';
@@ -18,6 +19,7 @@ export function Page({
     title?: string;
     superTitle?: React.ReactNode;
     metaDescription?: string;
+    blankPage?: boolean;
 }) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -49,7 +51,11 @@ export function Page({
     }, [handleKeyDown, handleWindowClick]);
 
     return (
-        <main className={clsx(s.main, s[size])}>
+        <main
+            className={clsx(s.main, s[size], {
+                [s.blankPage]: blankPage,
+            })}
+        >
             <Helmet title={title}>
                 <meta property="og:title" content={title} />
                 {metaDescription && (

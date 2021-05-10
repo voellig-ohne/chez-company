@@ -20,6 +20,7 @@ export default function FragmentPage({
             size={!!contentfulFragmentVideo ? 'large' : 'medium'}
             title={fragment.title}
             metaDescription={fragment.metaDescription?.metaDescription}
+            blankPage={fragment.blankPage}
         >
             <Fragment {...fragment} />
         </Page>
@@ -50,6 +51,7 @@ export const pageQuery = graphql`
                 metaDescription
             }
             aspectRatio
+            blankPage
         }
         contentfulFragmentAudio(id: { eq: $id }) {
             title
