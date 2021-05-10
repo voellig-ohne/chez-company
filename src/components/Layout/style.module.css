@@ -10,22 +10,25 @@
     pointer-events: none;
 }
 
+.storerContainer2 {
+    composes: storerContainer;
+}
+
 .storer {
     position: fixed;
     text-decoration: none;
     display: block;
-    bottom: 0;
     width: max-content;
     background: var(--yellow);
     color: var(--red);
     font-weight: bold;
-    padding: 0.2rem 0;
+    font-size: var(--fontSizeL);
+    padding: 0.5rem 0;
     pointer-events: all;
     bottom: 2rem;
-    transform: rotate(-5deg);
     transform-origin: top left;
     animation-name: storer;
-    animation-duration: 30s;
+    animation-duration: 20s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-play-state: paused;
@@ -35,11 +38,26 @@
     animation-play-state: running;
 }
 
+.storer2 {
+    composes: storer;
+    animation-name: storer2;
+    bottom: 6rem;
+}
+
 @keyframes storer {
     from {
-        transform: rotate(-5deg) translateX(-10%);
+        transform: rotate(-3deg) translateX(-1rem);
     }
     to {
-        transform: rotate(-5deg) translateX(-90%);
+        transform: rotate(-3deg) translateX(-200rem);
+    }
+}
+
+@keyframes storer2 {
+    from {
+        transform: rotate(-6deg) translateX(-1rem);
+    }
+    to {
+        transform: rotate(-6deg) translateX(-200rem);
     }
 }

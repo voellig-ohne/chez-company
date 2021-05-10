@@ -24,6 +24,8 @@ body {
 
     --paragraphLineHeight: 1.4;
 
+    --fontSizeL: 1.2rem;
+
     background: var(--turquoise);
     font-family: var(--mainFont);
     margin: 0;

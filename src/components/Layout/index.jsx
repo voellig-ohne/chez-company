@@ -15,6 +15,8 @@ export default function Layout({ children, path }) {
             ogimage,
             storerText,
             storerLink,
+            storerText2,
+            storerLink2,
         },
     } = useStaticQuery(graphql`
         query GlobalStuffQuery {
@@ -32,6 +34,8 @@ export default function Layout({ children, path }) {
                 }
                 storerText
                 storerLink
+                storerText2
+                storerLink2
             }
         }
     `);
@@ -61,6 +65,28 @@ export default function Layout({ children, path }) {
                         aria-label={storerText}
                     >
                         {generateStorerText(storerText)}
+                    </Link>
+                </div>
+            )}
+            {storerText2 && storerLink2 && (
+                <div className={s.storerContainer}>
+                    <Link
+                        to={storerLink}
+                        className={s.storer}
+                        aria-label={storerText}
+                    >
+                        {generateStorerText(storerText)}
+                    </Link>
+                </div>
+            )}
+            {storerText2 && storerLink2 && (
+                <div className={s.storerContainer2}>
+                    <Link
+                        to={storerText2}
+                        className={s.storer2}
+                        aria-label={storerText2}
+                    >
+                        {generateStorerText(storerText2)}
                     </Link>
                 </div>
             )}
