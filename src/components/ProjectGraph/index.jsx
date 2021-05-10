@@ -10,19 +10,19 @@ const graphStyles = {
     project: {
         color: '#ffff3b',
         background: '#fec4fc',
-        fontSize: 7,
+        fontSize: 6,
         order: 1,
     },
     fragment: {
         color: '#f81955',
         background: '#2c99e4',
-        fontSize: 4,
+        fontSize: 3,
         order: 3,
     },
     tag: {
         color: '#ffff3b',
         background: '#fec4fc',
-        fontSize: 6,
+        fontSize: 5,
         order: 2,
     },
 };
