@@ -41,7 +41,7 @@
 .storer2 {
     composes: storer;
     animation-name: storer2;
-    bottom: 6rem;
+    bottom: 10rem;
 }
 
 @keyframes storer {
@@ -55,9 +55,19 @@
 
 @keyframes storer2 {
     from {
-        transform: rotate(-6deg) translateX(-1rem);
+        transform: rotate(6deg) translateX(-1rem);
     }
     to {
-        transform: rotate(-6deg) translateX(-200rem);
+        transform: rotate(6deg) translateX(-200rem);
+    }
+}
+
+@media (max-height: 700px) {
+    .storer {
+        font-size: inherit;
+        padding: 0.2rem 0;
+    }
+    .storer2 {
+        bottom: 6rem;
     }
 }

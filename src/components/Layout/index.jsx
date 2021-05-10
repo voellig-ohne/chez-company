@@ -82,7 +82,7 @@ export default function Layout({ children, path }) {
             {storerText2 && storerLink2 && (
                 <div className={s.storerContainer2}>
                     <Link
-                        to={storerText2}
+                        to={storerLink2}
                         className={s.storer2}
                         aria-label={storerText2}
                     >
