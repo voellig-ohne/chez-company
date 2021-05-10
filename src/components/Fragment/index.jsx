@@ -1,15 +1,12 @@
 import contentfulRichtTextToThml from '../contentfulRichTextToHtml';
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import {
-    YoutubeEmbed,
-    getPreviewImagesForAnimation,
-    youtubeParser,
-} from '../YoutubeEmbed';
+import { IFrameEmbed, useImagesForAnimation } from '../YoutubeEmbed';
 import * as s from './style.module.css';
 import { Helmet } from 'react-helmet';
 
 export function Fragment({ description, images, youtubeId, audio }) {
+    const animationImages = useImagesForAnimation(youtubeId);
     return (
         <>
             <Helmet>
@@ -24,15 +21,11 @@ export function Fragment({ description, images, youtubeId, audio }) {
                 {youtubeId && (
                     <meta
                         property="og:image"
-                        content={
-                            getPreviewImagesForAnimation(
-                                youtubeParser(youtubeId)
-                            )[0]
-                        }
+                        content={animationImages.length && animationImages[0]}
                     />
                 )}
             </Helmet>
-            {youtubeId && <YoutubeEmbed youtubeUrl={youtubeId} />}
+            {youtubeId && <IFrameEmbed youtubeUrl={youtubeId} />}
             {audio?.file?.url && (
                 <audio controls autoPlay src={audio.file.url} />
             )}

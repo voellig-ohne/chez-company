@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as s from './style.module.css';
 
-export function YoutubeEmbed({ youtubeUrl }: { youtubeUrl?: string }) {
-    const youtubeUrlNoCookie = getYoutubeUrlNoCookie(youtubeUrl);
+const regExpYoutube = /^https?:\/\/(?:www\.youtube(?:-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*&)?vi?=|&vi?=|\?(?:.*&)?vi?=)([^#&?\n/<>"']*)/i;
+const regExpVimeo = /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/(?:[^\/]*)\/videos\/|album\/(?:\d+)\/video\/|video\/|)(\d+)(?:[a-zA-Z0-9_\-]+)?/i;
+
+export function IFrameEmbed({ youtubeUrl }: { youtubeUrl?: string }) {
+    const youtubeUrlNoCookie = getUrl(youtubeUrl);
 
     return (
         <div className={s.container}>
@@ -11,7 +14,7 @@ export function YoutubeEmbed({ youtubeUrl }: { youtubeUrl?: string }) {
                 width="560"
                 height="315"
                 src={youtubeUrlNoCookie}
-                title="YouTube video player"
+                title="Video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -20,22 +23,18 @@ export function YoutubeEmbed({ youtubeUrl }: { youtubeUrl?: string }) {
     );
 }
 
-export function YoutubePreview({ youtubeUrl }: { youtubeUrl?: string }) {
-    if (!youtubeUrl) return null;
-
-    const id = youtubeParser(youtubeUrl);
-
-    if (!id) return null;
-
-    const images = getPreviewImagesForAnimation(id);
+export function VideoPreview({ youtubeUrl }: { youtubeUrl?: string }) {
+    const { id } = urlParser(youtubeUrl);
+    const images = useImagesForAnimation(youtubeUrl);
+    if (!youtubeUrl || !id) return null;
 
     return (
         <div className={s.preview}>
             <div className={s.previewInner}>
-                {images.map(url => (
+                {images.map((url, index) => (
                     <img
                         className={s.previewImage}
-                        key={url}
+                        key={index}
                         alt=""
                         src={url}
                     />
@@ -45,25 +44,61 @@ export function YoutubePreview({ youtubeUrl }: { youtubeUrl?: string }) {
     );
 }
 
-function getYoutubeUrlNoCookie(str?: string) {
+export function useImagesForAnimation(url?: string) {
+    const [images, setImages] = useState<string[]>([]);
+    const { type, id } = urlParser(url);
+
+    useEffect(() => {
+        if (type === 'vimeo') {
+            fetch(`https://vimeo.com/api/v2/video/${id}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    setImages([0, 1, 2].map(() => data[0].thumbnail_medium));
+                });
+        }
+
+        if (type === 'youtube') {
+            setImages(
+                [0, 1, 2, 3].map(
+                    index => `https://img.youtube.com/vi/${id}/${index}.jpg`
+                )
+            );
+        }
+    }, [setImages, id, type]);
+
+    return images;
+}
+
+function getUrl(str?: string) {
     if (!str) {
         return undefined;
     }
-    const ID = youtubeParser(str);
-    if (!ID) {
-        return undefined;
+
+    const { type, id } = urlParser(str);
+
+    if (type === 'youtube') {
+        return `https://www.youtube-nocookie.com/embed/${id}`;
     }
-    return `https://www.youtube-nocookie.com/embed/${ID}`;
+    if (type === 'vimeo') {
+        return `https://player.vimeo.com/video/${id}`;
+    }
+
+    return str;
 }
 
-export function youtubeParser(url: string) {
-    var regExp = /^https?:\/\/(?:www\.youtube(?:-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*&)?vi?=|&vi?=|\?(?:.*&)?vi?=)([^#&?\n/<>"']*)/i;
-    var match = url.match(regExp);
-    return match && match[1].length === 11 ? match[1] : false;
-}
+function urlParser(url?: string) {
+    if (!url) return { type: undefined, id: undefined };
 
-export function getPreviewImagesForAnimation(id: string) {
-    return [0, 1, 2, 3].map(
-        index => `https://img.youtube.com/vi/${id}/${index}.jpg`
-    );
+    const matchYoutube = url.match(regExpYoutube);
+    const matchVimeo = url.match(regExpVimeo);
+
+    if (matchYoutube && matchYoutube[1].length === 11) {
+        return { type: 'youtube', id: matchYoutube[1] };
+    }
+
+    if (matchVimeo) {
+        return { type: 'vimeo', id: matchVimeo[1] };
+    }
+
+    return { type: undefined, id: undefined };
 }

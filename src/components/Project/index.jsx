@@ -3,7 +3,7 @@ import * as s from './style.module.css';
 import React, { useRef } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
-import { YoutubePreview } from '../YoutubeEmbed';
+import { VideoPreview } from '../YoutubeEmbed';
 import { getRoute } from '../util';
 
 export function Project({ description, tags, fragments, persons }) {
@@ -79,7 +79,7 @@ function FragmentItem(fragment) {
                 />
             )}
             {fragment.youtubeId && (
-                <YoutubePreview youtubeUrl={fragment.youtubeId} />
+                <VideoPreview youtubeUrl={fragment.youtubeId} />
             )}
             {fragment.audio?.file?.url && (
                 <div className={s.audio}>
