@@ -4,11 +4,22 @@ import * as s from './style.module.css';
 const regExpYoutube = /^https?:\/\/(?:www\.youtube(?:-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*&)?vi?=|&vi?=|\?(?:.*&)?vi?=)([^#&?\n/<>"']*)/i;
 const regExpVimeo = /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/(?:[^\/]*)\/videos\/|album\/(?:\d+)\/video\/|video\/|)(\d+)(?:[a-zA-Z0-9_\-]+)?/i;
 
-export function IFrameEmbed({ youtubeUrl }: { youtubeUrl?: string }) {
+export function IFrameEmbed({
+    youtubeUrl,
+    aspectRatio,
+}: {
+    youtubeUrl?: string;
+    aspectRatio?: number;
+}) {
     const youtubeUrlNoCookie = getUrl(youtubeUrl);
+    const containerStyle = aspectRatio
+        ? {
+              paddingBottom: `${(1 / aspectRatio) * 100}%`,
+          }
+        : undefined;
 
     return (
-        <div className={s.container}>
+        <div className={s.container} style={containerStyle}>
             <iframe
                 className={s.iFrame}
                 width="560"

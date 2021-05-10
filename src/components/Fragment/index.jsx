@@ -5,7 +5,13 @@ import { IFrameEmbed, useImagesForAnimation } from '../YoutubeEmbed';
 import * as s from './style.module.css';
 import { Helmet } from 'react-helmet';
 
-export function Fragment({ description, images, youtubeId, audio }) {
+export function Fragment({
+    description,
+    images,
+    youtubeId,
+    audio,
+    aspectRatio,
+}) {
     const animationImages = useImagesForAnimation(youtubeId);
     return (
         <>
@@ -25,7 +31,9 @@ export function Fragment({ description, images, youtubeId, audio }) {
                     />
                 )}
             </Helmet>
-            {youtubeId && <IFrameEmbed youtubeUrl={youtubeId} />}
+            {youtubeId && (
+                <IFrameEmbed youtubeUrl={youtubeId} aspectRatio={aspectRatio} />
+            )}
             {audio?.file?.url && (
                 <audio controls autoPlay src={audio.file.url} />
             )}

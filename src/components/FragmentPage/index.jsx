@@ -49,6 +49,7 @@ export const pageQuery = graphql`
             metaDescription {
                 metaDescription
             }
+            aspectRatio
         }
         contentfulFragmentAudio(id: { eq: $id }) {
             title
