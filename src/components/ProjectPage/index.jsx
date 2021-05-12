@@ -41,6 +41,9 @@ export const pageQuery = graphql`
                     id
                     gatsbyImageData(layout: FIXED, width: 100)
                 }
+                text {
+                    text
+                }
             }
             persons {
                 internal {

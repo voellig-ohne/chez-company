@@ -5,38 +5,33 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { VideoPreview } from '../YoutubeEmbed';
 import { getRoute } from '../util';
+import { PersonInline } from '../PersonInline';
 
 export function Project({ description, tags, fragments, persons }) {
     return (
         <>
             <div className={s.tags}>
                 {tags?.map(tag => {
-                    if (!tag?.image?.gatsbyImageData) return null;
-                    return (
-                        <GatsbyImage
-                            key={tag.id}
-                            alt={tag.title || ''}
-                            image={tag?.image?.gatsbyImageData}
-                        />
-                    );
-                })}
-            </div>
-            <div className={s.persons}>
-                {persons?.map(person => {
-                    if (!person?.image?.gatsbyImageData) return null;
-                    return (
-                        <Link to={getRoute(person)} key={person.id}>
+                    if (tag?.image?.gatsbyImageData) {
+                        return (
                             <GatsbyImage
-                                alt={person.name}
-                                title={person.name}
-                                image={person?.image?.gatsbyImageData}
+                                key={tag.id}
+                                alt={tag.title || ''}
+                                image={tag?.image?.gatsbyImageData}
                             />
-                        </Link>
-                    );
+                        );
+                    }
                 })}
             </div>
             <div>{contentfulRichtTextToThml(description)}</div>
             <Fragments fragments={fragments} />
+
+            <h2>Mitwirkende</h2>
+            <div className={s.persons}>
+                {persons?.map(person => (
+                    <PersonInline key={person.id} {...person} />
+                ))}
+            </div>
         </>
     );
 }
