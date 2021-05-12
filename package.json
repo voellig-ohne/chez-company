@@ -16,6 +16,7 @@
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^14.1.3",
     "@types/lodash.orderby": "^4.6.6",
+    "@types/lodash.shuffle": "^4.2.6",
     "@types/lodash.sortby": "^4.7.6",
     "@types/react": "^17.0.4",
     "@types/react-dom": "^17.0.3",
@@ -30,6 +31,7 @@
     "gatsby-transformer-sharp": "^3.4.0",
     "gatsby-transformer-typescript-css-modules": "^1.0.14",
     "lodash.orderby": "^4.6.0",
+    "lodash.shuffle": "^4.2.0",
     "lodash.sortby": "^4.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

@@ -1,7 +1,7 @@
 import { ForceGraph2D } from 'react-force-graph';
 import React, { useEffect, useRef, useState } from 'react';
 import { useProjects } from '../../hooks/useProjects';
-import { sortBy } from 'lodash';
+import { shuffle, sortBy } from 'lodash';
 import { navigate } from 'gatsby-link';
 import { getRoute } from '../util';
 import { prefetchPathname } from 'gatsby';
@@ -22,10 +22,17 @@ const graphStyles = {
     tag: {
         color: '#ffff3b',
         background: '#fec4fc',
-        fontSize: 5,
+        fontSize: 8,
         order: 2,
     },
 };
+
+const tagStyles = [
+    ['#fec4fc', '#2c99e4'],
+    ['#ffff3b', '#2c99e4'],
+    ['#f81955', '#ffff3b'],
+    ['#f81955', '#fec4fc'],
+];
 
 const borderWidth = 0.5;
 const shadowDistance = 1;
@@ -76,6 +83,9 @@ export function ProjectGraph() {
                         if (node.tagImageEl) {
                             // TAG WITH AN IMAGE
                             drawImageTag(node, ctx);
+                        } else if (node?.text?.text) {
+                            // TAGS THAT ARE TEXT
+                            drawTextTag(node, ctx);
                         } else if (node.fragmentImageEls) {
                             // THESE ARE MULTIPLE IMAGES, FRAGMENTS
                             drawImageFragment(node, ctx);
@@ -241,6 +251,43 @@ function drawText(node, ctx) {
     node.__bckgDimensions = bckgDimensions;
 }
 
+function drawTextTag(node, ctx) {
+    const styles = graphStyles[node.type];
+
+    const lines = node.text.text.split('\n');
+
+    // BIGGER FONT-SIZE FOR TAGS WITH FEWER LINES
+    const fontSize = styles.fontSize / 2 + styles.fontSize / lines.length;
+
+    const lineHeight = fontSize - 0;
+    ctx.font = `${fontSize}px Bernard`;
+
+    const width = Math.max(...lines.map(line => ctx.measureText(line).width));
+
+    const bckgDimensions = [width, lineHeight * lines.length];
+
+    lines.forEach((line, index) => {
+        ctx.fillStyle = styles.color;
+        const posY = node.y + lineHeight * index - bckgDimensions[1] / 2;
+
+        // background
+        ctx.fillStyle = node.tagColors[0];
+        ctx.fillRect(
+            node.x - ctx.measureText(line).width / 2,
+            posY - lineHeight / 2,
+            ctx.measureText(line).width,
+            lineHeight
+        );
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = node.tagColors[1];
+        ctx.fillText(line, node.x, posY);
+    });
+
+    node.__bckgDimensions = bckgDimensions;
+}
+
 function formatGraphData(projects) {
     const graphData = { links: [], nodes: [] };
 
@@ -286,6 +333,7 @@ function formatGraphData(projects) {
             const tagNode = tag;
             tagNode.type = 'tag';
             const image = tagNode?.image?.resize?.src;
+            const text = tagNode?.text?.text;
 
             graphData.links.push({
                 source: projectNode.id,
@@ -298,6 +346,13 @@ function formatGraphData(projects) {
                     tagNode.ratio = tagNode?.image?.resize?.aspectRatio;
 
                     tagNode.tagImageEl.src = image;
+                }
+
+                if (text) {
+                    const style =
+                        tagStyles[Math.floor(Math.random() * tagStyles.length)];
+
+                    tagNode.tagColors = shuffle(style);
                 }
 
                 graphData.nodes.push(tagNode);
