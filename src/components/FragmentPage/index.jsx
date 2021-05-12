@@ -55,7 +55,6 @@ export const pageQuery = graphql`
         }
         contentfulFragmentAudio(id: { eq: $id }) {
             title
-
             audio {
                 file {
                     url

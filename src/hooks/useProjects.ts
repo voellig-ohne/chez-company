@@ -22,6 +22,9 @@ export const useProjects = () => {
                             tags {
                                 id
                                 title
+                                text {
+                                    text
+                                }
                                 image {
                                     id
                                     resize(width: 200) {

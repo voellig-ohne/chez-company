@@ -73,133 +73,15 @@ export function ProjectGraph() {
                     {...displaySize}
                     graphData={graphData}
                     nodeCanvasObject={(node, ctx, globalScale) => {
-                        if (node.imageEl) {
-                            // this is a TAG
-                            const area = 1200;
-                            const width = Math.sqrt(area * node.ratio);
-                            const height = Math.sqrt(area * (1 / node.ratio));
-                            node.__bckgDimensions = [width, height];
-
-                            ctx.drawImage(
-                                node.imageEl,
-                                node.x - width / 2,
-                                node.y - height / 2,
-                                width,
-                                height
-                            );
-                        } else if (node.imageEls) {
+                        if (node.tagImageEl) {
+                            // TAG WITH AN IMAGE
+                            drawImageTag(node, ctx);
+                        } else if (node.fragmentImageEls) {
                             // THESE ARE MULTIPLE IMAGES, FRAGMENTS
-                            const styles = graphStyles[node.type];
-                            node.imageEls.forEach((image, index) => {
-                                const area = 400;
-                                const width = Math.sqrt(area * image.ratio);
-                                const height = Math.sqrt(
-                                    area * (1 / image.ratio)
-                                );
-                                let x = node.x - width / 2;
-                                let y = node.y - height / 2;
-
-                                if (
-                                    !!node.__hovered &&
-                                    index !== node.imageEls.length - 1
-                                ) {
-                                    x += image.hoverX;
-                                    y += image.hoverY;
-                                }
-
-                                node.__bckgDimensions = [
-                                    width + 10,
-                                    height + 10,
-                                ];
-
-                                ctx.translate(
-                                    x + width * 0.5,
-                                    y + height * 0.5
-                                );
-                                ctx.rotate(image.rotation);
-
-                                // BORDER
-                                ctx.fillStyle = styles.color;
-                                ctx.fillRect(
-                                    width * -0.5 - borderWidth / 2,
-                                    height * -0.5 - borderWidth / 2,
-                                    width + borderWidth,
-                                    height + borderWidth
-                                );
-
-                                // IMAGE
-                                ctx.drawImage(
-                                    image.el,
-                                    width * -0.5,
-                                    height * -0.5,
-                                    width,
-                                    height
-                                );
-
-                                // UNDO TRANSLATIONS
-                                ctx.rotate(-image.rotation);
-                                ctx.translate(
-                                    -(x + width * 0.5),
-                                    -(y + height * 0.5)
-                                );
-                            });
+                            drawImageFragment(node, ctx);
                         } else {
-                            const shadowDistanceHovered = !!node.__hovered
-                                ? shadowDistance * 2
-                                : shadowDistance;
-
-                            const styles = graphStyles[node.type];
-
-                            const label = node.title;
-                            const fontSize = styles.fontSize;
-                            ctx.font = `${fontSize}px PT Mono`;
-
-                            const textWidth = ctx.measureText(label).width;
-                            const bckgDimensions = [textWidth, fontSize].map(
-                                n => n + fontSize * 0.4
-                            );
-
-                            ctx.fillStyle = styles.color;
-
-                            // border
-                            ctx.fillRect(
-                                node.x -
-                                    borderWidth / 2 -
-                                    bckgDimensions[0] / 2,
-                                node.y -
-                                    borderWidth / 2 -
-                                    bckgDimensions[1] / 2,
-                                ...bckgDimensions.map(d => d + borderWidth)
-                            );
-
-                            // shadow
-                            ctx.fillRect(
-                                node.x +
-                                    shadowDistanceHovered -
-                                    bckgDimensions[0] / 2,
-                                node.y +
-                                    shadowDistanceHovered -
-                                    bckgDimensions[1] / 2,
-                                ...bckgDimensions
-                            );
-
-                            // background
-                            ctx.fillStyle = !!node.__hovered
-                                ? '#f8927d'
-                                : styles.background;
-
-                            ctx.fillRect(
-                                node.x - bckgDimensions[0] / 2,
-                                node.y - bckgDimensions[1] / 2,
-                                ...bckgDimensions
-                            );
-
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillStyle = styles.color;
-                            ctx.fillText(label, node.x, node.y);
-
-                            node.__bckgDimensions = bckgDimensions;
+                            // PROJECTS & FRAGMENTS THAT DO NOT HAVE IMAGES
+                            drawText(node, ctx);
                         }
                     }}
                     nodePointerAreaPaint={(node, color, ctx) => {
@@ -260,6 +142,105 @@ export function ProjectGraph() {
     );
 }
 
+function drawImageTag(node, ctx) {
+    const area = 1200;
+    const width = Math.sqrt(area * node.ratio);
+    const height = Math.sqrt(area * (1 / node.ratio));
+    node.__bckgDimensions = [width, height];
+
+    ctx.drawImage(
+        node.tagImageEl,
+        node.x - width / 2,
+        node.y - height / 2,
+        width,
+        height
+    );
+}
+
+function drawImageFragment(node, ctx) {
+    const styles = graphStyles[node.type];
+    node.fragmentImageEls.forEach((image, index) => {
+        const area = 400;
+        const width = Math.sqrt(area * image.ratio);
+        const height = Math.sqrt(area * (1 / image.ratio));
+        let x = node.x - width / 2;
+        let y = node.y - height / 2;
+
+        if (!!node.__hovered && index !== node.fragmentImageEls.length - 1) {
+            x += image.hoverX;
+            y += image.hoverY;
+        }
+
+        node.__bckgDimensions = [width + 10, height + 10];
+
+        ctx.translate(x + width * 0.5, y + height * 0.5);
+        ctx.rotate(image.rotation);
+
+        // BORDER
+        ctx.fillStyle = styles.color;
+        ctx.fillRect(
+            width * -0.5 - borderWidth / 2,
+            height * -0.5 - borderWidth / 2,
+            width + borderWidth,
+            height + borderWidth
+        );
+
+        // IMAGE
+        ctx.drawImage(image.el, width * -0.5, height * -0.5, width, height);
+
+        // UNDO TRANSLATIONS
+        ctx.rotate(-image.rotation);
+        ctx.translate(-(x + width * 0.5), -(y + height * 0.5));
+    });
+}
+
+function drawText(node, ctx) {
+    const shadowDistanceHovered = !!node.__hovered
+        ? shadowDistance * 2
+        : shadowDistance;
+
+    const styles = graphStyles[node.type];
+
+    const label = node.title;
+    const fontSize = styles.fontSize;
+    ctx.font = `${fontSize}px PT Mono`;
+
+    const textWidth = ctx.measureText(label).width;
+    const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.4);
+
+    ctx.fillStyle = styles.color;
+
+    // border
+    ctx.fillRect(
+        node.x - borderWidth / 2 - bckgDimensions[0] / 2,
+        node.y - borderWidth / 2 - bckgDimensions[1] / 2,
+        ...bckgDimensions.map(d => d + borderWidth)
+    );
+
+    // shadow
+    ctx.fillRect(
+        node.x + shadowDistanceHovered - bckgDimensions[0] / 2,
+        node.y + shadowDistanceHovered - bckgDimensions[1] / 2,
+        ...bckgDimensions
+    );
+
+    // background
+    ctx.fillStyle = !!node.__hovered ? '#f8927d' : styles.background;
+
+    ctx.fillRect(
+        node.x - bckgDimensions[0] / 2,
+        node.y - bckgDimensions[1] / 2,
+        ...bckgDimensions
+    );
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = styles.color;
+    ctx.fillText(label, node.x, node.y);
+
+    node.__bckgDimensions = bckgDimensions;
+}
+
 function formatGraphData(projects) {
     const graphData = { links: [], nodes: [] };
 
@@ -281,19 +262,21 @@ function formatGraphData(projects) {
 
             if (!graphData.nodes.find(node => node.id === fragmentNode.id)) {
                 if (fragmentNode.images) {
-                    fragmentNode.imageEls = fragmentNode.images.map(image => {
-                        const el = new Image();
-                        el.src = image.resize.src;
+                    fragmentNode.fragmentImageEls = fragmentNode.images.map(
+                        image => {
+                            const el = new Image();
+                            el.src = image.resize.src;
 
-                        return {
-                            el,
-                            ratio: image.resize.aspectRatio,
-                            rotation: Math.random() * 0.4 - 0.2,
-                            hoverX: Math.random() * 40 - 20,
-                            hoverY: Math.random() * 40 - 20,
-                        };
-                    });
-                    fragmentNode.imageEls.reverse();
+                            return {
+                                el,
+                                ratio: image.resize.aspectRatio,
+                                rotation: Math.random() * 0.4 - 0.2,
+                                hoverX: Math.random() * 40 - 20,
+                                hoverY: Math.random() * 40 - 20,
+                            };
+                        }
+                    );
+                    fragmentNode.fragmentImageEls.reverse();
                 }
                 graphData.nodes.push(fragmentNode);
             }
@@ -311,10 +294,10 @@ function formatGraphData(projects) {
 
             if (!graphData.nodes.find(node => node.id === tag.id)) {
                 if (image) {
-                    tagNode.imageEl = new Image();
+                    tagNode.tagImageEl = new Image();
                     tagNode.ratio = tagNode?.image?.resize?.aspectRatio;
 
-                    tagNode.imageEl.src = image;
+                    tagNode.tagImageEl.src = image;
                 }
 
                 graphData.nodes.push(tagNode);
