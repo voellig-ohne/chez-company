@@ -1,4 +1,4 @@
-const { shuffle } = require('lodash');
+const seedrandom = require('seedrandom');
 
 const stringToSslug = function (str) {
     str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -43,8 +43,14 @@ const tagStyles = [
     ['#f81955', '#fec4fc'],
 ];
 
-exports.getRandomTagColors = function () {
-    const style = tagStyles[Math.floor(Math.random() * tagStyles.length)];
+exports.getRandomTagColors = function (seed = '') {
+    const rng = seedrandom(seed);
 
-    return shuffle(style);
+    const style = tagStyles[Math.floor(rng() * tagStyles.length)];
+
+    if (rng() > 0.5) {
+        return style.reverse();
+    }
+
+    return style;
 };

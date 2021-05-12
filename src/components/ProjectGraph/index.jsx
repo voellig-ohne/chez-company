@@ -1,7 +1,7 @@
 import { ForceGraph2D } from 'react-force-graph';
 import React, { useEffect, useRef, useState } from 'react';
 import { useProjects } from '../../hooks/useProjects';
-import { shuffle, sortBy } from 'lodash';
+import { sortBy } from 'lodash';
 import { navigate } from 'gatsby-link';
 import { getRandomTagColors, getRoute } from '../util';
 import { prefetchPathname } from 'gatsby';
@@ -342,7 +342,7 @@ function formatGraphData(projects) {
                 }
 
                 if (text) {
-                    tagNode.tagColors = getRandomTagColors();
+                    tagNode.tagColors = getRandomTagColors(tagNode.title);
                 }
 
                 graphData.nodes.push(tagNode);

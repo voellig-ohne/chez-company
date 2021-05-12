@@ -29,7 +29,7 @@ export function Project({ description, tags, fragments, persons }) {
 }
 
 function TagItem({ image, text, title }) {
-    const [colors] = useState(getRandomTagColors());
+    const [colors] = useState(getRandomTagColors(title));
 
     if (image?.gatsbyImageData) {
         return <GatsbyImage alt={title || ''} image={image?.gatsbyImageData} />;
