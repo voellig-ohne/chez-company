@@ -21,8 +21,8 @@
 
 @font-face {
     font-family: 'Bernard';
-    src: url(./fonts/Bernard.woff2) format('woff2'),
-        url(./fonts/Bernard.woff) format('woff');
+    src: url(./fonts/bernard.woff2) format('woff2'),
+        url(./fonts/bernard.woff) format('woff');
 }
 
 @font-face {
