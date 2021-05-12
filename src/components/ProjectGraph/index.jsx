@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useProjects } from '../../hooks/useProjects';
 import { shuffle, sortBy } from 'lodash';
 import { navigate } from 'gatsby-link';
-import { getRoute } from '../util';
+import { getRandomTagColors, getRoute } from '../util';
 import { prefetchPathname } from 'gatsby';
 
 const graphStyles = {
@@ -26,13 +26,6 @@ const graphStyles = {
         order: 2,
     },
 };
-
-const tagStyles = [
-    ['#fec4fc', '#2c99e4'],
-    ['#ffff3b', '#2c99e4'],
-    ['#f81955', '#ffff3b'],
-    ['#f81955', '#fec4fc'],
-];
 
 const borderWidth = 0.5;
 const shadowDistance = 1;
@@ -349,10 +342,7 @@ function formatGraphData(projects) {
                 }
 
                 if (text) {
-                    const style =
-                        tagStyles[Math.floor(Math.random() * tagStyles.length)];
-
-                    tagNode.tagColors = shuffle(style);
+                    tagNode.tagColors = getRandomTagColors();
                 }
 
                 graphData.nodes.push(tagNode);

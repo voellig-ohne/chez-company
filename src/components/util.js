@@ -1,3 +1,5 @@
+const { shuffle } = require('lodash');
+
 const stringToSslug = function (str) {
     str = str.replace(/^\s+|\s+$/g, ''); // trim
     str = str.toLowerCase();
@@ -32,4 +34,17 @@ exports.getRoute = function ({ slug, internal }) {
         default:
             return `/${escapedSlug}`;
     }
+};
+
+const tagStyles = [
+    ['#fec4fc', '#2c99e4'],
+    ['#ffff3b', '#2c99e4'],
+    ['#f81955', '#ffff3b'],
+    ['#f81955', '#fec4fc'],
+];
+
+exports.getRandomTagColors = function () {
+    const style = tagStyles[Math.floor(Math.random() * tagStyles.length)];
+
+    return shuffle(style);
 };

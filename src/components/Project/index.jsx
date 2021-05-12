@@ -1,27 +1,19 @@
 import contentfulRichtTextToThml from '../contentfulRichTextToHtml';
 import * as s from './style.module.css';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { VideoPreview } from '../YoutubeEmbed';
-import { getRoute } from '../util';
+import { getRandomTagColors, getRoute } from '../util';
 import { PersonInline } from '../PersonInline';
 
 export function Project({ description, tags, fragments, persons }) {
     return (
         <>
             <div className={s.tags}>
-                {tags?.map(tag => {
-                    if (tag?.image?.gatsbyImageData) {
-                        return (
-                            <GatsbyImage
-                                key={tag.id}
-                                alt={tag.title || ''}
-                                image={tag?.image?.gatsbyImageData}
-                            />
-                        );
-                    }
-                })}
+                {tags?.map(tag => (
+                    <TagItem key={tag.id} {...tag} />
+                ))}
             </div>
             <div>{contentfulRichtTextToThml(description)}</div>
             <Fragments fragments={fragments} />
@@ -34,6 +26,34 @@ export function Project({ description, tags, fragments, persons }) {
             </div>
         </>
     );
+}
+
+function TagItem({ image, text, title }) {
+    const [colors] = useState(getRandomTagColors());
+
+    if (image?.gatsbyImageData) {
+        return <GatsbyImage alt={title || ''} image={image?.gatsbyImageData} />;
+    }
+
+    if (text?.text) {
+        const fontSizeFactor = 0.5 + (1 / text.text.split('\n').length) * 0.5;
+        return (
+            <div className={s.tagText}>
+                <span
+                    className={s.tagTextInner}
+                    style={{
+                        background: colors[0],
+                        color: colors[1],
+                        fontSize: `${fontSizeFactor * 2}rem`,
+                    }}
+                >
+                    {text.text}
+                </span>
+            </div>
+        );
+    }
+
+    return null;
 }
 
 function Fragments({ fragments }) {

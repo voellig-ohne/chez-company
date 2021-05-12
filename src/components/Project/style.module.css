@@ -11,6 +11,13 @@
     margin: 1rem;
 }
 
+.tagText {
+    font-family: var(--secondaryFont);
+    white-space: pre-line;
+    text-align: center;
+    line-height: 1;
+}
+
 .fragments {
     margin-top: 2rem;
     display: grid;
