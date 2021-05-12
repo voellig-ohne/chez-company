@@ -1,3 +1,30 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 4087594, 2021-05-12T06:09:17-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: BernardMTStd-Condensed by Monotype
+ * URL: https://www.myfonts.com/fonts/mti/bernard-mt/std-condensed/
+ * Copyright: Font software Copyright 1994 Adobe Systems Incorporated. Typeface designs Copyright 1994 The Monotype Corporation. All rights reserved.
+ *
+ *
+ *
+ * © 2021 MyFonts Inc
+*/
+
+@import url('//hello.myfonts.net/count/3e5f2a');
+
+@font-face {
+    font-family: 'Bernard';
+    src: url(./fonts/Bernard.woff2) format('woff2'),
+        url(./fonts/Bernard.woff) format('woff');
+}
+
 @font-face {
     font-family: 'PT Mono';
     src: url(./fonts/PT-Mono_Regular.woff2) format('woff2'),
@@ -13,6 +40,7 @@
 
 body {
     --mainFont: 'PT Mono', monospace;
+    --secondaryFont: Bernard, serif;
 
     --white: #fff;
     --yellow: #ffff3b;
