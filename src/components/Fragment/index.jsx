@@ -19,7 +19,7 @@ export function Fragment({
                 {images?.length && (
                     <meta
                         property="og:image"
-                        content={`${process.env.ROOT_URL}${images[0].gatsbyImageData?.images?.fallback?.src}`}
+                        content={`${process.env.GATSBY_ROOT_URL}${images[0].gatsbyImageData?.images?.fallback?.src}`}
                     />
                 )}
                 {youtubeId && (

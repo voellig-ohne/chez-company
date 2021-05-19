@@ -39,7 +39,7 @@ export default function Layout({ children, path }) {
             }
         }
     `);
-    console.log('huhu', process.env.ROOT_URL);
+    console.log('huhu', process.env.GATSBY_ROOT_URL);
 
     return (
         <>
@@ -47,15 +47,18 @@ export default function Layout({ children, path }) {
                 <link
                     rel="icon"
                     type="image/png"
-                    href={`${process.env.ROOT_URL}${Favicon}`}
+                    href={`${process.env.GATSBY_ROOT_URL}${Favicon}`}
                 />
-                <link rel="canonical" href={`${process.env.ROOT_URL}${path}`} />
+                <link
+                    rel="canonical"
+                    href={`${process.env.GATSBY_ROOT_URL}${path}`}
+                />
                 <meta name="description" content={description?.description} />
                 <meta property="og:site_name" content={title} />
                 <meta property="og:title" content={title} />
                 <meta
                     property="og:image"
-                    content={`${process.env.ROOT_URL}${ogimage?.resize?.src}`}
+                    content={`${process.env.GATSBY_ROOT_URL}${ogimage?.resize?.src}`}
                 />
             </Helmet>
             <div className={s.graph}>
