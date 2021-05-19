@@ -20,15 +20,17 @@ export function Fragment({
                     <>
                         <meta
                             property="og:image"
-                            content={
-                                images[0].gatsbyImageData?.images?.fallback?.src
-                            }
+                            content={images[0].gatsbyImageData?.images?.fallback?.src.replace(
+                                '//',
+                                'https://'
+                            )}
                         />
                         <meta
                             name="twitter:image"
-                            content={
-                                images[0].gatsbyImageData?.images?.fallback?.src
-                            }
+                            content={images[0].gatsbyImageData?.images?.fallback?.src.replace(
+                                '//',
+                                'https://'
+                            )}
                         />
                     </>
                 )}

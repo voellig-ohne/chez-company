@@ -17,15 +17,17 @@ export default function PersonPage({
                     <>
                         <meta
                             property="og:image"
-                            content={
-                                image?.gatsbyImageData?.images?.fallback?.src
-                            }
+                            content={image?.gatsbyImageData?.images?.fallback?.src.replace(
+                                '//',
+                                'https://'
+                            )}
                         />
                         <meta
                             name="twitter:image"
-                            content={
-                                image?.gatsbyImageData?.images?.fallback?.src
-                            }
+                            content={image?.gatsbyImageData?.images?.fallback?.src.replace(
+                                '//',
+                                'https://'
+                            )}
                         />
                     </>
                 )}
