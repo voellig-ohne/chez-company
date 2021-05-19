@@ -17,13 +17,13 @@ const graphStyles = {
         color: '#f81955',
         background: '#2c99e4',
         fontSize: 3,
-        order: 3,
+        order: 2,
     },
     tag: {
         color: '#ffff3b',
         background: '#fec4fc',
         fontSize: 8,
-        order: 2,
+        order: 3,
     },
 };
 
