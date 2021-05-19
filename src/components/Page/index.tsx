@@ -60,7 +60,13 @@ export function Page({
                 <meta property="og:title" content={title} />
                 <meta property="twitter:title" content={title} />
                 {metaDescription && (
-                    <meta name="description" content={metaDescription} />
+                    <>
+                        <meta name="description" content={metaDescription} />
+                        <meta
+                            name="twitter:description"
+                            content={metaDescription}
+                        />
+                    </>
                 )}
             </Helmet>
             <article className={clsx(s.article, s[color])} ref={ref}>
