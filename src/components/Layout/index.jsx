@@ -43,15 +43,19 @@ export default function Layout({ children, path }) {
     return (
         <>
             <Helmet defaultTitle={title} titleTemplate={`${title} - %s`}>
-                <link rel="icon" type="image/png" href={Favicon} />
                 <link
-                    rel="canonical"
-                    href={`https://chez-company.org${path}`}
+                    rel="icon"
+                    type="image/png"
+                    href={`${process.env.ROOT_URL}${Favicon}`}
                 />
+                <link rel="canonical" href={`${process.env.ROOT_URL}${path}`} />
                 <meta name="description" content={description?.description} />
                 <meta property="og:site_name" content={title} />
                 <meta property="og:title" content={title} />
-                <meta property="og:image" content={ogimage?.resize?.src} />
+                <meta
+                    property="og:image"
+                    content={`${process.env.ROOT_URL}${ogimage?.resize?.src}`}
+                />
             </Helmet>
             <div className={s.graph}>
                 <ProjectGraph />
