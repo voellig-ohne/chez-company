@@ -39,6 +39,7 @@ export default function Layout({ children, path }) {
             }
         }
     `);
+    console.log('huhu', process.env.ROOT_URL);
 
     return (
         <>
