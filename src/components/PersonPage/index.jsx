@@ -14,10 +14,20 @@ export default function PersonPage({
         <Page superTitle={profession} title={name} color="pink">
             <Helmet>
                 {image && (
-                    <meta
-                        property="og:image"
-                        content={`${process.env.GATSBY_ROOT_URL}${image?.gatsbyImageData?.images?.fallback?.src}`}
-                    />
+                    <>
+                        <meta
+                            property="og:image"
+                            content={
+                                image?.gatsbyImageData?.images?.fallback?.src
+                            }
+                        />
+                        <meta
+                            name="twitter:image"
+                            content={
+                                image?.gatsbyImageData?.images?.fallback?.src
+                            }
+                        />
+                    </>
                 )}
             </Helmet>
             <GatsbyImage

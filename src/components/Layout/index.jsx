@@ -39,7 +39,6 @@ export default function Layout({ children, path }) {
             }
         }
     `);
-    console.log('huhu', process.env.GATSBY_ROOT_URL);
 
     return (
         <>
@@ -56,10 +55,14 @@ export default function Layout({ children, path }) {
                 <meta name="description" content={description?.description} />
                 <meta property="og:site_name" content={title} />
                 <meta property="og:title" content={title} />
+                <meta property="og:image" content={ogimage?.resize?.src} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={title} />
                 <meta
-                    property="og:image"
-                    content={`${process.env.GATSBY_ROOT_URL}${ogimage?.resize?.src}`}
+                    name="twitter:description"
+                    content={description?.description}
                 />
+                <meta name="twitter:image" content={ogimage?.resize?.src} />
             </Helmet>
             <div className={s.graph}>
                 <ProjectGraph />

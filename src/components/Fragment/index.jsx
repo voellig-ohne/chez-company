@@ -17,16 +17,36 @@ export function Fragment({
         <>
             <Helmet>
                 {images?.length && (
-                    <meta
-                        property="og:image"
-                        content={`${process.env.GATSBY_ROOT_URL}${images[0].gatsbyImageData?.images?.fallback?.src}`}
-                    />
+                    <>
+                        <meta
+                            property="og:image"
+                            content={
+                                images[0].gatsbyImageData?.images?.fallback?.src
+                            }
+                        />
+                        <meta
+                            name="twitter:image"
+                            content={
+                                images[0].gatsbyImageData?.images?.fallback?.src
+                            }
+                        />
+                    </>
                 )}
                 {youtubeId && (
-                    <meta
-                        property="og:image"
-                        content={animationImages.length && animationImages[0]}
-                    />
+                    <>
+                        <meta
+                            property="og:image"
+                            content={
+                                animationImages.length && animationImages[0]
+                            }
+                        />
+                        <meta
+                            name="twitter:image"
+                            content={
+                                animationImages.length && animationImages[0]
+                            }
+                        />
+                    </>
                 )}
             </Helmet>
             {youtubeId && (
