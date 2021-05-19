@@ -95,6 +95,19 @@ export const pageQuery = graphql`
                     }
                 }
             }
+            supportOrg {
+                id
+                link
+                name
+                logo {
+                    id
+                    gatsbyImageData(layout: FIXED, width: 100)
+                    file {
+                        contentType
+                        url
+                    }
+                }
+            }
         }
     }
 `;

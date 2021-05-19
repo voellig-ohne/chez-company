@@ -7,7 +7,7 @@ import { VideoPreview } from '../YoutubeEmbed';
 import { getRandomTagColors, getRoute } from '../util';
 import { PersonInline } from '../PersonInline';
 
-export function Project({ description, tags, fragments, persons }) {
+export function Project({ description, tags, fragments, persons, supportOrg }) {
     return (
         <>
             <div className={s.tags}>
@@ -18,14 +18,58 @@ export function Project({ description, tags, fragments, persons }) {
             <div>{contentfulRichtTextToThml(description)}</div>
             <Fragments fragments={fragments} />
 
-            <h2>Mitwirkende</h2>
+            <h2 className={s.heading}>Mitwirkende</h2>
             <div className={s.persons}>
                 {persons?.map(person => (
                     <PersonInline key={person.id} {...person} />
                 ))}
             </div>
+
+            {supportOrg?.length && (
+                <>
+                    <h2 className={s.heading}>Unterstützer*innen</h2>
+                    <SupportOrganisations orgs={supportOrg} />
+                </>
+            )}
         </>
     );
+}
+
+function SupportOrganisations({ orgs }) {
+    return (
+        <ul className={s.supportOrgs}>
+            {orgs?.map(({ id, link, logo, name }) => (
+                <li className={s.supportOrg} key={id}>
+                    <SupportOrgLink link={link}>
+                        {logo.file.contentType === 'image/svg+xml' ? (
+                            <img
+                                alt={name}
+                                src={logo.file.url}
+                                className={s.supportOrgLogo}
+                            />
+                        ) : (
+                            <GatsbyImage
+                                alt={name}
+                                className={s.supportOrgLogo}
+                                image={logo.gatsbyImageData}
+                            />
+                        )}
+                    </SupportOrgLink>
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+function SupportOrgLink({ link, children }) {
+    if (link) {
+        return (
+            <a target="_blank" href={link} rel="noreferrer">
+                {children}
+            </a>
+        );
+    }
+    return children;
 }
 
 function TagItem({ image, text, title }) {

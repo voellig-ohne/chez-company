@@ -47,6 +47,29 @@
     display: block;
 }
 
+.heading {
+    margin-top: 3rem;
+}
+
+.supportOrgs {
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 1rem;
+    list-style: none;
+    align-items: center;
+}
+
+.supportOrg {
+    margin: 0;
+}
+
+.supportOrgLogo {
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+}
+
 .audio {
     padding-bottom: 50%;
     position: relative;
