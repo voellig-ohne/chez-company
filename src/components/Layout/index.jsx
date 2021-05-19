@@ -55,14 +55,20 @@ export default function Layout({ children, path }) {
                 <meta name="description" content={description?.description} />
                 <meta property="og:site_name" content={title} />
                 <meta property="og:title" content={title} />
-                <meta property="og:image" content={ogimage?.resize?.src} />
+                <meta
+                    property="og:image"
+                    content={ogimage?.resize?.src.replace('//', 'https://')}
+                />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={title} />
                 <meta
                     name="twitter:description"
                     content={description?.description}
                 />
-                <meta name="twitter:image" content={ogimage?.resize?.src} />
+                <meta
+                    name="twitter:image"
+                    content={ogimage?.resize?.src.replace('//', 'https://')}
+                />
             </Helmet>
             <div className={s.graph}>
                 <ProjectGraph />
