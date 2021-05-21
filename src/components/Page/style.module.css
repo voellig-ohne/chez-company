@@ -106,4 +106,8 @@
         padding: 0;
         align-items: stretch;
     }
+
+    .subTitle {
+        font-size: var(--fontSizeL);
+    }
 }
