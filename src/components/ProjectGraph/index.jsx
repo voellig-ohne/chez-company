@@ -114,7 +114,7 @@ export function ProjectGraph() {
                     onEngineStop={() => {
                         if (!hasCenteredOnce && window.innerWidth > 800) {
                             setHasCenteredOnce(true);
-                            graphRef.current.zoomToFit(2000, -1200);
+                            graphRef.current.zoomToFit(2000, -800);
                         }
                     }}
                     onNodeHover={(node, prevNode, ctx) => {
