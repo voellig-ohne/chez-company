@@ -23,6 +23,7 @@
     border: solid var(--borderWidth) var(--mainColor);
     pointer-events: all;
 }
+
 .heading {
     margin: 0;
     font-size: 2rem;
@@ -32,10 +33,6 @@
 .superTitleInner {
     color: var(--fontColor);
     background: var(--mainColor);
-}
-
-.superTitle {
-    margin-bottom: 0.5rem;
 }
 
 .subTitle {
@@ -80,7 +77,7 @@
 
 .pink {
     --mainColor: var(--pink);
-    --fontColor: var(--yellow);
+    --fontColor: var(--blue);
 }
 
 .blue {
