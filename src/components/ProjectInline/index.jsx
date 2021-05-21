@@ -33,7 +33,11 @@ export function ProjectInline({
                     ))}
                 </ul>
             )}
-            {description && <p className={s.description}>{description}</p>}
+            {description && (
+                <p className={s.description}>
+                    <span>{description}</span>
+                </p>
+            )}
         </Link>
     );
 }
