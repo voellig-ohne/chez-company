@@ -10,7 +10,7 @@ const graphStyles = {
     project: {
         color: '#ffff3b',
         background: '#fec4fc',
-        fontSize: 6,
+        fontSize: 5,
         order: 1,
     },
     fragment: {
@@ -22,7 +22,7 @@ const graphStyles = {
     tag: {
         color: '#ffff3b',
         background: '#fec4fc',
-        fontSize: 8,
+        fontSize: 7,
         order: 3,
     },
 };
@@ -114,7 +114,7 @@ export function ProjectGraph() {
                     onEngineStop={() => {
                         if (!hasCenteredOnce && window.innerWidth > 800) {
                             setHasCenteredOnce(true);
-                            graphRef.current.zoomToFit(2000, -300);
+                            graphRef.current.zoomToFit(2000, -1200);
                         }
                     }}
                     onNodeHover={(node, prevNode, ctx) => {
