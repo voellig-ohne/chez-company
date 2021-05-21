@@ -47,6 +47,11 @@ export const markdownFrontmatterFragment = graphql`
                     id
                     name
                 }
+                metaDescription {
+                    internal {
+                        content
+                    }
+                }
             }
             ... on ContentfulPerson {
                 contentful_id
@@ -78,6 +83,11 @@ export const markdownFrontmatterFragment = graphql`
                 persons {
                     id
                     name
+                }
+                metaDescription {
+                    internal {
+                        content
+                    }
                 }
             }
         }

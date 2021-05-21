@@ -35,3 +35,8 @@
 .person + .person:before {
     content: ', ';
 }
+
+.description {
+    color: var(--black);
+    margin-top: 0.5rem;
+}

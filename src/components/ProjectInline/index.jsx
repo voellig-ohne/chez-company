@@ -2,8 +2,17 @@ import * as s from './style.module.css';
 import React from 'react';
 import { Link } from 'gatsby';
 
-export function ProjectInline({ slug, title, year, yearUntil, persons }) {
+export function ProjectInline({
+    slug,
+    title,
+    year,
+    yearUntil,
+    persons,
+    metaDescription,
+}) {
     const superTitle = year && yearUntil ? `${year} – ${yearUntil}` : year;
+    const description = metaDescription?.internal?.content;
+    console.log(description, metaDescription);
 
     return (
         <Link to={`/projekt/${slug}`} className={s.project}>
@@ -24,6 +33,7 @@ export function ProjectInline({ slug, title, year, yearUntil, persons }) {
                     ))}
                 </ul>
             )}
+            {description && <p className={s.description}>{description}</p>}
         </Link>
     );
 }
