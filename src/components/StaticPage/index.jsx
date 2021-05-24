@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import contentfulRichtTextToThml from '../contentfulRichTextToHtml';
+import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import { Page } from '../Page';
 
 export default function PersonPage({
@@ -14,7 +14,7 @@ export default function PersonPage({
             color="pink"
             metaDescription={metaDescription?.metaDescription}
         >
-            {contentfulRichtTextToThml(text)}
+            <ContentfulRichtTextToHtml source={text} />
         </Page>
     );
 }

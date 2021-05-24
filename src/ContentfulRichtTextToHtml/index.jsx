@@ -2,10 +2,11 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { BLOCKS } from '@contentful/rich-text-types';
 import React from 'react';
 import { graphql } from 'gatsby';
-import { ProjectInline } from './ProjectInline';
-import { PersonInline } from './PersonInline';
+import { ProjectInline } from '../components/ProjectInline';
+import { PersonInline } from '../components/PersonInline';
+import * as s from './style.module.css';
 
-export default function contentfulRichtTextToThml(source) {
+export default function ContentfulRichtTextToHtml({ source }) {
     if (!source) return null;
 
     const options = {
@@ -27,7 +28,7 @@ export default function contentfulRichtTextToThml(source) {
         },
     };
 
-    return renderRichText(source, options);
+    return <div className={s.container}>{renderRichText(source, options)}</div>;
 }
 
 export const markdownFrontmatterFragment = graphql`

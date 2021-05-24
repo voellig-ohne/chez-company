@@ -1,4 +1,4 @@
-import contentfulRichtTextToThml from '../contentfulRichTextToHtml';
+import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { IFrameEmbed, useImagesForAnimation } from '../YoutubeEmbed';
@@ -64,7 +64,9 @@ export function Fragment({
                     ))}
                 </div>
             )}
-            <div>{contentfulRichtTextToThml(description)}</div>
+            <div>
+                <ContentfulRichtTextToHtml source={description} />
+            </div>
         </>
     );
 }

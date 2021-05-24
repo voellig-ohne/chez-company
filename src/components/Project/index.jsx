@@ -1,4 +1,4 @@
-import contentfulRichtTextToThml from '../contentfulRichTextToHtml';
+import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import * as s from './style.module.css';
 import React, { useRef, useState } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
@@ -15,7 +15,9 @@ export function Project({ description, tags, fragments, persons, supportOrg }) {
                     <TagItem key={tag.id} {...tag} />
                 ))}
             </div>
-            <div>{contentfulRichtTextToThml(description)}</div>
+            <div>
+                <ContentfulRichtTextToHtml source={description} />
+            </div>
             <Fragments fragments={fragments} />
 
             <h2 className={s.heading}>Mitwirkende</h2>

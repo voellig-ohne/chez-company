@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import contentfulRichtTextToThml from '../contentfulRichTextToHtml';
+import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import { Page } from '../Page';
 
 export default function PersonPage({
@@ -36,7 +36,7 @@ export default function PersonPage({
                 alt={`Bild von ${name}`}
                 image={image?.gatsbyImageData}
             />
-            {contentfulRichtTextToThml(description)}
+            <ContentfulRichtTextToHtml source={description} />
         </Page>
     );
 }
