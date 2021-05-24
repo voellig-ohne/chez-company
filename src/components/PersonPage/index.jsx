@@ -14,22 +14,22 @@ export default function PersonPage({
         <Page superTitle={profession} title={name} color="pink">
             <Helmet>
                 {image && (
-                    <>
-                        <meta
-                            property="og:image"
-                            content={image?.gatsbyImageData?.images?.fallback?.src.replace(
-                                '//',
-                                'https://'
-                            )}
-                        />
-                        <meta
-                            name="twitter:image"
-                            content={image?.gatsbyImageData?.images?.fallback?.src.replace(
-                                '//',
-                                'https://'
-                            )}
-                        />
-                    </>
+                    <meta
+                        property="og:image"
+                        content={image?.gatsbyImageData?.images?.fallback?.src.replace(
+                            '//',
+                            'https://'
+                        )}
+                    />
+                )}
+                {image && (
+                    <meta
+                        name="twitter:image"
+                        content={image?.gatsbyImageData?.images?.fallback?.src.replace(
+                            '//',
+                            'https://'
+                        )}
+                    />
                 )}
             </Helmet>
             <GatsbyImage

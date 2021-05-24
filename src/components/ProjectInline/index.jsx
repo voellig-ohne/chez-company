@@ -12,7 +12,6 @@ export function ProjectInline({
 }) {
     const superTitle = year && yearUntil ? `${year} – ${yearUntil}` : year;
     const description = metaDescription?.internal?.content;
-    console.log(description, metaDescription);
 
     return (
         <Link to={`/projekt/${slug}`} className={s.project}>
