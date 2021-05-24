@@ -288,6 +288,11 @@ function formatGraphData(projects) {
 
     projects.forEach(({ node }) => {
         const projectNode = node;
+
+        if (projectNode.hideInGraph) {
+            return;
+        }
+
         projectNode.type = 'project';
         graphData.nodes.push(projectNode);
 

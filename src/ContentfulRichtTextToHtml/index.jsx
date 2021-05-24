@@ -4,6 +4,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { ProjectInline } from '../components/ProjectInline';
 import { PersonInline } from '../components/PersonInline';
+import { MetaDataInline } from '../components/MetaDataInline';
 import * as s from './style.module.css';
 
 export default function ContentfulRichtTextToHtml({ source }) {
@@ -17,12 +18,19 @@ export default function ContentfulRichtTextToHtml({ source }) {
 
         renderNode: {
             [BLOCKS.EMBEDDED_ENTRY]: node => {
+                console.log(node.data?.target?.internal?.type);
                 if (node.data?.target?.internal?.type === 'ContentfulProject') {
                     return <ProjectInline {...node.data.target} />;
                 }
                 if (node.data?.target?.internal?.type === 'ContentfulPerson') {
                     return <PersonInline {...node.data.target} />;
                 }
+                if (
+                    node.data?.target?.internal?.type === 'ContentfulMetaData'
+                ) {
+                    return <MetaDataInline {...node.data.target} />;
+                }
+
                 return null;
             },
         },
@@ -67,9 +75,65 @@ export const markdownFrontmatterFragment = graphql`
                     gatsbyImageData(width: 200)
                 }
             }
+            ... on ContentfulMetaData {
+                internal {
+                    type
+                }
+                what
+                who {
+                    who
+                }
+            }
         }
     }
-    fragment textStuff2 on ContentfulFragmentTextDescription {
+    fragment textContentfulProject on ContentfulProjectDescription {
+        raw
+        references {
+            ... on ContentfulProject {
+                contentful_id
+                internal {
+                    type
+                }
+                title
+                slug
+                year
+                yearUntil
+                persons {
+                    id
+                    name
+                }
+                metaDescription {
+                    internal {
+                        content
+                    }
+                }
+            }
+            ... on ContentfulPerson {
+                contentful_id
+                internal {
+                    type
+                }
+                name
+                profession
+                slug
+                image {
+                    id
+                    gatsbyImageData(width: 200)
+                }
+            }
+            ... on ContentfulMetaData {
+                contentful_id
+                internal {
+                    type
+                }
+                what
+                who {
+                    who
+                }
+            }
+        }
+    }
+    fragment textContentfulFragment on ContentfulFragmentTextDescription {
         raw
         references {
             ... on ContentfulProject {
@@ -90,6 +154,10 @@ export const markdownFrontmatterFragment = graphql`
                         content
                     }
                 }
+                # ... on ContentfulMetaData {
+                #     who
+                #     what
+                # }
             }
         }
     }

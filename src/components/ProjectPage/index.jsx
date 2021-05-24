@@ -32,7 +32,7 @@ export const pageQuery = graphql`
                 metaDescription
             }
             description {
-                raw
+                ...textContentfulProject
             }
             tags {
                 id

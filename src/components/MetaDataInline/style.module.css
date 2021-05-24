@@ -1,0 +1,29 @@
+.container {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 12rem 1fr;
+    margin: 1rem 0;
+    color: var(--red);
+}
+
+.container + .container {
+    margin-top: -0.5rem;
+}
+
+.what {
+    text-align: right;
+}
+
+@media (max-width: 600px) {
+    .container {
+        display: block;
+    }
+
+    .what {
+        text-align: left;
+    }
+
+    .who {
+        padding-left: 1rem;
+    }
+}
