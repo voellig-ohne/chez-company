@@ -17,6 +17,7 @@ export default function Layout({ children, path }) {
             storerLink,
             storerText2,
             storerLink2,
+            projectFocus,
         },
     } = useStaticQuery(graphql`
         query GlobalStuffQuery {
@@ -36,6 +37,9 @@ export default function Layout({ children, path }) {
                 storerLink
                 storerText2
                 storerLink2
+                projectFocus {
+                    id
+                }
             }
         }
     `);
@@ -71,7 +75,7 @@ export default function Layout({ children, path }) {
                 />
             </Helmet>
             <div className={s.graph}>
-                <ProjectGraph />
+                <ProjectGraph projectFocus={projectFocus?.id} />
             </div>
             <Navigation />
             {storerText && storerLink && (

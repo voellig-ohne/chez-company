@@ -1,7 +1,7 @@
 import { ForceGraph2D } from 'react-force-graph';
 import React, { useEffect, useRef, useState } from 'react';
 import { useProjects } from '../../hooks/useProjects';
-import { sortBy } from 'lodash';
+import { some, sortBy } from 'lodash';
 import { navigate } from 'gatsby-link';
 import { getRandomTagColors, getRoute } from '../util';
 import { prefetchPathname } from 'gatsby';
@@ -30,7 +30,7 @@ const graphStyles = {
 const borderWidth = 0.5;
 const shadowDistance = 1;
 
-export function ProjectGraph() {
+export function ProjectGraph({ projectFocus }) {
     const projects = useProjects();
     const [hasCenteredOnce, setHasCenteredOnce] = useState(false);
     const [isHovering, setIsHovering] = useState(0);
@@ -55,6 +55,8 @@ export function ProjectGraph() {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    console.log('projectFocus', projectFocus);
 
     return (
         <div
@@ -114,7 +116,13 @@ export function ProjectGraph() {
                     onEngineStop={() => {
                         if (!hasCenteredOnce && window.innerWidth > 800) {
                             setHasCenteredOnce(true);
-                            graphRef.current.zoomToFit(2000, -800);
+                            graphRef.current.zoomToFit(2000, 100, node => {
+                                return shouldBeInView(
+                                    projectFocus,
+                                    node,
+                                    graphData
+                                );
+                            });
                         }
                     }}
                     onNodeHover={(node, prevNode, ctx) => {
@@ -143,6 +151,13 @@ export function ProjectGraph() {
             )}
         </div>
     );
+}
+
+function shouldBeInView(nodeIdToFocus, currentNode, graphData) {
+    return some(graphData.links, {
+        source: { id: nodeIdToFocus },
+        target: { id: currentNode.id },
+    });
 }
 
 function drawImageTag(node, ctx) {
