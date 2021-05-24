@@ -81,6 +81,7 @@ export const useProjects = () => {
                                     }
                                 }
                             }
+                            hideInGraph
                         }
                     }
                 }
