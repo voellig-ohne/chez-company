@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import { Page } from '../Page';
 import { ProjectInline } from '../ProjectInline';
+import { SubHeading } from '../SubHeading';
 
 export default function PersonPage({
     data: {
@@ -41,7 +42,7 @@ export default function PersonPage({
             <ContentfulRichtTextToHtml source={description} />
             {projects && (
                 <>
-                    <h2>Projekte</h2>
+                    <SubHeading>Projekte</SubHeading>
                     {projects.map(({ node }) => (
                         <ProjectInline {...node} />
                     ))}

@@ -6,6 +6,7 @@ import { Link } from 'gatsby';
 import { VideoPreview } from '../YoutubeEmbed';
 import { getRandomTagColors, getRoute } from '../util';
 import { PersonInline } from '../PersonInline';
+import { SubHeading } from '../SubHeading';
 
 export function Project({ description, tags, fragments, persons, supportOrg }) {
     return (
@@ -20,7 +21,7 @@ export function Project({ description, tags, fragments, persons, supportOrg }) {
             </div>
             <Fragments fragments={fragments} />
 
-            <h2 className={s.heading}>Mitwirkende</h2>
+            <SubHeading>Mitwirkende</SubHeading>
             <div className={s.persons}>
                 {persons?.map(person => (
                     <PersonInline key={person.id} {...person} />
@@ -29,7 +30,7 @@ export function Project({ description, tags, fragments, persons, supportOrg }) {
 
             {supportOrg?.length && (
                 <>
-                    <h2 className={s.heading}>Unterstützer*innen</h2>
+                    <SubHeading>Unterstützer*innen</SubHeading>
                     <SupportOrganisations orgs={supportOrg} />
                 </>
             )}
