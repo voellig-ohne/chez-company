@@ -44,7 +44,7 @@ export default function PersonPage({
                 <>
                     <SubHeading>Projekte</SubHeading>
                     {projects.map(({ node }) => (
-                        <ProjectInline {...node} />
+                        <ProjectInline key={node.id} {...node} />
                     ))}
                 </>
             )}
@@ -76,6 +76,7 @@ export const pageQuery = graphql`
                     year
                     yearUntil
                     slug
+                    id
                     metaDescription {
                         internal {
                             content
@@ -83,6 +84,7 @@ export const pageQuery = graphql`
                     }
                     persons {
                         name
+                        id
                     }
                 }
             }
