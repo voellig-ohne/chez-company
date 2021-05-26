@@ -4,10 +4,12 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import { Page } from '../Page';
+import { ProjectInline } from '../ProjectInline';
 
 export default function PersonPage({
     data: {
         contentfulPerson: { name, description, image, profession },
+        allContentfulProject: { edges: projects },
     },
 }) {
     return (
@@ -37,6 +39,14 @@ export default function PersonPage({
                 image={image?.gatsbyImageData}
             />
             <ContentfulRichtTextToHtml source={description} />
+            {projects && (
+                <>
+                    <h2>Projekte</h2>
+                    {projects.map(({ node }) => (
+                        <ProjectInline {...node} />
+                    ))}
+                </>
+            )}
         </Page>
     );
 }
@@ -53,6 +63,27 @@ export const pageQuery = graphql`
             image {
                 id
                 gatsbyImageData(width: 800)
+            }
+        }
+        allContentfulProject(
+            filter: { persons: { elemMatch: { id: { eq: $id } } } }
+            sort: { fields: year, order: DESC }
+        ) {
+            edges {
+                node {
+                    title
+                    year
+                    yearUntil
+                    slug
+                    metaDescription {
+                        internal {
+                            content
+                        }
+                    }
+                    persons {
+                        name
+                    }
+                }
             }
         }
     }
