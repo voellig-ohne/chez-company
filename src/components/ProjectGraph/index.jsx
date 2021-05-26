@@ -71,7 +71,7 @@ export function ProjectGraph({ projectFocusId, path }) {
         if (nodeIdToFocus) {
             setTimeout(
                 () => {
-                    graphRef.current.zoomToFit(2000, 200, node => {
+                    graphRef.current.zoomToFit(2000, 50, node => {
                         return shouldBeInViewById(
                             nodeIdToFocus,
                             node,
