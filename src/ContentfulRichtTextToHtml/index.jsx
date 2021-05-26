@@ -18,7 +18,6 @@ export default function ContentfulRichtTextToHtml({ source }) {
 
         renderNode: {
             [BLOCKS.EMBEDDED_ENTRY]: node => {
-                console.log(node.data?.target?.internal?.type);
                 if (node.data?.target?.internal?.type === 'ContentfulProject') {
                     return <ProjectInline {...node.data.target} />;
                 }
