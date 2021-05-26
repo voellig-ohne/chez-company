@@ -30,7 +30,7 @@ const graphStyles = {
 const borderWidth = 0.5;
 const shadowDistance = 1;
 
-export function ProjectGraph({ projectFocus }) {
+export function ProjectGraph({ projectFocusId, path }) {
     const projects = useProjects();
     const [hasCenteredOnce, setHasCenteredOnce] = useState(false);
     const [isHovering, setIsHovering] = useState(0);
@@ -56,7 +56,37 @@ export function ProjectGraph({ projectFocus }) {
         };
     }, []);
 
-    console.log('projectFocus', projectFocus);
+    // zooming around on pageload or when a project is selected
+    useEffect(() => {
+        let nodeIdToFocus;
+
+        nodeIdToFocus = graphData.nodes.find(
+            node => node.slug && getRoute(node) === path
+        )?.id;
+
+        if (path === '/' && !hasCenteredOnce) {
+            nodeIdToFocus = projectFocusId;
+        }
+
+        if (nodeIdToFocus) {
+            setTimeout(
+                () => {
+                    graphRef.current.zoomToFit(2000, 200, node => {
+                        return shouldBeInViewById(
+                            nodeIdToFocus,
+                            node,
+                            graphData
+                        );
+                    });
+                },
+                hasCenteredOnce ? 0 : 4000
+            );
+            setHasCenteredOnce(true);
+        }
+
+        // dont actually want to run when hasCenteredOnce is updated
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [path, graphData]);
 
     return (
         <div
@@ -113,18 +143,6 @@ export function ProjectGraph({ projectFocus }) {
                         }
                     }}
                     cooldownTime={5000}
-                    onEngineStop={() => {
-                        if (!hasCenteredOnce && window.innerWidth > 800) {
-                            setHasCenteredOnce(true);
-                            graphRef.current.zoomToFit(2000, 100, node => {
-                                return shouldBeInView(
-                                    projectFocus,
-                                    node,
-                                    graphData
-                                );
-                            });
-                        }
-                    }}
                     onNodeHover={(node, prevNode, ctx) => {
                         if (node) {
                             node.__hovered = true;
@@ -153,11 +171,18 @@ export function ProjectGraph({ projectFocus }) {
     );
 }
 
-function shouldBeInView(nodeIdToFocus, currentNode, graphData) {
-    return some(graphData.links, {
-        source: { id: nodeIdToFocus },
-        target: { id: currentNode.id },
-    });
+function shouldBeInViewById(nodeIdToFocus, currentNode, graphData) {
+    return (
+        currentNode.id === nodeIdToFocus ||
+        some(graphData.links, {
+            source: { id: nodeIdToFocus },
+            target: { id: currentNode.id },
+        }) ||
+        some(graphData.links, {
+            source: { id: currentNode.id },
+            target: { id: nodeIdToFocus },
+        })
+    );
 }
 
 function drawImageTag(node, ctx) {

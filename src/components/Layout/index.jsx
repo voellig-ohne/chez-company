@@ -75,7 +75,7 @@ export default function Layout({ children, path }) {
                 />
             </Helmet>
             <div className={s.graph}>
-                <ProjectGraph projectFocus={projectFocus?.id} />
+                <ProjectGraph projectFocusId={projectFocus?.id} path={path} />
             </div>
             <Navigation />
             {storerText && storerLink && (
