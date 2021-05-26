@@ -64,7 +64,7 @@ export function ProjectGraph({ projectFocusId, path }) {
             node => node.slug && getRoute(node) === path
         )?.id;
 
-        if (path === '/' && !hasCenteredOnce) {
+        if (!nodeIdToFocus && !hasCenteredOnce) {
             nodeIdToFocus = projectFocusId;
         }
 
