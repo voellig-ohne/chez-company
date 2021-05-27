@@ -67,7 +67,10 @@ export const pageQuery = graphql`
             }
         }
         allContentfulProject(
-            filter: { persons: { elemMatch: { id: { eq: $id } } } }
+            filter: {
+                persons: { elemMatch: { id: { eq: $id } } }
+                hideInGraph: { ne: true }
+            }
             sort: { fields: year, order: DESC }
         ) {
             edges {
