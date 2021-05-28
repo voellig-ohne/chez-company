@@ -20,7 +20,8 @@ export default function FragmentPage({
         contentfulFragmentAudio;
 
     const projects = allContentfulProject.edges.filter(
-        ({ node: { fragments } }) => some(fragments, { id: fragment.id })
+        ({ node: { fragments, hideInGraph } }) =>
+            some(fragments, { id: fragment.id }) && !hideInGraph
     );
 
     return (
@@ -111,6 +112,7 @@ export const pageQuery = graphql`
                             id
                         }
                     }
+                    hideInGraph
                 }
             }
         }
