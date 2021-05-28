@@ -30,8 +30,8 @@
 }
 
 .fragmentLink {
-    color: var(--fontColor);
-    background: var(--mainColor);
+    color: var(--red);
+    background: var(--blue);
     text-decoration: none;
     padding: 1rem;
     display: block;
