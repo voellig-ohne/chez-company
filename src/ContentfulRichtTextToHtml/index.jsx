@@ -134,30 +134,30 @@ export const markdownFrontmatterFragment = graphql`
     }
     fragment textContentfulFragment on ContentfulFragmentTextDescription {
         raw
-        references {
-            ... on ContentfulProject {
-                contentful_id
-                title
-                slug
-                year
-                yearUntil
-                internal {
-                    type
-                }
-                persons {
-                    id
-                    name
-                }
-                metaDescription {
-                    internal {
-                        content
-                    }
-                }
-                # ... on ContentfulMetaData {
-                #     who
-                #     what
-                # }
-            }
-        }
+        # references {
+        #     ... on ContentfulProject {
+        #         contentful_id
+        #         title
+        #         slug
+        #         year
+        #         yearUntil
+        #         internal {
+        #             type
+        #         }
+        #         persons {
+        #             id
+        #             name
+        #         }
+        #         metaDescription {
+        #             internal {
+        #                 content
+        #             }
+        #         }
+        #         # ... on ContentfulMetaData {
+        #         #     who
+        #         #     what
+        #         # }
+        #     }
+        # }
     }
 `;
