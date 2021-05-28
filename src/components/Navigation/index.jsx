@@ -3,6 +3,23 @@ import * as s from './style.module.css';
 import Logo from './logo-without-shadow.inline.svg';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { getRoute } from '../util';
+import FacebookIcon from './facebook-brands.inline.svg';
+import InstagramIcon from './instagram-brands.inline.svg';
+
+const SOCIAL_MEDIA_CHANNELS = [
+    {
+        title: 'Facebook',
+        type: 'facebook',
+        link: 'https://www.facebook.com/ChezIcke/',
+        Icon: FacebookIcon,
+    },
+    {
+        title: 'Instagram',
+        type: 'instagram',
+        link: 'https://www.instagram.com/p/CPQBBkUnfiG/',
+        Icon: InstagramIcon,
+    },
+];
 
 export default function Navigation() {
     const {
@@ -79,6 +96,21 @@ export default function Navigation() {
                     </Link>
                 ))}
             </nav>
+            <div className={s.social}>
+                {SOCIAL_MEDIA_CHANNELS.map(({ title, link, type, Icon }) => (
+                    <a
+                        href={link}
+                        key={type}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={title}
+                        title={title}
+                        className={s.socialLink}
+                    >
+                        <Icon className={s.socialIcon} />
+                    </a>
+                ))}
+            </div>
         </div>
     );
 }

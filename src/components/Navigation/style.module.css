@@ -54,3 +54,25 @@
         width: auto;
     }
 }
+
+.social {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.socialLink {
+    pointer-events: all;
+    color: var(--red);
+    filter: drop-shadow(var(--sz) var(--sz) 0 var(--yellow));
+}
+
+.socialLink:hover .socialIcon {
+    filter: drop-shadow(var(--sz) var(--sz) 0 var(--yellow));
+}
+
+.socialIcon {
+    height: 2rem;
+}
