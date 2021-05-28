@@ -15,20 +15,20 @@
 
 .superTitle > span,
 .title > span {
-    color: var(--fontColor);
-    background: var(--mainColor);
+    color: var(--blue);
+    background: var(--pink);
 }
 
 .project:hover .superTitle > span,
 .project:hover .person,
 .project:hover .description > span,
 .project:hover .title > span {
-    background: var(--mainColor);
+    background: var(--pink);
 }
 
 .project:hover .person,
 .project:hover .description > span {
-    box-shadow: 0 -0.3rem 0 var(--mainColor);
+    box-shadow: 0 -0.3rem 0 var(--pink);
 }
 
 .persons {
