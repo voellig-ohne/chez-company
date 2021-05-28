@@ -60,6 +60,7 @@
     top: 1rem;
     right: 1rem;
     display: flex;
+    align-items: flex-end;
     gap: 1rem;
 }
 
@@ -75,4 +76,15 @@
 
 .socialIcon {
     height: 2rem;
+}
+
+@media (max-width: 500px) {
+    .social {
+        height: 4rem;
+        gap: 0.5rem;
+    }
+
+    .socialIcon {
+        height: 1.5rem;
+    }
 }
