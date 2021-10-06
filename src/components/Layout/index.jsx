@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
 import Favicon from './favicon.png';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 
-export default function Layout({ children, path }) {
+export default function Layout({ children, location }) {
     const {
         contentfulGlobal: {
             title,
@@ -54,7 +54,7 @@ export default function Layout({ children, path }) {
                 />
                 <link
                     rel="canonical"
-                    href={`${process.env.GATSBY_ROOT_URL}${path}`}
+                    href={`${process.env.GATSBY_ROOT_URL}${location.pathname}`}
                 />
                 <meta name="description" content={description?.description} />
                 <meta property="og:site_name" content={title} />
@@ -79,7 +79,10 @@ export default function Layout({ children, path }) {
                 />
             </Helmet>
             <div className={s.graph}>
-                <ProjectGraph projectFocusId={projectFocus?.id} path={path} />
+                <ProjectGraph
+                    projectFocusId={projectFocus?.id}
+                    path={location.pathname}
+                />
             </div>
             <Navigation />
             {storerText && storerLink && (
@@ -115,7 +118,7 @@ export default function Layout({ children, path }) {
                     </Link>
                 </div>
             )}
-            {path !== '/' && children}
+            {location.pathname !== '/' && children}
         </>
     );
 }
