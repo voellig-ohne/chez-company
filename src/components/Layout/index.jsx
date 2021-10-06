@@ -73,6 +73,10 @@ export default function Layout({ children, path }) {
                     name="twitter:image"
                     content={ogimage?.resize?.src.replace('//', 'https://')}
                 />
+                <meta
+                    name="google-site-verification"
+                    content="ChdOTNNjdpoi-k72TajfXJL7Ua1Zast8ulVsR_HH9dI"
+                />
             </Helmet>
             <div className={s.graph}>
                 <ProjectGraph projectFocusId={projectFocus?.id} path={path} />
