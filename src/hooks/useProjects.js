@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 export const useProjects = () => {
     const {
         allContentfulProject: { edges },
-    } = useStaticQuery<GatsbyTypes.ProjectsQuery>(
+    } = useStaticQuery(
         graphql`
             query Projects {
                 allContentfulProject {
@@ -28,7 +28,8 @@ export const useProjects = () => {
                                 image {
                                     id
                                     resize(width: 200) {
-                                        aspectRatio
+                                        width
+                                        height
                                         src
                                     }
                                 }
@@ -45,7 +46,8 @@ export const useProjects = () => {
                                         images {
                                             id
                                             resize(width: 200) {
-                                                aspectRatio
+                                                width
+                                                height
                                                 src
                                             }
                                         }
@@ -76,7 +78,8 @@ export const useProjects = () => {
                                 id
                                 image {
                                     resize(width: 200) {
-                                        aspectRatio
+                                        width
+                                        height
                                         src
                                     }
                                 }

@@ -54,3 +54,7 @@ exports.getRandomTagColors = function (seed = '') {
 
     return style;
 };
+
+exports.getRatio = function ({ width, height }) {
+    return width / height;
+};

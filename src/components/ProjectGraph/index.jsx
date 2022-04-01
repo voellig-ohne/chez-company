@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useProjects } from '../../hooks/useProjects';
 import { some, sortBy } from 'lodash';
 import { navigate } from 'gatsby-link';
-import { getRandomTagColors, getRoute } from '../util';
+import { getRandomTagColors, getRatio, getRoute } from '../util';
 import { prefetchPathname } from 'gatsby';
 
 const graphStyles = {
@@ -354,7 +354,7 @@ function formatGraphData(projects) {
 
                             return {
                                 el,
-                                ratio: image.resize.aspectRatio,
+                                ratio: getRatio(image.resize),
                                 rotation: Math.random() * 0.4 - 0.2,
                                 hoverX: Math.random() * 40 - 20,
                                 hoverY: Math.random() * 40 - 20,
@@ -381,7 +381,7 @@ function formatGraphData(projects) {
             if (!graphData.nodes.find(node => node.id === tag.id)) {
                 if (image) {
                     tagNode.tagImageEl = new Image();
-                    tagNode.ratio = tagNode?.image?.resize?.aspectRatio;
+                    tagNode.ratio = getRatio(tagNode?.image?.resize);
 
                     tagNode.tagImageEl.src = image;
                 }
