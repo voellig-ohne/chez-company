@@ -45,7 +45,7 @@ export const useProjects = () => {
                                         slug
                                         images {
                                             id
-                                            resize(width: 200) {
+                                            resize(width: 400) {
                                                 width
                                                 height
                                                 src
