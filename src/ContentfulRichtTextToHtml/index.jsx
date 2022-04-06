@@ -5,6 +5,7 @@ import { graphql } from 'gatsby';
 import { ProjectInline } from '../components/ProjectInline';
 import { PersonInline } from '../components/PersonInline';
 import { MetaDataInline } from '../components/MetaDataInline';
+import { FragmentItemInline } from '../components/FragmentInline';
 import * as s from './style.module.css';
 
 export default function ContentfulRichtTextToHtml({ source }) {
@@ -28,6 +29,13 @@ export default function ContentfulRichtTextToHtml({ source }) {
                     node.data?.target?.internal?.type === 'ContentfulMetaData'
                 ) {
                     return <MetaDataInline {...node.data.target} />;
+                }
+
+                if (
+                    node.data?.target?.internal?.type ===
+                    'ContentfulFragmentText'
+                ) {
+                    return <FragmentItemInline {...node.data.target} />;
                 }
 
                 return null;
@@ -83,6 +91,20 @@ export const markdownFrontmatterFragment = graphql`
                     who
                 }
             }
+            ... on ContentfulFragmentText {
+                contentful_id
+                __typename
+                internal {
+                    type
+                }
+                id
+                title
+                slug
+                images {
+                    id
+                    gatsbyImageData(layout: CONSTRAINED, width: 200)
+                }
+            }
         }
     }
     fragment textContentfulProject on ContentfulProjectDescription {
@@ -130,34 +152,39 @@ export const markdownFrontmatterFragment = graphql`
                     who
                 }
             }
+            ... on ContentfulFragmentText {
+                contentful_id
+                __typename
+                internal {
+                    type
+                }
+                id
+                title
+                slug
+                images {
+                    id
+                    gatsbyImageData(layout: CONSTRAINED, width: 200)
+                }
+            }
         }
     }
     fragment textContentfulFragment on ContentfulFragmentTextDescription {
         raw
-        # references {
-        #     ... on ContentfulProject {
-        #         contentful_id
-        #         title
-        #         slug
-        #         year
-        #         yearUntil
-        #         internal {
-        #             type
-        #         }
-        #         persons {
-        #             id
-        #             name
-        #         }
-        #         metaDescription {
-        #             internal {
-        #                 content
-        #             }
-        #         }
-        #         # ... on ContentfulMetaData {
-        #         #     who
-        #         #     what
-        #         # }
-        #     }
-        # }
+        references {
+            ... on ContentfulFragmentText {
+                contentful_id
+                __typename
+                internal {
+                    type
+                }
+                id
+                title
+                slug
+                images {
+                    id
+                    gatsbyImageData(layout: CONSTRAINED, width: 200)
+                }
+            }
+        }
     }
 `;

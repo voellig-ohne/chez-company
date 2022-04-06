@@ -115,7 +115,7 @@ function Fragments({ fragments }) {
     );
 }
 
-function FragmentItem(fragment) {
+export function FragmentItem(fragment) {
     const audioref = useRef();
     if (!fragment) return null;
 

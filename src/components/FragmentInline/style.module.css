@@ -1,0 +1,7 @@
+.container {
+    max-width: 15rem;
+}
+
+.container + .container {
+    margin-top: 1rem;
+}
