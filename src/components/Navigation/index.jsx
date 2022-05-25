@@ -30,8 +30,11 @@ const SOCIAL_MEDIA_CHANNELS = [
 
 export default function Navigation() {
     const {
-        contentfulGlobal: { menu },
+        contentfulGlobal: { menu, menuBottom },
     } = useStaticQuery(graphql`
+        fragment menuItems on ContentfulGlobal {
+            title
+        }
         query MenuQuery {
             contentfulGlobal(
                 id: { eq: "7a2518b6-52e7-59d7-b0a0-1a812f2980b9" }
@@ -82,6 +85,15 @@ export default function Navigation() {
                         }
                     }
                 }
+                menuBottom {
+                    ... on ContentfulPage {
+                        title
+                        slug
+                        internal {
+                            type
+                        }
+                    }
+                }
             }
         }
     `);
@@ -93,6 +105,18 @@ export default function Navigation() {
             </Link>
             <nav className={s.nav}>
                 {menu.map(item => (
+                    <Link
+                        key={item.slug}
+                        className={s.link}
+                        activeClassName={s.active}
+                        to={getRoute(item)}
+                    >
+                        {item.title}
+                    </Link>
+                ))}
+            </nav>
+            <nav className={s.navBottom}>
+                {menuBottom.map(item => (
                     <Link
                         key={item.slug}
                         className={s.link}

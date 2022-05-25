@@ -9,6 +9,7 @@
     gap: 1rem;
     padding: 1rem;
     pointer-events: none;
+    z-index: 1;
 }
 
 .nav {
@@ -17,6 +18,12 @@
     row-gap: 0.5rem;
     column-gap: 1.5rem;
     width: max-content;
+}
+
+.navBottom {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
 }
 
 .link {
