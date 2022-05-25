@@ -33,7 +33,7 @@ export default function FragmentPage({
             blankPage={fragment.blankPage}
         >
             <Fragment {...fragment} />
-            {projects.length && (
+            {!!projects.length && (
                 <>
                     <SubHeading>Projekte</SubHeading>
                     {projects.map(({ node }) => (

@@ -16,7 +16,7 @@ export function Fragment({
     return (
         <>
             <Helmet>
-                {images?.length && (
+                {!!images?.length && (
                     <meta
                         property="og:image"
                         content={images[0].gatsbyImageData?.images?.fallback?.src.replace(
@@ -31,7 +31,7 @@ export function Fragment({
                         content={animationImages.length && animationImages[0]}
                     />
                 )}
-                {images?.length && (
+                {!!images?.length && (
                     <meta
                         name="twitter:image"
                         content={images[0].gatsbyImageData?.images?.fallback?.src.replace(
@@ -53,7 +53,7 @@ export function Fragment({
             {audio?.file?.url && (
                 <audio controls autoPlay src={audio.file.url} />
             )}
-            {images?.length && (
+            {!!images?.length && (
                 <div className={s.images}>
                     {images.map(image => (
                         <GatsbyImage

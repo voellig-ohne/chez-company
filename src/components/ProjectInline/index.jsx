@@ -23,7 +23,7 @@ export function ProjectInline({
             <h2 className={s.title}>
                 <span>{title}</span>
             </h2>
-            {persons?.length && (
+            {!!persons?.length && (
                 <ul className={s.persons}>
                     {persons.map(person => (
                         <li className={s.person} key={person.id}>
