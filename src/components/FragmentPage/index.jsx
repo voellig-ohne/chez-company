@@ -83,7 +83,10 @@ export const pageQuery = graphql`
                 metaDescription
             }
         }
-        allContentfulProject(sort: { fields: year, order: DESC }) {
+        allContentfulProject(
+            filter: { node_locale: { eq: "de" } }
+            sort: { fields: year, order: DESC }
+        ) {
             edges {
                 node {
                     id

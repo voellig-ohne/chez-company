@@ -34,7 +34,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
         resolve(
             graphql(`
                 {
-                    allContentfulProject {
+                    allContentfulProject(
+                        filter: { node_locale: { eq: "de" } }
+                    ) {
                         edges {
                             node {
                                 internal {

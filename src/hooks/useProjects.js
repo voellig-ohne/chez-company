@@ -6,7 +6,7 @@ export const useProjects = () => {
     } = useStaticQuery(
         graphql`
             query Projects {
-                allContentfulProject {
+                allContentfulProject(filter: { node_locale: { eq: "de" } }) {
                     edges {
                         node {
                             internal {
