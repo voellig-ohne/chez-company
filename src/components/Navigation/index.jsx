@@ -5,8 +5,15 @@ import { graphql, Link, useStaticQuery } from 'gatsby';
 import { getRoute } from '../util';
 import FacebookIcon from './facebook-brands.inline.svg';
 import InstagramIcon from './instagram-brands.inline.svg';
+import TwitchIcon from './twitch-brands.inline.svg';
 
 const SOCIAL_MEDIA_CHANNELS = [
+    {
+        title: 'Twitch',
+        type: 'twitch',
+        link: 'https://www.twitch.tv/chezcompany',
+        Icon: TwitchIcon,
+    },
     {
         title: 'Facebook',
         type: 'facebook',

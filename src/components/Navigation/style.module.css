@@ -76,6 +76,7 @@
 
 .socialIcon {
     height: 2rem;
+    fill: currentColor;
 }
 
 @media (max-width: 500px) {
