@@ -70,7 +70,6 @@ export const pageQuery = graphql`
             filter: {
                 persons: { elemMatch: { id: { eq: $id } } }
                 hideInGraph: { ne: true }
-                node_locale: { eq: "de" }
             }
             sort: { fields: year, order: DESC }
         ) {
