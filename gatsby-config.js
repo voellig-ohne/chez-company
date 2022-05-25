@@ -9,17 +9,17 @@ module.exports = {
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
         'gatsby-plugin-react-helmet',
-        {
-            resolve: `gatsby-plugin-typegen`,
-            options: {
-                emitSchema: {
-                    'src/__generated__/gatsby-introspection.json': true,
-                },
-                emitPluginDocuments: {
-                    'src/__generated__/gatsby-plugin-documents.graphql': true,
-                },
-            },
-        },
+        // {
+        //     resolve: `gatsby-plugin-typegen`,
+        //     options: {
+        //         emitSchema: {
+        //             'src/__generated__/gatsby-introspection.json': true,
+        //         },
+        //         emitPluginDocuments: {
+        //             'src/__generated__/gatsby-plugin-documents.graphql': true,
+        //         },
+        //     },
+        // },
         {
             resolve: `gatsby-source-contentful`,
             options: {
