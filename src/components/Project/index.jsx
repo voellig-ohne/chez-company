@@ -8,7 +8,14 @@ import { getRandomTagColors, getRoute } from '../util';
 import { PersonInline } from '../PersonInline';
 import { SubHeading } from '../SubHeading';
 
-export function Project({ description, tags, fragments, persons, supportOrg }) {
+export function Project({
+    description,
+    tags,
+    fragments,
+    persons,
+    supportOrg,
+    location,
+}) {
     return (
         <>
             <div className={s.tags}>
@@ -131,6 +138,7 @@ export function FragmentItem(fragment) {
             onMouseLeave={() => {
                 audioref?.current?.pause();
             }}
+            state={{ goBack: true }}
         >
             <h1 className={s.fragmentHeading}>{fragment.title}</h1>
             {image && (

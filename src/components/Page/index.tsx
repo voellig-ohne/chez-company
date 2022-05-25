@@ -12,6 +12,7 @@ export function Page({
     superTitle,
     metaDescription,
     blankPage,
+    location,
 }: {
     children: React.ReactNode;
     color?: 'pink' | 'blue' | 'white';
@@ -20,6 +21,7 @@ export function Page({
     superTitle?: React.ReactNode;
     metaDescription?: string;
     blankPage?: boolean;
+    location?: any;
 }) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -75,6 +77,12 @@ export function Page({
                     to="/"
                     aria-label="zurück"
                     title="zurück"
+                    onClick={() => {
+                        if (location?.state.goBack) {
+                            navigate(-1);
+                            return false;
+                        }
+                    }}
                 ></Link>
                 <header className={s.header}>
                     {superTitle && (

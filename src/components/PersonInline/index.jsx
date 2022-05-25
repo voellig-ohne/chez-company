@@ -5,7 +5,11 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 
 export function PersonInline({ slug, name, profession, image }) {
     return (
-        <Link to={`/person/${slug}`} className={s.person}>
+        <Link
+            to={`/person/${slug}`}
+            state={{ goBack: true }}
+            className={s.person}
+        >
             {image?.gatsbyImageData && (
                 <GatsbyImage alt="" image={image?.gatsbyImageData} />
             )}

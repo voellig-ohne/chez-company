@@ -12,9 +12,15 @@ export default function PersonPage({
         contentfulPerson: { name, description, image, profession },
         allContentfulProject: { edges: projects },
     },
+    location,
 }) {
     return (
-        <Page superTitle={profession} title={name} color="pink">
+        <Page
+            superTitle={profession}
+            title={name}
+            color="pink"
+            location={location}
+        >
             <Helmet>
                 {image && (
                     <meta

@@ -14,7 +14,11 @@ export function ProjectInline({
     const description = metaDescription?.internal?.content;
 
     return (
-        <Link to={`/projekt/${slug}`} className={s.project}>
+        <Link
+            to={`/projekt/${slug}`}
+            className={s.project}
+            state={{ goBack: true }}
+        >
             {superTitle && (
                 <div className={s.superTitle}>
                     <span>{superTitle}</span>

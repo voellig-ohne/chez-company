@@ -3,7 +3,10 @@ import React from 'react';
 import { Page } from '../Page';
 import { Project } from '../Project';
 
-export default function ProjectPage({ data: { contentfulProject: project } }) {
+export default function ProjectPage({
+    data: { contentfulProject: project },
+    location,
+}) {
     const superTitle =
         project.year && project.yearUntil
             ? `${project.year} – ${project.yearUntil}`
@@ -15,8 +18,9 @@ export default function ProjectPage({ data: { contentfulProject: project } }) {
             superTitle={superTitle}
             metaDescription={project.metaDescription?.metaDescription}
             color="pink"
+            location={location}
         >
-            <Project {...project} />
+            <Project {...project} location={location} />
         </Page>
     );
 }

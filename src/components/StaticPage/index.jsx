@@ -3,16 +3,18 @@ import React from 'react';
 import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import { Page } from '../Page';
 
-export default function PersonPage({
+export default function StaticPage({
     data: {
         contentfulPage: { title, text, metaDescription },
     },
+    location,
 }) {
     return (
         <Page
             title={title}
             color="pink"
             metaDescription={metaDescription?.metaDescription}
+            location={location}
         >
             <ContentfulRichtTextToHtml source={text} />
         </Page>

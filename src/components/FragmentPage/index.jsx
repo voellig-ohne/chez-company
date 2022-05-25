@@ -13,6 +13,7 @@ export default function FragmentPage({
         contentfulFragmentAudio,
         allContentfulProject,
     },
+    location,
 }) {
     const fragment =
         contentfulFragmentText ||
@@ -31,6 +32,7 @@ export default function FragmentPage({
             title={fragment.title}
             metaDescription={fragment.metaDescription?.metaDescription}
             blankPage={fragment.blankPage}
+            location={location}
         >
             <Fragment {...fragment} />
             {!!projects.length && (
