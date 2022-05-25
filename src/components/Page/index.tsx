@@ -77,10 +77,10 @@ export function Page({
                     to="/"
                     aria-label="zurück"
                     title="zurück"
-                    onClick={() => {
+                    onClick={e => {
                         if (location?.state.goBack) {
                             navigate(-1);
-                            return false;
+                            e.preventDefault();
                         }
                     }}
                 ></Link>
