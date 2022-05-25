@@ -2,7 +2,7 @@ import { ForceGraph2D } from 'react-force-graph';
 import React, { useEffect, useRef, useState } from 'react';
 import { useProjects } from '../../hooks/useProjects';
 import { some, sortBy } from 'lodash';
-import { navigate } from 'gatsby-link';
+import { navigate } from 'gatsby';
 import { getRandomTagColors, getRatio, getRoute } from '../util';
 import { prefetchPathname } from 'gatsby';
 
