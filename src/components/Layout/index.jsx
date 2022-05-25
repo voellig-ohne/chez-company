@@ -50,7 +50,7 @@ export default function Layout({ children, location }) {
                 <link
                     rel="icon"
                     type="image/png"
-                    href={`${process.env.GATSBY_ROOT_URL}${Favicon}`}
+                    href={`${process.env.GATSBY_ROOT_URL}${Favicon}?v=2`}
                 />
                 <link
                     rel="canonical"
