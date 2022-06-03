@@ -37,7 +37,9 @@ export function DuoLangDescription({ de, en }) {
             {lang === 'de' ? (
                 <ContentfulRichtTextToHtml source={de} />
             ) : (
-                <ContentfulRichtTextToHtml source={en} />
+                <div lang="en">
+                    <ContentfulRichtTextToHtml source={en} />
+                </div>
             )}
         </>
     );

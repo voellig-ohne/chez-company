@@ -15,7 +15,6 @@ export default function PersonPage({
     },
     location,
 }) {
-    console.log(name, description, image, descriptionEn);
     return (
         <Page
             superTitle={profession}
