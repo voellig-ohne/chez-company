@@ -44,11 +44,15 @@ export function DuoLangDescription({ de, en }) {
 }
 
 function getDefaultLang() {
+    if (typeof window === 'undefined') {
+        return 'de';
+    }
     if (localStorage.getItem('lang')) {
         return localStorage.getItem('lang');
     }
     if (window.navigator.language.includes('de')) {
         return 'de';
     }
+
     return 'en';
 }
