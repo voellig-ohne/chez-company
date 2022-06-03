@@ -6,7 +6,12 @@ import clsx from 'clsx';
 const languages = ['de', 'en'];
 
 export function DuoLangDescription({ de, en }) {
-    const [lang, setLang] = useState('de');
+    const [lang, setLang] = useState(getDefaultLang());
+
+    function setLanguage(language) {
+        setLang(language);
+        localStorage.setItem('lang', language);
+    }
     if (!en) {
         return <ContentfulRichtTextToHtml source={de} />;
     }
@@ -21,7 +26,7 @@ export function DuoLangDescription({ de, en }) {
                             [s.buttonActive]: lang === buttonLang,
                         })}
                         onClick={() => {
-                            setLang(buttonLang);
+                            setLanguage(buttonLang);
                         }}
                     >
                         {buttonLang}
@@ -35,4 +40,14 @@ export function DuoLangDescription({ de, en }) {
             )}
         </>
     );
+}
+
+function getDefaultLang() {
+    if (localStorage.getItem('lang')) {
+        return localStorage.getItem('lang');
+    }
+    if (window.navigator.language.includes('de')) {
+        return 'de';
+    }
+    return 'en';
 }
