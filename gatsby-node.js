@@ -47,7 +47,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                             }
                         }
                     }
-                    allContentfulFragmentText {
+                    allContentfulFragmentText(
+                        filter: { node_locale: { eq: "de" } }
+                    ) {
                         edges {
                             node {
                                 internal {
@@ -69,7 +71,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                             }
                         }
                     }
-                    allContentfulFragmentAudio {
+                    allContentfulFragmentAudio(
+                        filter: { node_locale: { eq: "de" } }
+                    ) {
                         edges {
                             node {
                                 internal {
@@ -80,7 +84,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                             }
                         }
                     }
-                    allContentfulPerson {
+                    allContentfulPerson(filter: { node_locale: { eq: "de" } }) {
                         edges {
                             node {
                                 internal {
@@ -91,7 +95,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                             }
                         }
                     }
-                    allContentfulPage {
+                    allContentfulPage(filter: { node_locale: { eq: "de" } }) {
                         edges {
                             node {
                                 internal {
@@ -128,7 +132,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     createPage({
                         path: slug,
                         component: PersonPage,
-                        context: { slug, id: node.id },
+                        context: { slug, id: node.id, rawSlug: node.slug },
                     });
                 });
 
@@ -138,7 +142,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     createPage({
                         path: slug,
                         component: StaticPage,
-                        context: { slug, id: node.id },
+                        context: { slug, id: node.id, rawSlug: node.slug },
                     });
                 });
 
@@ -153,7 +157,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                     createPage({
                         path: slug,
                         component: FragmentPage,
-                        context: { slug, id: node.id },
+                        context: { slug, id: node.id, rawSlug: node.slug },
                     });
                 });
             })
