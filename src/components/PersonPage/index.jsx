@@ -2,18 +2,20 @@ import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
+import { DuoLangDescription } from '../DuoLangDescription';
 import { Page } from '../Page';
 import { ProjectInline } from '../ProjectInline';
 import { SubHeading } from '../SubHeading';
 
 export default function PersonPage({
     data: {
-        contentfulPerson: { name, description, image, profession },
+        personDe: { name, description, image, profession },
+        personEn: { description: descriptionEn },
         allContentfulProject: { edges: projects },
     },
     location,
 }) {
+    console.log(name, description, image, descriptionEn);
     return (
         <Page
             superTitle={profession}
@@ -44,8 +46,9 @@ export default function PersonPage({
             <GatsbyImage
                 alt={`Bild von ${name}`}
                 image={image?.gatsbyImageData}
+                style={{ marginBottom: '1rem' }}
             />
-            <ContentfulRichtTextToHtml source={description} />
+            <DuoLangDescription de={description} en={descriptionEn} />
             {projects && (
                 <>
                     <SubHeading>Projekte</SubHeading>
@@ -59,8 +62,8 @@ export default function PersonPage({
 }
 
 export const pageQuery = graphql`
-    query PersonById($id: String!) {
-        contentfulPerson(id: { eq: $id }) {
+    query PersonById($rawSlug: String!, $id: String!) {
+        personDe: contentfulPerson(id: { eq: $id }) {
             name
             id
             profession
@@ -70,6 +73,14 @@ export const pageQuery = graphql`
             image {
                 id
                 gatsbyImageData(width: 800)
+            }
+        }
+        personEn: contentfulPerson(
+            slug: { eq: $rawSlug }
+            node_locale: { eq: "en" }
+        ) {
+            description {
+                raw
             }
         }
         allContentfulProject(

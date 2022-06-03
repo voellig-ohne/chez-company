@@ -1,12 +1,13 @@
-import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { IFrameEmbed, useImagesForAnimation } from '../YoutubeEmbed';
 import * as s from './style.module.css';
 import { Helmet } from 'react-helmet';
+import { DuoLangDescription } from '../DuoLangDescription';
 
 export function Fragment({
     description,
+    descriptionEn,
     images,
     youtubeId,
     audio,
@@ -64,8 +65,8 @@ export function Fragment({
                     ))}
                 </div>
             )}
-            <div>
-                <ContentfulRichtTextToHtml source={description} />
+            <div className={s.description}>
+                <DuoLangDescription de={description} en={descriptionEn} />
             </div>
         </>
     );

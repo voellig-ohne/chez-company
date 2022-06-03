@@ -1,11 +1,12 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
+import { DuoLangDescription } from '../DuoLangDescription';
 import { Page } from '../Page';
 
 export default function StaticPage({
     data: {
         contentfulPage: { title, text, metaDescription },
+        pageEn: { text: textEn },
     },
     location,
 }) {
@@ -16,13 +17,13 @@ export default function StaticPage({
             metaDescription={metaDescription?.metaDescription}
             location={location}
         >
-            <ContentfulRichtTextToHtml source={text} />
+            <DuoLangDescription de={text} en={textEn} />
         </Page>
     );
 }
 
 export const pageQuery = graphql`
-    query PageById($id: String!) {
+    query PageById($rawSlug: String!, $id: String!) {
         contentfulPage(id: { eq: $id }) {
             title
             id
@@ -31,6 +32,14 @@ export const pageQuery = graphql`
             }
             metaDescription {
                 metaDescription
+            }
+        }
+        pageEn: contentfulPage(
+            slug: { eq: $rawSlug }
+            node_locale: { eq: "en" }
+        ) {
+            text {
+                ...textContentfulPage
             }
         }
     }

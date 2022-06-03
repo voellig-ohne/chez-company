@@ -12,6 +12,7 @@ export default function FragmentPage({
         contentfulFragmentVideo,
         contentfulFragmentAudio,
         allContentfulProject,
+        fragmentTextEn,
     },
     location,
 }) {
@@ -19,6 +20,7 @@ export default function FragmentPage({
         contentfulFragmentText ||
         contentfulFragmentVideo ||
         contentfulFragmentAudio;
+    const fragmentEn = fragmentTextEn;
 
     const projects = allContentfulProject.edges.filter(
         ({ node: { fragments, hideInGraph } }) =>
@@ -34,7 +36,7 @@ export default function FragmentPage({
             blankPage={fragment.blankPage}
             location={location}
         >
-            <Fragment {...fragment} />
+            <Fragment {...fragment} descriptionEn={fragmentEn?.description} />
             {!!projects.length && (
                 <>
                     <SubHeading>Projekte</SubHeading>
@@ -48,7 +50,7 @@ export default function FragmentPage({
 }
 
 export const pageQuery = graphql`
-    query FragmentById($id: String!) {
+    query FragmentById($rawSlug: String!, $id: String!) {
         contentfulFragmentText(id: { eq: $id }) {
             title
             id
@@ -61,6 +63,14 @@ export const pageQuery = graphql`
             }
             metaDescription {
                 metaDescription
+            }
+        }
+        fragmentTextEn: contentfulFragmentText(
+            slug: { eq: $rawSlug }
+            node_locale: { eq: "en" }
+        ) {
+            description {
+                ...textContentfulFragment
             }
         }
         contentfulFragmentVideo(id: { eq: $id }) {

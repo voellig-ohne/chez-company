@@ -12,6 +12,7 @@ export function DuoLangDescription({ de, en }) {
         setLang(language);
         localStorage.setItem('lang', language);
     }
+
     if (!en) {
         return <ContentfulRichtTextToHtml source={de} />;
     }

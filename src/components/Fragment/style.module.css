@@ -3,3 +3,7 @@
     grid-template-columns: 1fr;
     grid-gap: 1rem;
 }
+
+.description {
+    margin-top: 1rem;
+}
