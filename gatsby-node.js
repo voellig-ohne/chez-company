@@ -111,11 +111,14 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
 
                 result.data?.allContentfulProject.edges.forEach(({ node }) => {
                     const slug = getRoute(node);
-
                     createPage({
                         path: slug,
                         component: ProjectPage,
-                        context: { slug, id: node.id },
+                        context: {
+                            slug: slug,
+                            id: node.id,
+                            rawSlug: node.slug,
+                        },
                     });
                 });
 

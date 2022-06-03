@@ -1,15 +1,16 @@
-import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import * as s from './style.module.css';
 import React, { useRef, useState } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { VideoPreview } from '../YoutubeEmbed';
+import { DuoLangDescription } from '../DuoLangDescription';
 import { getRandomTagColors, getRoute } from '../util';
 import { PersonInline } from '../PersonInline';
 import { SubHeading } from '../SubHeading';
 
 export function Project({
     description,
+    descriptionEn,
     tags,
     fragments,
     persons,
@@ -24,7 +25,7 @@ export function Project({
                 ))}
             </div>
             <div>
-                <ContentfulRichtTextToHtml source={description} />
+                <DuoLangDescription de={description} en={descriptionEn} />
             </div>
             <Fragments fragments={fragments} />
 

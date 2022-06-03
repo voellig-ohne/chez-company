@@ -4,7 +4,7 @@ import * as s from './style.module.css';
 
 export function FragmentItemInline(fragment) {
     return (
-        <div class={s.container}>
+        <div className={s.container}>
             <FragmentItem {...fragment}></FragmentItem>
         </div>
     );

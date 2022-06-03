@@ -1,0 +1,39 @@
+.buttons {
+    --height: 2rem;
+    --border-width: 0.2rem;
+    border: var(--pink) var(--border-width) solid;
+    display: inline-flex;
+    border-radius: calc(var(--height) / 2 + var(--border-width));
+}
+
+.button {
+    border-width: var(--border-width);
+    border-color: transparent;
+    border-style: solid;
+    border-radius: 50%;
+    height: var(--height);
+    width: var(--height);
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: unset;
+    font-weight: bold;
+    color: var(--pink);
+}
+
+.buttonActive {
+    border-color: var(--pink);
+    height: calc(var(--height) + var(--border-width) * 2);
+    width: calc(var(--height) + var(--border-width) * 2);
+    margin: calc(var(--border-width) * -1);
+    cursor: unset;
+}
+
+.buttonActive,
+.button:hover {
+    background: var(--blue);
+}

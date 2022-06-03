@@ -3,10 +3,8 @@ import React from 'react';
 import { Page } from '../Page';
 import { Project } from '../Project';
 
-export default function ProjectPage({
-    data: { contentfulProject: project },
-    location,
-}) {
+export default function ProjectPage({ data, location }) {
+    const { projectDe: project, projectEn } = data;
     const superTitle =
         project.year && project.yearUntil
             ? `${project.year} – ${project.yearUntil}`
@@ -20,14 +18,18 @@ export default function ProjectPage({
             color="pink"
             location={location}
         >
-            <Project {...project} location={location} />
+            <Project
+                {...project}
+                descriptionEn={projectEn.description}
+                location={location}
+            />
         </Page>
     );
 }
 
 export const pageQuery = graphql`
-    query ProjectById($id: String!) {
-        contentfulProject(id: { eq: $id }) {
+    query ProjectById($rawSlug: String!, $id: String!) {
+        projectDe: contentfulProject(id: { eq: $id }) {
             title
             id
             year
@@ -112,6 +114,14 @@ export const pageQuery = graphql`
                         url
                     }
                 }
+            }
+        }
+        projectEn: contentfulProject(
+            slug: { eq: $rawSlug }
+            node_locale: { eq: "en" }
+        ) {
+            description {
+                ...textContentfulProject
             }
         }
     }
