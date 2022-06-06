@@ -29,7 +29,9 @@ export function DuoLangDescription({ de, en }) {
                     <button
                         key={buttonLang}
                         className={clsx(s.button, {
-                            [s.buttonActive]: lang === buttonLang,
+                            [s.buttonActive]:
+                                typeof window !== 'undefined' &&
+                                lang === buttonLang,
                         })}
                         onClick={() => {
                             setLanguage(buttonLang);
