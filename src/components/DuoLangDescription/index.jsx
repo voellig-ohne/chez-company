@@ -11,7 +11,6 @@ export function DuoLangDescription({ de, en }) {
     useEffect(() => {
         setLang(getDefaultLang());
     }, []);
-    console.log(lang);
 
     function setLanguage(language) {
         setLang(language);
