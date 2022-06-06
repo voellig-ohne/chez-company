@@ -6,7 +6,7 @@ import clsx from 'clsx';
 const languages = ['de', 'en'];
 
 export function DuoLangDescription({ de, en }) {
-    const [lang, setLang] = useState(getDefaultLang());
+    const [lang, setLang] = useState('de');
 
     useEffect(() => {
         setLang(getDefaultLang());
@@ -29,9 +29,7 @@ export function DuoLangDescription({ de, en }) {
                     <button
                         key={buttonLang}
                         className={clsx(s.button, {
-                            [s.buttonActive]:
-                                typeof window !== 'undefined' &&
-                                lang === buttonLang,
+                            [s.buttonActive]: lang === buttonLang,
                         })}
                         onClick={() => {
                             setLanguage(buttonLang);
