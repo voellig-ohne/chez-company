@@ -1,5 +1,5 @@
 import * as s from './style.module.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ContentfulRichtTextToHtml from '../../ContentfulRichtTextToHtml';
 import clsx from 'clsx';
 
@@ -7,6 +7,10 @@ const languages = ['de', 'en'];
 
 export function DuoLangDescription({ de, en }) {
     const [lang, setLang] = useState(getDefaultLang());
+
+    useEffect(() => {
+        setLang(getDefaultLang());
+    }, []);
 
     function setLanguage(language) {
         setLang(language);
@@ -34,13 +38,7 @@ export function DuoLangDescription({ de, en }) {
                     </button>
                 ))}
             </div>
-            {lang === 'de' ? (
-                <ContentfulRichtTextToHtml source={de} />
-            ) : (
-                <div lang="en">
-                    <ContentfulRichtTextToHtml source={en} />
-                </div>
-            )}
+            <ContentfulRichtTextToHtml source={lang === 'de' ? de : en} />
         </>
     );
 }
