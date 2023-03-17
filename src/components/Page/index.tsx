@@ -73,17 +73,21 @@ export function Page({
             </Helmet>
             <article className={clsx(s.article, s[color])} ref={ref}>
                 <Link
-                    className={s.backButton}
+                    className={s.closeButton}
                     to="/"
-                    aria-label="zurück"
-                    title="zurück"
-                    onClick={e => {
-                        if (location?.state.goBack) {
+                    aria-label="schließen"
+                    title="schließen"
+                />
+                {location?.state?.goBack && (
+                    <button
+                        className={s.backButton}
+                        aria-label="zurück"
+                        title="zurück"
+                        onClick={() => {
                             navigate(-1);
-                            e.preventDefault();
-                        }
-                    }}
-                ></Link>
+                        }}
+                    />
+                )}
                 <header className={s.header}>
                     {superTitle && (
                         <div className={s.superTitle}>

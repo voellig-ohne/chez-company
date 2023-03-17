@@ -45,6 +45,7 @@
     margin-bottom: 2rem;
 }
 
+.closeButton,
 .backButton {
     position: absolute;
     top: -1rem;
@@ -56,8 +57,12 @@
     border: var(--borderWidth) solid var(--mainColor);
 }
 
-.backButton:before,
-.backButton:after {
+.backButton {
+    right: 2.5rem;
+}
+
+:is(.closeButton, .backButton):before,
+:is(.closeButton, .backButton):after {
     content: '';
     position: absolute;
     top: 50%;
@@ -67,11 +72,26 @@
     height: var(--borderWidth);
 }
 
-.backButton:before {
+.closeButton:before {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+.closeButton:after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.backButton:before,
 .backButton:after {
+    transform-origin: left;
+}
+
+.backButton:before {
+    width: 40%;
+    transform: translate(-50%, -25%) rotate(-45deg);
+}
+
+.backButton:after {
+    width: 40%;
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
